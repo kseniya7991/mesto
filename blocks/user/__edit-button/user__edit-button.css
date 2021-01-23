@@ -1,0 +1,23 @@
+.user__edit-button{
+  min-width: 24px;
+  min-height: 24px;
+  border: 1px solid #fff;
+  vertical-align: center;
+  background-image: url('../../../images/__edit-button.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  background-color: #000;
+  position: absolute;
+  top: 30%;
+  right: calc(-24px - 18px);
+  transform-origin: 50% 50%;
+}
+
+/*@media screen and (max-width: 569px) {
+  .user__edit-button {
+    position: absolute;
+    right: -18px;
+  }
+}*/

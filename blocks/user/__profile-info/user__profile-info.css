@@ -1,0 +1,15 @@
+.user__profile-info {
+  min-height: 73px;
+}
+
+@media screen and (min-width: 570px) and (max-width: 700px) {
+  .user__profile-info {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 569px) {
+    .user__profile-info  {
+      max-width: 100%;
+    }
+}

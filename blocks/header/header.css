@@ -3,6 +3,7 @@
   min-height: 74px;
   margin: 0 auto;
   margin-top: 45px;
+  margin-bottom: 45px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   display: flex;
   justify-content: flex-start;
@@ -13,8 +14,9 @@
   .header {
     min-width: 320px;
     margin-top: 28px;
-    margin-bottom: 45px;
+    margin-bottom: 42px;
     padding-left: 27px;
+    box-sizing: border-box;
   }
 }
 
