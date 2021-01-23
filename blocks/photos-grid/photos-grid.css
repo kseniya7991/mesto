@@ -18,11 +18,11 @@
     max-width: 100%;
     margin-left: 40px;
     margin-right: 40px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 }
 
-@media screen and (max-width: 881px) {
+@media screen and (max-width: 661px) {
   .photos-grid {
     grid-template-columns: repeat(1, 282px);
     justify-content: center;

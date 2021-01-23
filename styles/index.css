@@ -18,7 +18,9 @@
 @import url('../blocks/photo/__img/photo__img.css');
 @import url('../blocks/photo/__title/photo__title.css');
 @import url('../blocks/photo/__desription/photo__description.css');
-@import url('');
+
+@import url('../blocks/footer/footer.css');
+
 @import url('');
 @import url('');
 @import url('');
