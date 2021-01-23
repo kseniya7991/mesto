@@ -9,15 +9,15 @@
 @import url('../blocks/user/__name/user__name.css');
 @import url('../blocks/user/user.css');
 @import url('../blocks/user/__edit-button/user__edit-button.css');
-@import url('../blocks/user/__info/user__info.css');
 @import url('../blocks/user/__profile-info/user__profile-info.css');
 @import url('../blocks/user/__about/user__about.css');
 @import url('../blocks/add-button/add-button.css');
-@import url('');
-@import url('');
-@import url('');
-@import url('');
-@import url('');
+
+@import url('../blocks/photos-grid/photos-grid.css');
+@import url('../blocks/photo/photo.css');
+@import url('../blocks/photo/__img/photo__img.css');
+@import url('../blocks/photo/__title/photo__title.css');
+@import url('../blocks/photo/__desription/photo__description.css');
 @import url('');
 @import url('');
 @import url('');

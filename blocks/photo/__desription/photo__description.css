@@ -1,0 +1,11 @@
+.photo__description {
+  max-width: 282px;
+  min-height: px;
+  margin-top: 25px;
+  margin-left: 21px;
+  margin-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  box-sizing: border-box;
+}

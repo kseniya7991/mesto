@@ -12,7 +12,7 @@
 }
 
 
-@media screen and (min-width: 700px) and (max-width: 881px) {
+@media screen and (min-width: 570px) and (max-width: 881px) {
     .add-button {
       margin-right: 40px;
     }
@@ -21,7 +21,6 @@
 @media screen and (min-width: 570px) and (max-width: 699px) {
     .add-button {
         min-width: 15%;
-        margin-right: 20px;
     }
 }
 
