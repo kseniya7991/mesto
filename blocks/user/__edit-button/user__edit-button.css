@@ -11,15 +11,30 @@
   background-color: #000;
   position: absolute;
   top: 30%;
-  right: calc(-24px - 18px);
-  transform-origin: 50% 50%;
+  right: -42px;
+  transform-origin: 100% 50%;
   outline-style: none;
   cursor: pointer;
   box-sizing: border-box;
   transition: .2s;
+  position: absolute;
+  z-index: 0;
 }
 
 .user__edit-button:hover {
   opacity: 0.6;
   transition: .2s;
+}
+
+@media screen and (max-width: 320px) {
+  .user__edit-button{
+    max-width: 18px;
+    max-height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    background-size: contain;
+    box-sizing: border-box;
+    top: 20%;
+    right: -18px;
+  }
 }

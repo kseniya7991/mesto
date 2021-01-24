@@ -2,12 +2,18 @@
   background-image: url('../../../images/like.svg');
   background-position: center;
   background-repeat: no-repeat;
-  max-width: 22px;
-  max-height: 19px;
+  background-color: #fff;
+  background-size: contain;
+  min-width: 23px;
+  min-height: 19px;
   outline-style: none;
   cursor: pointer;
   align-self: center;
   transition: .2s;
+  border: 0;
+  outline-style: none;
+  padding: 1px;
+  
 }
 
 .photo__like:hover {
@@ -18,4 +24,4 @@
 .photo__like:active {
   opacity: 1;
   background-image: url('../../../images/like-active.svg');
-} 
+}

@@ -1,0 +1,32 @@
+.popup__name {
+  min-width: 358px;
+  margin-left: 36px;
+  margin-bottom: 30px;
+  min-height: 27px;
+  border: 0;
+  outline-style: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: 'Inter', arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+input::-webkit-input-placeholder { color: #000; }
+input::-moz-placeholder { color: #000; }
+
+@media screen and (max-width: 540px) {
+    .popup__name {
+      min-width: 238px;
+      font-size: 14px;
+      line-height: 17px;
+      margin-left: 36px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .popup__name {
+    margin-left: 22px;
+    }
+}

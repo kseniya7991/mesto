@@ -8,6 +8,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+
 }
 
 @media screen and (max-width: 320px) {
@@ -17,6 +18,7 @@
     margin-bottom: 42px;
     padding-left: 27px;
     box-sizing: border-box;
+    min-height: 56px;
   }
 }
 

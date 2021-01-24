@@ -6,9 +6,9 @@
   line-height: 48px;
   color: #fff;
   margin: 0;
-  vertical-align: baseline;
   margin-bottom: 16px;
   position: relative;
+  text-align: center;
 }
 
 @media screen and (min-width: 321px) and (max-width: 881px) {
@@ -23,6 +23,7 @@
       font-size: 27px;
       line-height: 33px;
       text-align: center;
+      max-width: 200px;
     }
   }
 
