@@ -13,11 +13,7 @@
   top: 30%;
   right: calc(-24px - 18px);
   transform-origin: 50% 50%;
+  outline-style: none;
+  cursor: pointer;
 }
 
-/*@media screen and (max-width: 569px) {
-  .user__edit-button {
-    position: absolute;
-    right: -18px;
-  }
-}*/

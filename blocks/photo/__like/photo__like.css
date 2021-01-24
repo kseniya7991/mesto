@@ -1,0 +1,10 @@
+.photo__like {
+  background-image: url('../../../images/like.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 22px;
+  max-height: 19px;
+  outline-style: none;
+  cursor: pointer;
+  align-self: center;
+}
