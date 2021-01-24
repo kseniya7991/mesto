@@ -11,6 +11,14 @@
   background-color: #000;
   outline-style: none;
   cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 2px;
+  transition: .2s;
+}
+
+.add-button:hover {
+  opacity: 0.6;
+  transition: .2s;
 }
 
 

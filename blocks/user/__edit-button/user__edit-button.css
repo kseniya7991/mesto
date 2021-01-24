@@ -15,5 +15,11 @@
   transform-origin: 50% 50%;
   outline-style: none;
   cursor: pointer;
+  box-sizing: border-box;
+  transition: .2s;
 }
 
+.user__edit-button:hover {
+  opacity: 0.6;
+  transition: .2s;
+}
