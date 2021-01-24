@@ -8,7 +8,7 @@
   margin: 0;
   margin-bottom: 16px;
   position: relative;
-  text-align: center;
+  text-align: left;
 }
 
 @media screen and (min-width: 321px) and (max-width: 881px) {
