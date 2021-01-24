@@ -9,14 +9,14 @@
     box-sizing: border-box;
 }
 
-@media screen and (min-width: 570px) and (max-width: 881px) {
+@media screen and (min-width: 581px) and (max-width: 881px) {
     .profile {
       max-width: 100%;
       padding-left: 40px;
     }
 }
 
-  @media screen and (max-width: 569px) {
+  @media screen and (max-width: 580px) {
     .profile {
       max-width: 80%;
       min-height: 286px;
