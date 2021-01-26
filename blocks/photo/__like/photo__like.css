@@ -5,13 +5,12 @@
   background-color: #fff;
   background-size: contain;
   min-width: 23px;
-  min-height: 19px;
   outline-style: none;
   cursor: pointer;
   align-self: center;
   transition: .2s;
   border: 0;
-  padding: 1px;
+  padding: 9.5px 0;
 }
 
 .photo__like:hover {

@@ -39,9 +39,7 @@ formElement.addEventListener('keypress', function(evt) {
     evt.preventDefault();
     let editName = document.querySelector('.popup__name');
     let editAbout = document.querySelector('.popup__about');
-    document.querySelector('.user__name').innerHTML = `<h1 class="user__name">${editName.value}
-    <button class="user__edit-button"></button>
-  </h1>`;
+    document.querySelector('.user__name').textContent = `${editName.value}`;
     document.querySelector('.user__about').textContent = `${editAbout.value}`;
     overlay.classList.toggle('popup_opened');
     }

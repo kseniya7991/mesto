@@ -5,9 +5,20 @@
   align-items: center;
 }
 
+@media screen and (max-width: 580px) and (min-width: 321px) {
+  .user {
+  max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .user {
+  max-width: 282px;
+  }
+}
+
 @media screen and (max-width: 580px) {
   .user {
-  flex-direction: column;
-  max-width: 282px;
+    flex-direction: column;
   }
 }

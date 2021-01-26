@@ -2,7 +2,6 @@
   min-width: 358px;
   margin-left: 36px;
   margin-bottom: 30px;
-  min-height: 27px;
   border: 0;
   outline-style: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -11,6 +10,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
+  padding-bottom: 10px;
 }
 
 input::-webkit-input-placeholder { color: #000; }

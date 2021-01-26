@@ -1,8 +1,9 @@
 .popup {
+    /*позиционирование абсолютное, как было реализовано в лайфкодине по DOM*/
   position: absolute;
   z-index: 2;
-  min-width: 100%;
-  min-height: 100%;
+  right: 0;
+  bottom: 0;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0, .5);
