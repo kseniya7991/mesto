@@ -13,6 +13,7 @@
 @import url('../blocks/user/__profile-info/user__profile-info.css');
 @import url('../blocks/user/__about/user__about.css');
 @import url('../blocks/add-button/add-button.css');
+@import url('../blocks/user/__name-block/user__name-block.css');
 
 @import url('../blocks/photos-grid/photos-grid.css');
 @import url('../blocks/photo/photo.css');

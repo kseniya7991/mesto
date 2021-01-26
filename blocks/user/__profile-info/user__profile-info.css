@@ -1,5 +1,6 @@
 .user__profile-info {
   min-height: 73px;
+  position: relative;
 }
 
 @media screen and (min-width: 570px) and (max-width: 700px) {
@@ -11,5 +12,6 @@
 @media screen and (max-width: 569px) {
     .user__profile-info  {
       max-width: 100%;
+      margin-bottom: 36px;
     }
 }
