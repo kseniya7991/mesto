@@ -7,10 +7,9 @@
   padding: 0;
   min-width: 40px;
   min-height: 40px;
-  transform: rotate(-45deg);
+  transform: translate(100%, -100%);
   right: 0;
   top: 0;
-  transform: translate(100%, -100%);
   background-color: transparent;
   border: 0;
   outline-style: none;

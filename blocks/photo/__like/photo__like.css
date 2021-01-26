@@ -11,9 +11,7 @@
   align-self: center;
   transition: .2s;
   border: 0;
-  outline-style: none;
   padding: 1px;
-  
 }
 
 .photo__like:hover {
