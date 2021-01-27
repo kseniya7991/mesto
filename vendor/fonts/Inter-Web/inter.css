@@ -9,18 +9,6 @@
        url("Inter-Regular.woff?v=3.15") format("woff");
 }
 
-
-@font-face {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: 'Inter';
-  font-style:  normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("Inter-Bold.woff2?v=3.15") format("woff2"),
-       url("Inter-Bold.woff?v=3.15") format("woff");
-}
-
 @font-face {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
