@@ -1,6 +1,5 @@
 .popup__about {
     min-width: 358px;
-    margin-left: 36px;
     margin-bottom: 48px;
     border: 0;
     outline-style: none;
@@ -19,12 +18,6 @@
       font-size: 14px;
       line-height: 17px;
       margin-bottom: 45px;
-      margin-left: 36px;
     }
 }
 
-@media screen and (max-width: 320px) {
-    .popup__about {
-    margin-left: 22px;
-    }
-}
