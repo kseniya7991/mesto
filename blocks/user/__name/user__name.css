@@ -9,8 +9,8 @@
   margin-bottom: 16px;
   position: relative;
   text-align: left;
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
