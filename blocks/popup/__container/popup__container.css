@@ -1,5 +1,4 @@
 .popup__container {
-  /*позиционирование фиксированное*/
   position: relative;
   max-width: 430px;
   min-width: 430px;
