@@ -2,8 +2,8 @@ let overlay = document.querySelector('.popup');
 let popupOpenBtn = document.querySelector('.user__edit-button');
 let popupCloseBtn = document.querySelector('.popup__close');
 let formElement = document.querySelector('.popup__container');
-let editName = document.querySelector('.popup_name');
-let editAbout = document.querySelector('.popup_about');
+let editName = document.querySelector('.popup__input_name');
+let editAbout = document.querySelector('.popup__input_about');
 let userName = document.querySelector('.user__name');
 let userAbout =  document.querySelector('.user__about');
 
