@@ -1,6 +1,5 @@
 .popup__name {
   min-width: 358px;
-  margin-left: 36px;
   margin-bottom: 30px;
   border: 0;
   outline-style: none;
@@ -21,12 +20,6 @@ input::-moz-placeholder { color: #000; }
       min-width: 238px;
       font-size: 14px;
       line-height: 17px;
-      margin-left: 36px;
     }
 }
 
-@media screen and (max-width: 320px) {
-    .popup__name {
-    margin-left: 22px;
-    }
-}
