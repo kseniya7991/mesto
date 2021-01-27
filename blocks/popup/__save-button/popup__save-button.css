@@ -11,9 +11,7 @@
   border-radius: 2px;
   border: 0;
   outline-style: none;
-  margin-left: 36px;
   transition: .2s;
-  margin-bottom: 37px;
   padding: 14px 0;
 }
 
@@ -25,17 +23,9 @@
 @media screen and (max-width: 540px) {
     .popup__save-button {
       min-width: 238px;
-      margin-left: 36px;
       font-size: 14px;
       line-height: 17px;
       padding: 14px 0;
-      margin-bottom: 25px;
     }
 }
 
-@media screen and (max-width: 320px) {
-    .popup__save-button {
-    margin-left: 22px;
-    margin-bottom: 25px;
-    }
-}
