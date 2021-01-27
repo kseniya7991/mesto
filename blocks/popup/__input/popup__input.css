@@ -1,4 +1,4 @@
-.popup__name {
+.popup__input {
   min-width: 358px;
   margin-bottom: 30px;
   border: 0;
@@ -16,10 +16,8 @@ input::-webkit-input-placeholder { color: #000; }
 input::-moz-placeholder { color: #000; }
 
 @media screen and (max-width: 540px) {
-    .popup__name {
+    .popup__input {
       min-width: 238px;
-      font-size: 14px;
-      line-height: 17px;
     }
 }
 

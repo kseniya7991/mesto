@@ -12,13 +12,13 @@
     .profile {
       max-width: 100%;
       padding-left: 40px;
+      padding-right: 40px;
     }
 }
 
   @media screen and (max-width: 580px) {
     .profile {
       max-width: 80%;
-      margin: 0 auto;
       margin-bottom: 36px;
       flex-direction: column;
     }

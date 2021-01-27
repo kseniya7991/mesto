@@ -1,8 +1,6 @@
 .header {
   max-width: 880px;
-
-  /*не убирала минимальную высоту, чтобы блок соответствтовал макету*/
-  min-height: 74px;
+  padding-bottom: 37px;
   margin: 0 auto;
   margin-top: 45px;
   margin-bottom: 45px;
@@ -17,9 +15,9 @@
     min-width: 320px;
     margin-top: 28px;
     margin-bottom: 42px;
-    padding-left: 27px;
     box-sizing: border-box;
-    min-height: 56px;
+    padding-bottom: 28px;
+    padding-left: 27px;
   }
 }
 

@@ -33,8 +33,9 @@
     padding: 9px 0;
     min-width: 18px;
     background-size: contain;
-    box-sizing: border-box;
     top: 20%;
     right: -25px;
+    margin-bottom: 14px;
+    margin-left: 0;
   }
 }

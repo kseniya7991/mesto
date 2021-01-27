@@ -3,35 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="./styles/index.css" type="text/css">
+  <link rel="stylesheet" href="./pages/index.css" type="text/css">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header">
     <a class="header__logo-link" target="_blank" href="#">
-      <img class="header__logo" src="./images/__logo.svg" alt="mesto" title="mesto">
+      <img class="header__logo" src="./images/__logo.svg" alt="место" title="место">
     </a>    
   </header>
 
-  <section class="popup">
-    <form class="popup__container">
-      <button class="popup__close"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <input class="popup__name" type="text" placeholder="Жак-Ив Кусто">
-      <input class="popup__about" type="text" placeholder="Исследователь океана">
-      <button type="submit" formtarget="_self" class="popup__save-button">Сохранить</button>
-    </form>
-  </section>
+ 
 
   <main>
     <section class="profile">
       <div class="user">
-        <img class="user__avatar" src="./images/__avatar.jpg" alt="user-photo" title="user-photo">
+        <img class="user__avatar" src="./images/__avatar.jpg" alt="фото пользователя" title="фото пользователя">
         <div class="user__profile-info">
           <div class="user__name-block">
             <h1 class="user__name">Жак-Ив Кусто
             </h1>
-            <button class="user__edit-button"></button>
+            <button class="user__edit-button" type="submit" aria-label="edit"></button>
           </div>    
           <p class="user__about">
             Исследователь океана
@@ -39,52 +31,53 @@
         </div>
       </div>
       
-      <button class="add-button">
+      <button class="add-button" type="submit">
+        <img class="add-button__image" src="images/__add-button.svg" alt="кнопка" title="кнопка">
       </button>
     </section>
 
     <ul class="photos-grid">
       <li class="photo">
         <img class="photo__img" alt="Карачаево-Черкесск" title="Карачаево-Черкесск" src="./images/karachaevsk.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Карачаево-Черкесск</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
       <li class="photo">
         <img class="photo__img" alt="Гора Эльбрус" title="Гора Эльбрус" src="./images/elbrus.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Гора Эльбрус</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
       <li class="photo">
         <img class="photo__img" alt="Домбай" title="Домбай" src="./images/dombay.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Домбай</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
       <li class="photo">
         <img class="photo__img" alt="Красная Поляна" title="Красная Поляна" src="./images/krasnaya-polyana.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Красная Поляна</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
       <li class="photo">
         <img class="photo__img" alt="Сулакский Каньон" title="Сулакский Каньон" src="./images/sulakskiy-kanyon.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Сулакский Каньон</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
       <li class="photo">
         <img class="photo__img" alt="Роза Пик" title="Роза Пик" src="./images/roza-pik.jpg">
-        <article class="photo__description">
+        <div class="photo__description">
           <h2 class="photo__title">Роза Пик</h2>
-          <button class="photo__like" ></button>
-        </article>
+          <button class="photo__like" type="submit" aria-label="like"></button>
+        </div>
       </li>
     </ul>
   </main>
@@ -92,6 +85,15 @@
     &copy; 2021 Mesto Russia
   </footer>
   
+  <section class="popup">
+    <form class="popup__container" name="userProfileForm">
+      <button type="submit" class="popup__close" aria-label="close"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input class="popup__input popup_name" name="Name" type="text" placeholder="Ваше имя">
+      <input class="popup__input popup_about" name="Job" type="text" placeholder="Чем вы занимаетесь">
+      <button type="submit" formtarget="_self" class="popup__save-button" aria-label="save">Сохранить</button>
+    </form>
+  </section>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

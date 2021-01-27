@@ -1,46 +1,48 @@
 let overlay = document.querySelector('.popup');
 let popupOpenBtn = document.querySelector('.user__edit-button');
 let popupCloseBtn = document.querySelector('.popup__close');
-
-
-let togglePopup = function(evt) {
-    console.log('open');
-    evt.preventDefault();
-    overlay.classList.toggle('popup_opened');
-}
-
-function closePopup(evt) {
-    if (evt.target === evt.currentTarget) {
-        togglePopup(evt)
-    }
-}
-
-popupOpenBtn.addEventListener('click',togglePopup);
-popupCloseBtn.addEventListener('click',togglePopup);
-overlay.addEventListener('click',closePopup);
-
-
 let formElement = document.querySelector('.popup__container');
+let editName = document.querySelector('.popup_name');
+let editAbout = document.querySelector('.popup_about');
+let userName = document.querySelector('.user__name');
+let userAbout =  document.querySelector('.user__about');
+
+
+let openPopup = function(evt) {
+    overlay.classList.add('popup_opened');
+}
+
+let closePopup = function(evt) {
+    if (evt.target === evt.currentTarget) 
+        overlay.classList.remove('popup_opened');
+}
+
+let btnClosePopup = function (evt) {
+    overlay.classList.remove('popup_opened');
+   }
+
 
 function formSubmitHandler(evt) {
     evt.preventDefault(); 
-    let editName = document.querySelector('.popup__name');
-    let editAbout = document.querySelector('.popup__about');
-    document.querySelector('.user__name').textContent = `${editName.value}`;
-    document.querySelector('.user__about').textContent = `${editAbout.value}`;
-    overlay.classList.toggle('popup_opened')
+    userName.textContent = editName.value;
+    userAbout.textContent = editAbout.value;
+    btnClosePopup();
 }
 
-formElement.addEventListener('submit', formSubmitHandler); 
 
-
+// Такое было в чек-листе. Это не нужно делать в этой работе?//
+//При открытом попапе нажатие на клавишу “Enter” 
+//или кнопку «Сохранить» изменяет на странице информацию о пользователе.
 formElement.addEventListener('keypress', function(evt) {
     if (evt.keyCode == 13) {
     evt.preventDefault();
-    let editName = document.querySelector('.popup__name');
-    let editAbout = document.querySelector('.popup__about');
-    document.querySelector('.user__name').textContent = `${editName.value}`;
-    document.querySelector('.user__about').textContent = `${editAbout.value}`;
-    overlay.classList.toggle('popup_opened');
+    userName.textContent = editName.value;
+    userAbout.textContent = editAbout.value;
+    btnClosePopup();
     }
 });
+
+popupOpenBtn.addEventListener('click', openPopup);
+popupCloseBtn.addEventListener('click', btnClosePopup);
+overlay.addEventListener('click',closePopup);
+formElement.addEventListener('submit', formSubmitHandler); 
