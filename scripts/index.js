@@ -25,8 +25,8 @@ const initialCards = [
     }
   ];
 
-   const templateElement = document.querySelector('.template');
-  const containerItems = document.querySelector('.photos-grid');
+const templateElement = document.querySelector('.template');
+const containerItems = document.querySelector('.photos-grid');
 
 let overlay = document.querySelector('.popup');
 let popupOpenBtn = document.querySelector('.user__edit-button');
@@ -64,6 +64,7 @@ let openPopupCard = function(evt) {
     editName.setAttribute('placeholder', 'Название');
     editAbout.setAttribute('name', 'Link');
     editAbout.setAttribute('placeholder', 'Ссылка на картинку');
+    editAbout.setAttribute('pattern','[h][t][t][p].*');
     openPopup();
     popupTitle.textContent = 'Новое место';
     saveBtn.textContent = 'Создать';
@@ -71,7 +72,6 @@ let openPopupCard = function(evt) {
 
 let removePopupOpened = function() {
     overlay.classList.remove('popup_opened');
-
 }
 
 let closePopup = function(evt) {
