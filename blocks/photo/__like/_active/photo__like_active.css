@@ -1,4 +1,4 @@
 .photo__like_active {
-  opacity: 1;
-  background-image: url('../../../images/like-active.svg');
+    background-image: url('../../../../images/like-active.svg');
+    opacity: 1;
 }

@@ -40,6 +40,7 @@ let popupCardBtn = document.querySelector('.add-button');
 let popupTitle = document.querySelector('.popup__title');
 let saveBtn = document.querySelector('.popup__save-button');
 
+
 const openPopup = (evt) => {
     overlay.classList.add('popup_opened');
 }
@@ -114,7 +115,16 @@ function getItem(item) {
     cardImage.setAttribute('alt', item.name);
     cardImage.setAttribute('title', item.name);
 
+    const likeBtn = newItem.querySelector('.photo__like');
+    likeBtn.addEventListener('click', photoLike);
+
     return newItem;
+}
+
+const photoLike = (event) => {
+    const targetEl = event.target;
+    const targetItem = targetEl.closest('.photo__like');
+    targetItem.classList.toggle('photo__like_active');
 }
 
 
@@ -125,4 +135,6 @@ formElement.addEventListener('submit', formSubmitHandler);
 popupCloseBtn.addEventListener('click', removePopupOpened);
 popupCardBtn.addEventListener('click', openPopupCard);
 
+
 render();
+
