@@ -85,8 +85,8 @@ function formSubmitHandler(evt) {
     if (popupTitle.textContent === 'Редактировать профиль') {
     userName.textContent = editName.value;
     userAbout.textContent = editAbout.value;
-    } else {
-
+    } if(popupTitle.textContent === 'Новое место') {
+    addNewCard();
     };
     removePopupOpened();
 }
@@ -95,6 +95,14 @@ function render() {
     const html = initialCards.map(getItem)
     containerItems.append(...html);
 }
+
+const addNewCard = () => {
+    const inputName = editName.value;
+    const inputLink = editAbout.value;
+    const cardItem = getItem({name: inputName, src: inputLink});
+    containerItems.prepend(cardItem);
+}
+
 
 function getItem(item) {
     const newItem = templateElement.content.cloneNode(true);
