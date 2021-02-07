@@ -1,7 +1,7 @@
-.popup__close {
+.popup-close {
   position: absolute;
   transform-origin: 0% 100%;
-  background-image: url('../../../images/__close-icon.svg');
+  background-image: url('../../images/__close-icon.svg');
   background-position: center;
   background-repeat: no-repeat;
   min-width: 40px;
@@ -16,13 +16,13 @@
   padding: 20px 0;
 }
 
-.popup__close:hover {
+.popup-close:hover {
   opacity: 0.6;
   transition: .2s;
 }
 
 @media screen and (max-width: 540px) {
-    .popup__close{
+    .popup-close{
       max-width: 26px;
       max-height: 26px;
       overflow: hidden;

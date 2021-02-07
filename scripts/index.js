@@ -29,8 +29,10 @@ const templateElement = document.querySelector('.template');
 const containerItems = document.querySelector('.photos-grid');
 
 let overlay = document.querySelector('.popup');
+let overlayAdd = document.querySelector('.add-popup');
+
 let popupOpenBtn = document.querySelector('.user__edit-button');
-let popupCloseBtn = document.querySelector('.popup__close');
+let popupCloseBtn = document.querySelector('.popup-close');
 let formElement = document.querySelector('.popup__container');
 let editName = document.querySelector('.popup__input_text_name');
 let editAbout = document.querySelector('.popup__input_text_about');
@@ -39,6 +41,11 @@ let userAbout =  document.querySelector('.user__about');
 let popupCardBtn = document.querySelector('.add-button');
 let popupTitle = document.querySelector('.popup__title');
 let saveBtn = document.querySelector('.popup__save-button');
+let overlayCard = document.querySelector('.photo-popup');
+let popupCardCloseBtn = document.querySelector('.popup-close_card');
+let photoPopupCard = document.querySelector('.photo-popup__photo');
+let captionPopupCard = document.querySelector('.photo-popup__caption');
+
 
 
 
@@ -74,6 +81,7 @@ let openPopupCard = function(evt) {
 
 let removePopupOpened = function() {
     overlay.classList.remove('popup_opened');
+    overlayCard.classList.remove('photo-popup_opened');
 }
 
 let closePopup = function(evt) {
@@ -110,18 +118,28 @@ function getItem(item) {
     const newItem = templateElement.content.cloneNode(true);
     const cardTitle = newItem.querySelector('.photo__title');
     cardTitle.textContent = item.name;
-
+  
     const cardImage = newItem.querySelector('.photo__img');
     cardImage.setAttribute('src', item.src);
     cardImage.setAttribute('alt', item.name);
     cardImage.setAttribute('title', item.name);
+    const srcPhoto = cardImage.getAttribute('src');
+    const altPhoto = cardImage.getAttribute('alt');
 
+    function openPhotoPopup (evt) {
+        overlayCard.classList.add('photo-popup_opened');
+        photoPopupCard.setAttribute('src', srcPhoto);
+        photoPopupCard.setAttribute('alt', altPhoto);
+        captionPopupCard.textContent = altPhoto;
+    }
+    cardImage.addEventListener('click', openPhotoPopup);
+    
     const likeBtn = newItem.querySelector('.photo__like');
     likeBtn.addEventListener('click', photoLike);
 
     const deleteBtn = newItem.querySelector('.photo__delete');
     deleteBtn.addEventListener('click', photoDelete);
-
+  
     return newItem;
 }
 
@@ -137,14 +155,14 @@ const photoDelete = (event) => {
     targetItem.remove();
 }
 
-
 popupOpenBtn.addEventListener('click', openPopupProfile);
 
-overlay.addEventListener('click',closePopup);
+overlay.addEventListener('click', closePopup);
+overlayCard.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler); 
 popupCloseBtn.addEventListener('click', removePopupOpened);
 popupCardBtn.addEventListener('click', openPopupCard);
-
+popupCardCloseBtn.addEventListener('click', closePopup);
 
 render();
 
