@@ -3,5 +3,6 @@
   border-radius: 10px;
   background: -webkit-linear-gradient(black 282px, white 282px);
   border: 0;
+  position: relative;
 }
 

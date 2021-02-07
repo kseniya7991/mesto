@@ -41,6 +41,7 @@ let popupTitle = document.querySelector('.popup__title');
 let saveBtn = document.querySelector('.popup__save-button');
 
 
+
 const openPopup = (evt) => {
     overlay.classList.add('popup_opened');
 }
@@ -118,6 +119,9 @@ function getItem(item) {
     const likeBtn = newItem.querySelector('.photo__like');
     likeBtn.addEventListener('click', photoLike);
 
+    const deleteBtn = newItem.querySelector('.photo__delete');
+    deleteBtn.addEventListener('click', photoDelete);
+
     return newItem;
 }
 
@@ -125,6 +129,12 @@ const photoLike = (event) => {
     const targetEl = event.target;
     const targetItem = targetEl.closest('.photo__like');
     targetItem.classList.toggle('photo__like_active');
+}
+
+const photoDelete = (event) => {
+    const targetEl = event.target;
+    const targetItem = targetEl.closest('.photo');
+    targetItem.remove();
 }
 
 
