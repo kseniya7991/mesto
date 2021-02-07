@@ -28,60 +28,54 @@ const initialCards = [
 const templateElement = document.querySelector('.template');
 const containerItems = document.querySelector('.photos-grid');
 
-let overlay = document.querySelector('.popup');
-let overlayAdd = document.querySelector('.add-popup');
+let overlayProfile = document.querySelector('.popup_profile');
+let overlayAdd = document.querySelector('.popup_add');
 
-let popupOpenBtn = document.querySelector('.user__edit-button');
+let popupEditBtn = document.querySelector('.user__edit-button');
 let popupCloseBtn = document.querySelector('.popup-close');
-let formElement = document.querySelector('.popup__container');
+
+let formElement = document.querySelector('.popup__container_profile');
+let addFormElement = document.querySelector('.popup__container_add');
+
 let editName = document.querySelector('.popup__input_text_name');
 let editAbout = document.querySelector('.popup__input_text_about');
+let editTitle = document.querySelector('.popup__input_text_title');
+let editLink = document.querySelector('.popup__input_link_photo');
+
 let userName = document.querySelector('.user__name');
 let userAbout =  document.querySelector('.user__about');
-let popupCardBtn = document.querySelector('.add-button');
-let popupTitle = document.querySelector('.popup__title');
-let saveBtn = document.querySelector('.popup__save-button');
+
+let popupAddBtn = document.querySelector('.add-button');
+
+let saveBtn = document.querySelector('.popup__save-button_profile');
+let createBtn = document.querySelector('.popup__save-button_add');
+
 let overlayCard = document.querySelector('.photo-popup');
 let popupCardCloseBtn = document.querySelector('.popup-close_card');
 let photoPopupCard = document.querySelector('.photo-popup__photo');
 let captionPopupCard = document.querySelector('.photo-popup__caption');
 
 
-
-
-const openPopup = (evt) => {
-    overlay.classList.add('popup_opened');
+const openedProfilePopup = (evt) => {
+    overlayProfile.classList.add('popup_opened');
 }
+
+const openAddPopup = (evt) => {
+    overlayAdd.classList.add('popup_opened');
+}
+
 
 let openPopupProfile = function(evt) {
     editName.value = userName.textContent;
     editAbout.value = userAbout.textContent;
-    editName.setAttribute('name', 'Name');
-    editName.setAttribute('placeholder', 'Ваше имя');
-    editAbout.setAttribute('name', 'Job');
-    editAbout.setAttribute('placeholder', 'Чем вы занимаетесь');
-    openPopup();
-    popupTitle.textContent = 'Редактировать профиль';
-    saveBtn.textContent = 'Сохранить';
-
+    openedProfilePopup();
 }
 
-let openPopupCard = function(evt) {
-    editName.value = '';
-    editAbout.value = '';
-    editName.setAttribute('name', 'Title');
-    editName.setAttribute('placeholder', 'Название');
-    editAbout.setAttribute('name', 'Link');
-    editAbout.setAttribute('placeholder', 'Ссылка на картинку');
-    editAbout.setAttribute('pattern','[h][t][t][p].*');
-    openPopup();
-    popupTitle.textContent = 'Новое место';
-    saveBtn.textContent = 'Создать';
-}
 
 let removePopupOpened = function() {
-    overlay.classList.remove('popup_opened');
+    overlayProfile.classList.remove('popup_opened');
     overlayCard.classList.remove('photo-popup_opened');
+    overlayAdd.classList.remove('popup_opened');
 }
 
 let closePopup = function(evt) {
@@ -92,12 +86,14 @@ let closePopup = function(evt) {
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
-    if (popupTitle.textContent === 'Редактировать профиль') {
     userName.textContent = editName.value;
     userAbout.textContent = editAbout.value;
-    } if(popupTitle.textContent === 'Новое место') {
+    removePopupOpened();
+}
+
+function cardSubmitHandler(evt) {
+    evt.preventDefault();
     addNewCard();
-    };
     removePopupOpened();
 }
 
@@ -107,8 +103,8 @@ function render() {
 }
 
 const addNewCard = () => {
-    const inputName = editName.value;
-    const inputLink = editAbout.value;
+    const inputName = editTitle.value;
+    const inputLink = editLink.value;
     const cardItem = getItem({name: inputName, src: inputLink});
     containerItems.prepend(cardItem);
 }
@@ -155,13 +151,17 @@ const photoDelete = (event) => {
     targetItem.remove();
 }
 
-popupOpenBtn.addEventListener('click', openPopupProfile);
+popupEditBtn.addEventListener('click', openPopupProfile);
+popupAddBtn.addEventListener('click', openAddPopup);
 
-overlay.addEventListener('click', closePopup);
+overlayProfile.addEventListener('click', closePopup);
+overlayAdd.addEventListener('click', closePopup);
 overlayCard.addEventListener('click', closePopup);
+
 formElement.addEventListener('submit', formSubmitHandler); 
+addFormElement.addEventListener('submit', cardSubmitHandler);
+
 popupCloseBtn.addEventListener('click', removePopupOpened);
-popupCardBtn.addEventListener('click', openPopupCard);
 popupCardCloseBtn.addEventListener('click', closePopup);
 
 render();
