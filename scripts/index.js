@@ -57,10 +57,14 @@ let photoPopupCard = document.querySelector('.photo-popup__photo');
 let captionPopupCard = document.querySelector('.photo-popup__caption');
 
 
-const openedProfilePopup = (evt) => overlayProfile.classList.add('popup_opened');
-const openAddPopup = (evt) => overlayAdd.classList.add('popup_opened');
+const openAddPopup = (evt) => {
+    overlayAdd.classList.add('popup_opened');
+    editTitle.value = '';
+    editLink.value = '';
+}
 
 const openPopupProfile = (evt) => {
+    overlayProfile.classList.add('popup_opened');
     editName.value = userName.textContent;
     editAbout.value = userAbout.textContent;
     openedProfilePopup();
