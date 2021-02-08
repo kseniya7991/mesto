@@ -6,7 +6,6 @@
   top: 0;
   left: 0;
   background-color: rgba(0,0,0, .9);
-  display: none;
   visibility: hidden;
   opacity: 0;
   transition-duration: .5s, 0s;
