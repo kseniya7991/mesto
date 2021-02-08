@@ -33,6 +33,7 @@ let overlayAdd = document.querySelector('.popup_add');
 
 let popupEditBtn = document.querySelector('.user__edit-button');
 let popupCloseBtn = document.querySelector('.popup-close');
+let popupAddCloseBtn = document.querySelector('.popup-close_add');
 
 let formElement = document.querySelector('.popup__container_profile');
 let addFormElement = document.querySelector('.popup__container_add');
@@ -56,48 +57,41 @@ let photoPopupCard = document.querySelector('.photo-popup__photo');
 let captionPopupCard = document.querySelector('.photo-popup__caption');
 
 
-const openedProfilePopup = (evt) => {
-    overlayProfile.classList.add('popup_opened');
-}
+const openedProfilePopup = (evt) => overlayProfile.classList.add('popup_opened');
+const openAddPopup = (evt) => overlayAdd.classList.add('popup_opened');
 
-const openAddPopup = (evt) => {
-    overlayAdd.classList.add('popup_opened');
-}
-
-
-let openPopupProfile = function(evt) {
+const openPopupProfile = (evt) => {
     editName.value = userName.textContent;
     editAbout.value = userAbout.textContent;
     openedProfilePopup();
 }
 
-
-let removePopupOpened = function() {
+const removePopupOpened = () => {
     overlayProfile.classList.remove('popup_opened');
-    overlayCard.classList.remove('photo-popup_opened');
     overlayAdd.classList.remove('popup_opened');
+    overlayCard.classList.remove('photo-popup_opened'); 
 }
 
-let closePopup = function(evt) {
+const closePopup = (evt) => {
     if (evt.target === evt.currentTarget) 
         removePopupOpened();
 }
 
 
-function formSubmitHandler(evt) {
+const formSubmitHandler = (evt) => {
     evt.preventDefault();
     userName.textContent = editName.value;
     userAbout.textContent = editAbout.value;
     removePopupOpened();
 }
 
-function cardSubmitHandler(evt) {
+const cardSubmitHandler = (evt) => {
     evt.preventDefault();
     addNewCard();
     removePopupOpened();
 }
 
-function render() {
+const render = () => {
     const html = initialCards.map(getItem)
     containerItems.append(...html);
 }
@@ -110,7 +104,7 @@ const addNewCard = () => {
 }
 
 
-function getItem(item) {
+const getItem = (item) => {
     const newItem = templateElement.content.cloneNode(true);
     const cardTitle = newItem.querySelector('.photo__title');
     cardTitle.textContent = item.name;
@@ -122,7 +116,7 @@ function getItem(item) {
     const srcPhoto = cardImage.getAttribute('src');
     const altPhoto = cardImage.getAttribute('alt');
 
-    function openPhotoPopup (evt) {
+    const openPhotoPopup = (evt) => {
         overlayCard.classList.add('photo-popup_opened');
         photoPopupCard.setAttribute('src', srcPhoto);
         photoPopupCard.setAttribute('alt', altPhoto);
@@ -161,7 +155,8 @@ overlayCard.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler); 
 addFormElement.addEventListener('submit', cardSubmitHandler);
 
-popupCloseBtn.addEventListener('click', removePopupOpened);
+popupAddCloseBtn.addEventListener('click', removePopupOpened);
+popupCloseBtn.addEventListener('click',removePopupOpened);
 popupCardCloseBtn.addEventListener('click', closePopup);
 
 render();

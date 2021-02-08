@@ -1,3 +1,4 @@
 .photo__img {
   max-height: 282px;
+  min-width: 100%;
 }
