@@ -57,16 +57,16 @@
       <button type="reset" class="popup-close popup-close_add" aria-label="close"></button>
       <h2 class="popup__title popup__title_add">Новое место</h2>
       <input class="popup__input popup__input_text_title" name="Title" type="text" placeholder="Название">
-      <input class="popup__input popup__input_link_photo" name="Link" type="text" pattern="[h][t][t][p].*"  placeholder="Ссылка на картинку" required>
+      <input class="popup__input popup__input_link_photo" name="Link" type="url" placeholder="Ссылка на картинку" required>
       <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_add" aria-label="create">Создать</button>
     </form>
   </section>
 
-  <section class="photo-popup">
-    <figure class="photo-popup__photo-block">
+  <section class="popup popup_photo">
+    <figure class="popup__photo-block">
       <button type="reset" class="popup-close popup-close_card" aria-label="close"></button>
-      <img class="photo-popup__photo" alt="#" src="#">
-      <figcaption class="photo-popup__caption"></figcaption>
+      <img class="popup__photo" src="" alt="">
+      <figcaption class="popup__caption"></figcaption>
     </figure>
   </section>
 
@@ -80,7 +80,7 @@
       <button class="photo__delete" type="button" aria-label="delete"></button>
     </li>
   </template>
-
+  <script src="./scripts/initialCards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
