@@ -1,39 +1,13 @@
-const initialCards = [
-  {
-    name: 'Карачаево-Черкесск',
-    src: './images/karachaevsk.jpg'
-  },
-  {
-    name: 'Гора Эльбрус',
-    src: './images/elbrus.jpg'
-  },
-  {
-    name: 'Красная Поляна',
-    src: './images/krasnaya-polyana.jpg'
-  },
-  {
-    name: 'Домбай',
-    src: './images/dombay.jpg'
-  },
-  {
-    name: 'Сулакский Каньон',
-    src: './images/sulakskiy-kanyon.jpg'
-  },
-  {
-    name: 'Роза Пик',
-    src: './images/krasnaya-polyana.jpg'
-  }
-];
-
 const templateElement = document.querySelector('.template');
 const containerItems = document.querySelector('.photos-grid');
 
-const profilePopup = document.querySelector('.popup_profile');
-const buttonOpenAddCard = document.querySelector('.popup_add');
+const popupEditProfile = document.querySelector('.popup_profile');
+const popupAddCard = document.querySelector('.popup_add');
+const popupPhotoCard = document.querySelector('.popup_photo');
 
 const buttonOpenEditProfile = document.querySelector('.user__edit-button');
-const popupCloseBtn = document.querySelector('.popup-close');
-const popupAddCloseBtn = document.querySelector('.popup-close_add');
+const buttonCloseProfilePopup = document.querySelector('.popup-close');
+const buttonCloseAddPopup = document.querySelector('.popup-close_add');
 
 const profileForm = document.querySelector('.popup__container_profile');
 const AddCardForm = document.querySelector('.popup__container_add');
@@ -46,37 +20,39 @@ const editLink = document.querySelector('.popup__input_link_photo');
 const userName = document.querySelector('.user__name');
 const userAbout =  document.querySelector('.user__about');
 
-const popupAddBtn = document.querySelector('.add-button');
+const buttonAddCard = document.querySelector('.add-button');
 
 const saveBtn = document.querySelector('.popup__save-button_profile');
 const createBtn = document.querySelector('.popup__save-button_add');
 
-const overlayCard = document.querySelector('.photo-popup');
+/* const overlayCard = document.querySelector('.popup'); */
 const popupCardCloseBtn = document.querySelector('.popup-close_card');
-const photoPopupCard = document.querySelector('.photo-popup__photo');
-const captionPopupCard = document.querySelector('.photo-popup__caption');
+const photoPopupCard = document.querySelector('.popup__photo');
+const captionPopupCard = document.querySelector('.popup__caption');
 
-
-const openAddPopup = (evt) => {
-  buttonOpenAddCard.classList.add('popup_opened');
-  AddCardForm.reset();
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
 }
 
-const openPopupProfile = (evt) => {
-  profilePopup.classList.add('popup_opened');
+const openAddCardPopup = (evt) => {
+  AddCardForm.reset();
+  openPopup(popupAddCard);
+}
+
+const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
+  openPopup(popupEditProfile);
 }
 
-const removePopupOpened = () => {
-  profilePopup.classList.remove('popup_opened');
-  buttonOpenAddCard.classList.remove('popup_opened');
-  overlayCard.classList.remove('photo-popup_opened'); 
+const removeClassOpened = (popup) => {
+  popup.classList.remove('popup_opened'); 
 }
 
 const closePopup = (evt) => {
+  const buttonClose = evt.target.closest('.popup_opened');
   if (evt.target === evt.currentTarget) 
-      removePopupOpened();
+      removeClassOpened(buttonClose);
 }
 
 
@@ -84,13 +60,13 @@ const handlerProfileSubmit = (evt) => {
   evt.preventDefault();
   userName.textContent = editName.value;
   userAbout.textContent = editAbout.value;
-  removePopupOpened();
+   removeClassOpened(popupEditProfile);
 }
 
 const handlerAddCardSubmit = (evt) => {
   evt.preventDefault();
   addNewCard();
-  removePopupOpened();
+   removeClassOpened(popupAddCard);
 }
 
 const render = () => {
@@ -110,53 +86,53 @@ const getItem = (item) => {
   cardTitle.textContent = item.name;
 
   const cardImage = newItem.querySelector('.photo__img');
-  cardImage.setAttribute('src', item.src);
-  cardImage.setAttribute('alt', item.name);
-  cardImage.setAttribute('title', item.name);
-  const srcPhoto = cardImage.getAttribute('src');
-  const altPhoto = cardImage.getAttribute('alt');
+  cardImage.src = item.src;
+  cardImage.alt = item.name;
+  cardImage.title = item.name;
+  const srcPhoto = cardImage.src;
+  const altPhoto = cardImage.alt;
 
-  const openPhotoPopup = (evt) => {
-      overlayCard.classList.add('photo-popup_opened');
-      photoPopupCard.setAttribute('src', srcPhoto);
-      photoPopupCard.setAttribute('alt', altPhoto);
+const openPhotoPopup = (evt) => {
+      popupPhotoCard.classList.add('popup_opened');
+      photoPopupCard.src = srcPhoto;
+      photoPopupCard.alt = altPhoto;
       captionPopupCard.textContent = altPhoto;
   }
-  cardImage.addEventListener('click', openPhotoPopup);
+  cardImage.addEventListener('click', openPhotoPopup); 
   
   const likeBtn = newItem.querySelector('.photo__like');
-  likeBtn.addEventListener('click', photoLike);
+  likeBtn.addEventListener('click', handleCardLikeClick);
 
   const deleteBtn = newItem.querySelector('.photo__delete');
-  deleteBtn.addEventListener('click', photoDelete);
+  deleteBtn.addEventListener('click', handleCardDeleteClick);
 
   return newItem;
 }
 
-const photoLike = (event) => {
+const handleCardLikeClick = (event) => {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.photo__like');
   targetItem.classList.toggle('photo__like_active');
 }
 
-const photoDelete = (event) => {
+const handleCardDeleteClick = (event) => {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.photo');
   targetItem.remove();
 }
 
-buttonOpenEditProfile.addEventListener('click', openPopupProfile);
-popupAddBtn.addEventListener('click', openAddPopup);
-
-profilePopup.addEventListener('click', closePopup);
-buttonOpenAddCard.addEventListener('click', closePopup);
-overlayCard.addEventListener('click', closePopup);
-
+buttonOpenEditProfile.addEventListener('click', openProfilePopup);
+buttonAddCard.addEventListener('click', openAddCardPopup);
+ 
+popupEditProfile.addEventListener('click', closePopup);
+popupAddCard.addEventListener('click', closePopup);
+buttonCloseAddPopup.addEventListener('click', closePopup); 
+buttonCloseProfilePopup.addEventListener('click', closePopup); 
+popupPhotoCard.addEventListener('click', closePopup);
 profileForm.addEventListener('submit', handlerProfileSubmit); 
 AddCardForm.addEventListener('submit', handlerAddCardSubmit);
 
-popupAddCloseBtn.addEventListener('click', removePopupOpened);
-popupCloseBtn.addEventListener('click',removePopupOpened);
 popupCardCloseBtn.addEventListener('click', closePopup);
 
 render();
+

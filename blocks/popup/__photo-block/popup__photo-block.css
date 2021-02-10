@@ -1,4 +1,4 @@
-.photo-popup__photo-block {
+.popup__photo-block {
   position: relative;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   z-index: 1;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .photo-popup__photo-block {
+  .popup__photo-block {
     max-width: 75%;
     max-height: 75%;
   }
