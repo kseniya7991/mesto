@@ -10,7 +10,7 @@ const buttonCloseProfilePopup = document.querySelector('.popup-close');
 const buttonCloseAddPopup = document.querySelector('.popup-close_add');
 
 const profileForm = document.querySelector('.popup__container_profile');
-const AddCardForm = document.querySelector('.popup__container_add');
+const addCardForm = document.querySelector('.popup__container_add');
 
 const editName = document.querySelector('.popup__input_text_name');
 const editAbout = document.querySelector('.popup__input_text_about');
@@ -35,7 +35,7 @@ const openPopup = (popup) => {
 }
 
 const openAddCardPopup = (evt) => {
-  AddCardForm.reset();
+  addCardForm.reset();
   openPopup(popupAddCard);
 }
 
@@ -45,14 +45,14 @@ const openProfilePopup = (evt) => {
   openPopup(popupEditProfile);
 }
 
-const removeClassOpened = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
 }
 
-const closePopup = (evt) => {
+const handleClosePopupClick = (evt) => {
   const buttonClose = evt.target.closest('.popup_opened');
   if (evt.target === evt.currentTarget) 
-      removeClassOpened(buttonClose);
+      closePopup(buttonClose);
 }
 
 
@@ -60,13 +60,13 @@ const handlerProfileSubmit = (evt) => {
   evt.preventDefault();
   userName.textContent = editName.value;
   userAbout.textContent = editAbout.value;
-   removeClassOpened(popupEditProfile);
+   closePopup(popupEditProfile);
 }
 
 const handlerAddCardSubmit = (evt) => {
   evt.preventDefault();
   addNewCard();
-   removeClassOpened(popupAddCard);
+   closePopup(popupAddCard);
 }
 
 const render = () => {
@@ -78,6 +78,13 @@ const addNewCard = () => {
   const cardItem = getItem({name: editTitle.value, src: editLink.value});
   containerItems.prepend(cardItem);
 }
+
+
+
+
+
+
+
 
 
 const getItem = (item) => {
@@ -93,11 +100,12 @@ const getItem = (item) => {
   const altPhoto = cardImage.alt;
 
 const openPhotoPopup = (evt) => {
-      popupPhotoCard.classList.add('popup_opened');
+      openPopup(popupPhotoCard);
       photoPopupCard.src = srcPhoto;
       photoPopupCard.alt = altPhoto;
       captionPopupCard.textContent = altPhoto;
   }
+
   cardImage.addEventListener('click', openPhotoPopup); 
   
   const likeBtn = newItem.querySelector('.photo__like');
@@ -111,9 +119,9 @@ const openPhotoPopup = (evt) => {
 
 const handleCardLikeClick = (event) => {
   const targetEl = event.target;
-  const targetItem = targetEl.closest('.photo__like');
-  targetItem.classList.toggle('photo__like_active');
+  targetEl.classList.toggle('photo__like_active');
 }
+
 
 const handleCardDeleteClick = (event) => {
   const targetEl = event.target;
@@ -124,15 +132,14 @@ const handleCardDeleteClick = (event) => {
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
  
-popupEditProfile.addEventListener('click', closePopup);
-popupAddCard.addEventListener('click', closePopup);
-buttonCloseAddPopup.addEventListener('click', closePopup); 
-buttonCloseProfilePopup.addEventListener('click', closePopup); 
-popupPhotoCard.addEventListener('click', closePopup);
+popupEditProfile.addEventListener('click', handleClosePopupClick);
+popupAddCard.addEventListener('click', handleClosePopupClick);
+buttonCloseAddPopup.addEventListener('click', handleClosePopupClick); 
+buttonCloseProfilePopup.addEventListener('click', handleClosePopupClick); 
+popupPhotoCard.addEventListener('click', handleClosePopupClick);
 profileForm.addEventListener('submit', handlerProfileSubmit); 
-AddCardForm.addEventListener('submit', handlerAddCardSubmit);
+addCardForm.addEventListener('submit', handlerAddCardSubmit);
 
-popupCardCloseBtn.addEventListener('click', closePopup);
+popupCardCloseBtn.addEventListener('click', handleClosePopupClick);
 
 render();
-
