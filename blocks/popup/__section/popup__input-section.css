@@ -1,0 +1,13 @@
+.popup__input-section {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.popup__input-section:last-of-type {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__input-section:last-of-type {
+    margin-bottom: 45px;
+  }
