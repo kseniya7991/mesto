@@ -31,7 +31,6 @@ const photoPopupCard = document.querySelector('.popup__photo');
 const captionPopupCard = document.querySelector('.popup__caption');
 
 const openPopup = (popup) => {
-  console.log(popup);
   popup.classList.add('popup_opened');
 }
 
@@ -80,6 +79,14 @@ const addNewCard = () => {
   containerItems.prepend(cardItem);
 }
 
+
+
+
+
+
+
+
+
 const getItem = (item) => {
   const newItem = templateElement.content.cloneNode(true);
   const cardTitle = newItem.querySelector('.photo__title');
@@ -92,9 +99,15 @@ const getItem = (item) => {
   const srcPhoto = cardImage.src;
   const altPhoto = cardImage.alt;
 
-  const photoCard = newItem.querySelector('.photo__img');
-  photoCard.addEventListener('click', handleCardPhotoImg);
+const openPhotoPopup = (evt) => {
+      openPopup(popupPhotoCard);
+      photoPopupCard.src = srcPhoto;
+      photoPopupCard.alt = altPhoto;
+      captionPopupCard.textContent = altPhoto;
+  }
 
+  cardImage.addEventListener('click', openPhotoPopup); 
+  
   const likeBtn = newItem.querySelector('.photo__like');
   likeBtn.addEventListener('click', handleCardLikeClick);
 
@@ -102,16 +115,6 @@ const getItem = (item) => {
   deleteBtn.addEventListener('click', handleCardDeleteClick);
 
   return newItem;
-}
-
-
-const handleCardPhotoImg = (event) => {
-  const targetEl = event.target;
-  console.log(targetEl);
-  photoPopupCard.src = targetEl.src;
-  photoPopupCard.alt = targetEl.alt;
-  captionPopupCard.textContent = targetEl.alt;
-  openPopup(popupPhotoCard);
 }
 
 const handleCardLikeClick = (event) => {
