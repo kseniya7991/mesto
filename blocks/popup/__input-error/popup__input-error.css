@@ -10,4 +10,5 @@
   top: calc(100% + 5px);
   max-width: 100%;
   overflow: hidden;
+  opacity: 0;
 }

@@ -43,32 +43,32 @@
   </footer>
   
   <section class="popup popup_profile">
-    <form class="popup__container popup__container_profile" name="userProfileForm">
+    <form class="popup__form popup__form_profile" name="userProfileForm" novalidate>
       <button type="reset" class="popup-close" aria-label="close"></button>
       <h2 class="popup__title popup__title_profile">Редактировать профиль</h2>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_name popup__input_error" name="Name" type="text" placeholder="Ваше имя">
-        <span class="popup__input-error">Вы пропустили это поле.</span>
+        <input class="popup__input popup__input_text_name popup__input_error" id="profile-name" name="Name" type="text" placeholder="Ваше имя" minlength="20">
+        <span class="popup__input-error" id="profile-name-error"></span>
       </section>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_about popup__input_error" name="Job" type="text" placeholder="Чем вы занимаетесь">
-        <span class="popup__input-error">Вы пропустили это поле.</span>
+        <input class="popup__input popup__input_text_about popup__input_error"  id="profile-about" name="Job" type="text" placeholder="Чем вы занимаетесь">
+        <span class="popup__input-error"  id="profile-about-error"></span>
       </section>
       <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_profile popup__save-button_inactive" aria-label="save">Сохранить</button>
     </form>
   </section>
 
   <section class="popup popup_add">
-    <form class="popup__container popup__container_add" name="addCardForm">
+    <form class="popup__form popup__form_add" name="addCardForm" novalidate>
       <button type="reset" class="popup-close popup-close_add" aria-label="close"></button>
       <h2 class="popup__title popup__title_add">Новое место</h2>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_title" name="Title" type="text" placeholder="Название">
-        <span class="popup__input-error">Вы пропустили это поле.</span>
+        <input class="popup__input popup__input_text_title"  id="add-title" name="Title" type="text" placeholder="Название">
+        <span class="popup__input-error" id="add-title-error"></span>
       </section>
       <section class="popup__input-section">
-       <input class="popup__input popup__input_link_photo" name="Link" type="url" placeholder="Ссылка на картинку" required>
-       <span class="popup__input-error">Вы пропустили это поле.</span>
+       <input class="popup__input popup__input_link_photo"  id="add-link" name="Link" type="url" placeholder="Ссылка на картинку" required>
+       <span class="popup__input-error"  id="add-link-error"></span>
       </section>
       <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_add" aria-label="create">Создать</button>
     </form>
@@ -94,5 +94,6 @@
   </template>
   <script src="./scripts/initialCards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
