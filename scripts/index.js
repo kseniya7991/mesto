@@ -107,14 +107,14 @@ const getItem = (item) => {
   const srcPhoto = cardImage.src;
   const altPhoto = cardImage.alt;
 
-const openPhotoPopup = (evt) => {
-      popupPhotoCard.classList.add('popup_opened');
-      photoPopupCard.src = srcPhoto;
-      photoPopupCard.alt = altPhoto;
-      captionPopupCard.textContent = altPhoto;
-      document.addEventListener('keydown', handlePopupEscClick); 
+  const openPhotoPopup = (evt) => {
+    popupPhotoCard.classList.add('popup_opened');
+    photoPopupCard.src = srcPhoto;
+    photoPopupCard.alt = altPhoto;
+    captionPopupCard.textContent = altPhoto;
+    document.addEventListener('keydown', handlePopupEscClick); 
   }
-  
+
   cardImage.addEventListener('click', openPhotoPopup); 
   
   const likeBtn = newItem.querySelector('.photo__like');
@@ -141,7 +141,6 @@ const handleCardDeleteClick = (event) => {
 const handlePopupEscClick = (evt) => {
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') removeClassOpened(popupOpened);
-  console.log(evt.key);
 };
 
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
