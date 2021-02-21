@@ -47,6 +47,19 @@ const openProfilePopup = (evt) => {
 
 const removeClassOpened = (popup) => {
   popup.classList.remove('popup_opened'); 
+  resetErrorClosingPopup(popup, validationElements);
+}
+
+//Скрытие ошибок при закрытии активного попапа
+const resetErrorClosingPopup = (popup, validationElements) => {
+  const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
+  inputErrorList.forEach((inputErrorEl) => {
+    inputErrorEl.classList.remove(validationElements.inputErrorActive);
+  });
+  const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
+  textErrorList.forEach((textErrorEl) => {
+    textErrorEl.textContent = '';
+  })
 }
 
 const closePopup = (evt) => {

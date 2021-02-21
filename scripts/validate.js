@@ -19,7 +19,6 @@ const showInputError = (formElement, inputElement, errorMessage, validationEleme
 const checkInputValid = (formElement, inputElement) => {
   const inputElementValid = inputElement.validity.valid;
   const errorMessage = inputElement.validationMessage;
-
   if(inputElementValid) {
     hideInputError(formElement, inputElement, validationElements);
   } else {
@@ -30,21 +29,38 @@ const checkInputValid = (formElement, inputElement) => {
 //Установление слушателей на все инпуты форм
 const setEventListeners = (formElement, validationElements) => {
   const inputList = Array.from(formElement.querySelectorAll(validationElements.inputSelector));
-  console.log(inputList);
-  
+  const buttonElement = formElement.querySelector(validationElements.submitButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (evt) => {
       checkInputValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement, validationElements);
     });
   })
+ 
 }
+
+//Переключение состояния кнопок "сохранить" и "создать"
+const toggleButtonState = (inputList, buttonElement, validationElements) => {
+  const notValidInput = inputList.some(
+    (inputElement) => !inputElement.validity.valid 
+    );
+  if(notValidInput) {
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add(validationElements.inactiveButtonClass);
+  } else {
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove(validationElements.inactiveButtonClass);
+  }
+}
+
+
   
 //Классы и селекторы элементов форм 
 const validationElements = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactive',
+  inactiveButtonClass: '.popup__save-button_inactive',
   textError: '.popup__input-error',
   activeTextError: 'popup__input-error_active',
   inputErrorActive: 'popup__input_error',
@@ -56,6 +72,7 @@ const enableValidation = (validationElements) => {
   formList.forEach( (formElement) => {
     setEventListeners(formElement, validationElements);
   });
+  
 }
 
 enableValidation(validationElements);

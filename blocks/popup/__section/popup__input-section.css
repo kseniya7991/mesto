@@ -1,6 +1,6 @@
 .popup__input-section {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .popup__input-section:last-of-type {
@@ -11,3 +11,4 @@
   .popup__input-section:last-of-type {
     margin-bottom: 45px;
   }
+}

@@ -47,14 +47,14 @@
       <button type="reset" class="popup-close" aria-label="close"></button>
       <h2 class="popup__title popup__title_profile">Редактировать профиль</h2>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_name popup__input_error" id="profile-name" name="Name" type="text" placeholder="Ваше имя" minlength="20">
+        <input class="popup__input popup__input_text_name" id="profile-name" name="Name" type="text" placeholder="Ваше имя" minlength="2" maxlength="40" required>
         <span class="popup__input-error" id="profile-name-error"></span>
       </section>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_about popup__input_error"  id="profile-about" name="Job" type="text" placeholder="Чем вы занимаетесь">
+        <input class="popup__input popup__input_text_about"  id="profile-about" name="Job" type="text" placeholder="Чем вы занимаетесь" minlength="2" maxlength="200" required>
         <span class="popup__input-error"  id="profile-about-error"></span>
       </section>
-      <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_profile popup__save-button_inactive" aria-label="save">Сохранить</button>
+      <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_profile" aria-label="save">Сохранить</button>
     </form>
   </section>
 
@@ -63,7 +63,7 @@
       <button type="reset" class="popup-close popup-close_add" aria-label="close"></button>
       <h2 class="popup__title popup__title_add">Новое место</h2>
       <section class="popup__input-section">
-        <input class="popup__input popup__input_text_title"  id="add-title" name="Title" type="text" placeholder="Название">
+        <input class="popup__input popup__input_text_title"  id="add-title" name="Title" type="text" placeholder="Название" minlength="2" maxlength="40" required>
         <span class="popup__input-error" id="add-title-error"></span>
       </section>
       <section class="popup__input-section">
