@@ -9,8 +9,8 @@ const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 const buttonCloseProfilePopup = document.querySelector('.popup-close');
 const buttonCloseAddPopup = document.querySelector('.popup-close_add');
 
-const profileForm = document.querySelector('.popup__container_profile');
-const addCardForm = document.querySelector('.popup__container_add');
+const profileForm = document.querySelector('.popup__form_profile');
+const AddCardForm = document.querySelector('.popup__form_add');
 
 const editName = document.querySelector('.popup__input_text_name');
 const editAbout = document.querySelector('.popup__input_text_about');
@@ -25,14 +25,16 @@ const buttonAddCard = document.querySelector('.add-button');
 const saveBtn = document.querySelector('.popup__save-button_profile');
 const createBtn = document.querySelector('.popup__save-button_add');
 
-/* const overlayCard = document.querySelector('.popup'); */
 const popupCardCloseBtn = document.querySelector('.popup-close_card');
 const photoPopupCard = document.querySelector('.popup__photo');
 const captionPopupCard = document.querySelector('.popup__caption');
 
+
+
 const openPopup = (popup) => {
   console.log(popup);
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handlePopupEscClick); 
 }
 
 const openAddCardPopup = (evt) => {
@@ -48,12 +50,26 @@ const openProfilePopup = (evt) => {
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
+  resetErrorClosingPopup(popup, validationElements);
+  document.removeEventListener('keydown', handlePopupEscClick);
+}
+
+//Скрытие ошибок при закрытии активного попапа
+const resetErrorClosingPopup = (popup, validationElements) => {
+  const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
+  inputErrorList.forEach((inputErrorEl) => {
+    inputErrorEl.classList.remove(validationElements.inputErrorActive);
+  });
+  const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
+  textErrorList.forEach((textErrorEl) => {
+    textErrorEl.textContent = '';
+  })
 }
 
 const handleClosePopupClick = (evt) => {
   const buttonClose = evt.target.closest('.popup_opened');
-  if (evt.target === evt.currentTarget) 
-      closePopup(buttonClose);
+if (evt.target === evt.currentTarget) 
+     closePopup(buttonClose);
 }
 
 
@@ -112,6 +128,7 @@ const handleCardPhotoImg = (event) => {
   photoPopupCard.alt = targetEl.alt;
   captionPopupCard.textContent = targetEl.alt;
   openPopup(popupPhotoCard);
+  document.addEventListener('keydown', handlePopupEscClick); 
 }
 
 const handleCardLikeClick = (event) => {
@@ -125,6 +142,11 @@ const handleCardDeleteClick = (event) => {
   const targetItem = targetEl.closest('.photo');
   targetItem.remove();
 }
+
+const handlePopupEscClick = (evt) => {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') closePopup(popupOpened);
+};
 
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
