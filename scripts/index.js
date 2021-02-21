@@ -25,13 +25,15 @@ const buttonAddCard = document.querySelector('.add-button');
 const saveBtn = document.querySelector('.popup__save-button_profile');
 const createBtn = document.querySelector('.popup__save-button_add');
 
-/* const overlayCard = document.querySelector('.popup'); */
 const popupCardCloseBtn = document.querySelector('.popup-close_card');
 const photoPopupCard = document.querySelector('.popup__photo');
 const captionPopupCard = document.querySelector('.popup__caption');
 
+
+
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handlePopupEscClick); 
 }
 
 const openAddCardPopup = (evt) => {
@@ -48,6 +50,7 @@ const openProfilePopup = (evt) => {
 const removeClassOpened = (popup) => {
   popup.classList.remove('popup_opened'); 
   resetErrorClosingPopup(popup, validationElements);
+  document.removeEventListener('keydown', handlePopupEscClick);
 }
 
 //Скрытие ошибок при закрытии активного попапа
@@ -64,8 +67,7 @@ const resetErrorClosingPopup = (popup, validationElements) => {
 
 const closePopup = (evt) => {
   const buttonClose = evt.target.closest('.popup_opened');
-  if (evt.target === evt.currentTarget) 
-      removeClassOpened(buttonClose);
+  if (evt.target === evt.currentTarget) removeClassOpened(buttonClose);
 }
 
 
@@ -110,7 +112,9 @@ const openPhotoPopup = (evt) => {
       photoPopupCard.src = srcPhoto;
       photoPopupCard.alt = altPhoto;
       captionPopupCard.textContent = altPhoto;
+      document.addEventListener('keydown', handlePopupEscClick); 
   }
+  
   cardImage.addEventListener('click', openPhotoPopup); 
   
   const likeBtn = newItem.querySelector('.photo__like');
@@ -133,6 +137,12 @@ const handleCardDeleteClick = (event) => {
   const targetItem = targetEl.closest('.photo');
   targetItem.remove();
 }
+
+const handlePopupEscClick = (evt) => {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') removeClassOpened(popupOpened);
+  console.log(evt.key);
+};
 
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
