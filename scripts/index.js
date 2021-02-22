@@ -120,7 +120,6 @@ const handleCardPhotoImg = (event) => {
   photoPopupCard.alt = targetEl.alt;
   captionPopupCard.textContent = targetEl.alt;
   openPopup(popupPhotoCard);
-  document.addEventListener('keydown', handlePopupEscClick); 
 }
 
 const handleCardLikeClick = (event) => {
