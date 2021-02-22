@@ -66,12 +66,6 @@ const resetErrorClosingPopup = (popup, validationElements) => {
   })
 }
 
-const handleClosePopupClick = (evt) => {
-if (evt.target === evt.currentTarget) 
-     closePopup(evt.target);
-}
-
-
 const handlerProfileSubmit = (evt) => {
   evt.preventDefault();
   userName.textContent = editName.value;
@@ -146,17 +140,21 @@ const handlePopupEscClick = (evt) => {
   if (evt.key === 'Escape') closePopup(popupOpened);
 };
 
+const handleClosePopupClick = () => {
+const popups = document.querySelectorAll('.popup');
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) closePopup(popup);
+    if (evt.target.classList.contains('popup-close')) closePopup(popup);
+    });
+});
+}
+
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
  
-popupEditProfile.addEventListener('click', handleClosePopupClick);
-popupAddCard.addEventListener('click', handleClosePopupClick);
-buttonCloseAddPopup.addEventListener('click', handleClosePopupClick); 
-buttonCloseProfilePopup.addEventListener('click', handleClosePopupClick); 
-popupPhotoCard.addEventListener('click', handleClosePopupClick);
 profileForm.addEventListener('submit', handlerProfileSubmit); 
 addCardForm.addEventListener('submit', handlerAddCardSubmit);
 
-popupCardCloseBtn.addEventListener('click', handleClosePopupClick);
-
+handleClosePopupClick();
 render();
