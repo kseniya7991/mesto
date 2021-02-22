@@ -67,9 +67,8 @@ const resetErrorClosingPopup = (popup, validationElements) => {
 }
 
 const handleClosePopupClick = (evt) => {
-  const buttonClose = evt.target.closest('.popup_opened');
 if (evt.target === evt.currentTarget) 
-     closePopup(buttonClose);
+     closePopup(evt.target);
 }
 
 
@@ -123,7 +122,6 @@ const getItem = (item) => {
 
 const handleCardPhotoImg = (event) => {
   const targetEl = event.target;
-  console.log(targetEl);
   photoPopupCard.src = targetEl.src;
   photoPopupCard.alt = targetEl.alt;
   captionPopupCard.textContent = targetEl.alt;
