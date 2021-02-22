@@ -16,7 +16,7 @@ const showInputError = (formElement, inputElement, errorMessage, validationEleme
 
 
 //Проверка валидности формы
-const checkInputValid = (formElement, inputElement) => {
+const checkInputValid = (formElement, inputElement, validationElements) => {
   const inputElementValid = inputElement.validity.valid;
   const errorMessage = inputElement.validationMessage;
   if(inputElementValid) {
@@ -32,7 +32,7 @@ const setEventListeners = (formElement, validationElements) => {
   const buttonElement = formElement.querySelector(validationElements.submitButtonSelector);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', (evt) => {
-      checkInputValid(formElement, inputElement);
+      checkInputValid(formElement, inputElement, validationElements);
       toggleButtonState(inputList, buttonElement, validationElements);
     });
   })
