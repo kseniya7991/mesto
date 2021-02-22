@@ -32,7 +32,6 @@ const captionPopupCard = document.querySelector('.popup__caption');
 
 
 const openPopup = (popup) => {
-  console.log(popup);
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupEscClick); 
 }
@@ -40,17 +39,18 @@ const openPopup = (popup) => {
 const openAddCardPopup = (evt) => {
   addCardForm.reset();
   openPopup(popupAddCard);
+  resetErrorClosingPopup(popupAddCard, validationElements);
 }
 
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
+  resetErrorClosingPopup(popupEditProfile, validationElements);
   openPopup(popupEditProfile);
 }
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
-  resetErrorClosingPopup(popup, validationElements);
   document.removeEventListener('keydown', handlePopupEscClick);
 }
 
