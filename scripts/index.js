@@ -10,7 +10,7 @@ const buttonCloseProfilePopup = document.querySelector('.popup-close');
 const buttonCloseAddPopup = document.querySelector('.popup-close_add');
 
 const profileForm = document.querySelector('.popup__form_profile');
-const AddCardForm = document.querySelector('.popup__form_add');
+const addCardForm = document.querySelector('.popup__form_add');
 
 const editName = document.querySelector('.popup__input_text_name');
 const editAbout = document.querySelector('.popup__input_text_about');
