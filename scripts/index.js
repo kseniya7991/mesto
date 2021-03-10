@@ -155,5 +155,20 @@ buttonAddCard.addEventListener('click', openAddCardPopup);
 profileForm.addEventListener('submit', handlerProfileSubmit); 
 addCardForm.addEventListener('submit', handlerAddCardSubmit);
 
+
+//новое
+import { initialCards } from './initialCards.js';
+initialCards.forEach((item) => {
+  const card = new Card(item);
+  const cardElement = card.generateCard();
+  document.body.append(cardElement);
+});
+
+export {openPopup} ;
+
+
+
+
+
 handleClosePopupClick();
 render();
