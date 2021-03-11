@@ -1,7 +1,5 @@
-//import {openPopup} from './index2.js';
-
-//const popupPhotoCard = document.querySelector('.popup_photo');
-export default class Card {
+import {openPopup} from './index2.js';
+ class Card {
   constructor(data) {
     this._src = data.src;
     this._name = data.name;
@@ -18,35 +16,53 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-   // this._setEventListeners();
+    this._setEventListeners();
     this._element.querySelector('.photo__img').src = this._src;
     this._element.querySelector('.photo__img').alt = this._name;
   	this._element.querySelector('.photo__title').textContent = this._name;
 
-  	return this._element;
+    return this._element;
+  }
+     
+  _setEventListeners() {
+    this._likeBtn = this._element.querySelector('.photo__like');
+    this._likeBtn.addEventListener('click', () => {
+      this._handleCardLikeClick();
+    });
+
+    this._deleteBtn = this._element.querySelector('.photo__delete');
+    this,this._deleteBtn.addEventListener('click', () => {
+      this._handleCardDeleteClick()
+    });
+
+    this._photoCard = this._element.querySelector('.photo__img');
+    this._photoCard.addEventListener('click', () => {
+      handleCardPhotoImg(this._photoCard);
+      //console.log(this._photoCard);
+    });
+   }
+
+   _handleCardLikeClick = () => {
+    this._likeBtn.classList.toggle('photo__like_active');
+   }
+
+   _handleCardDeleteClick = () => {
+    this._likeBtn.closest('.photo').remove();
+   }
+   
   }
 
-/*   _setEventListeners() {
-    this._element.querySelector('.photo__img').addEventListener('click', openPopup(popupPhotoCard));
-  });
 
-    buttonClosePopup.addEventListener('click', handleClosePopup);
-    }); }*/
+  const photoPopupCard = document.querySelector('.popup__photo');
+  const captionPopupCard = document.querySelector('.popup__caption');
+  const popupPhotoCard = document.querySelector('.popup_photo');
   
+  const handleCardPhotoImg = (photoElement) => {
+    photoPopupCard.src = photoElement.src;
+    photoPopupCard.alt = photoElement.alt;
+    captionPopupCard.textContent = photoElement.alt;
+    openPopup(popupPhotoCard);
+  }
 
-}
-
-const renderElements = () => {
-  const cardsElements = initialCards.map(getItem)
-  containerItems.append(...cardsElements);
-
-  cardList.innerHTML = '';
-  items.forEach((item) => {
-    const card = isGrid
-      ? new DefaultCard(item, '.default-card')
-      : new HorizontalCard(item, '.horizontal-card');
-
-    const cardElement = card.generateCard();
-    cardList.append(cardElement);
-  });
-};
+  export {Card, handleCardPhotoImg};
+  

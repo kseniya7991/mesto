@@ -79,17 +79,12 @@ const handlerAddCardSubmit = (evt) => {
    closePopup(popupAddCard);
 }
 
-const render = () => {
-  const cardsElements = initialCards.map(getItem)
-  containerItems.append(...cardsElements);
-}
-
 const addNewCard = () => {
   const cardItem = getItem({name: editTitle.value, src: editLink.value});
   containerItems.prepend(cardItem);
 }
 
-const getItem = (item) => {
+ const getItem = (item) => {
   const newItem = templateElement.content.cloneNode(true);
   const cardTitle = newItem.querySelector('.photo__title');
   cardTitle.textContent = item.name;
@@ -111,7 +106,7 @@ const getItem = (item) => {
   deleteBtn.addEventListener('click', handleCardDeleteClick);
 
   return newItem;
-}
+} 
 
 
 const handleCardPhotoImg = (event) => {
@@ -155,20 +150,5 @@ buttonAddCard.addEventListener('click', openAddCardPopup);
 profileForm.addEventListener('submit', handlerProfileSubmit); 
 addCardForm.addEventListener('submit', handlerAddCardSubmit);
 
-
-//новое
-import { initialCards } from './initialCards.js';
-initialCards.forEach((item) => {
-  const card = new Card(item);
-  const cardElement = card.generateCard();
-  document.body.append(cardElement);
-});
-
-export {openPopup} ;
-
-
-
-
-
 handleClosePopupClick();
-render();
+
