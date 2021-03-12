@@ -1,13 +1,27 @@
 import {openPopup} from './index2.js';
+
+const photoPopupCard = document.querySelector('.popup__photo');
+const captionPopupCard = document.querySelector('.popup__caption');
+const popupPhotoCard = document.querySelector('.popup_photo');
+
+const handleCardPhotoImg = (photoElement) => {
+  photoPopupCard.src = photoElement.src;
+  photoPopupCard.alt = photoElement.alt;
+  captionPopupCard.textContent = photoElement.alt;
+  openPopup(popupPhotoCard);
+}
+
  class Card {
-  constructor(data) {
+  constructor(data, cardSelector) {
+    this._data = data;
     this._src = data.src;
-    this._name = data.name;
+   this._name = data.name;
+    this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
   	const cardElement = document
-      .querySelector('.template')
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.photo')
       .cloneNode(true);
@@ -19,8 +33,7 @@ import {openPopup} from './index2.js';
     this._setEventListeners();
     this._element.querySelector('.photo__img').src = this._src;
     this._element.querySelector('.photo__img').alt = this._name;
-  	this._element.querySelector('.photo__title').textContent = this._name;
-
+    this._element.querySelector('.photo__title').textContent = this._name;
     return this._element;
   }
      
@@ -38,31 +51,17 @@ import {openPopup} from './index2.js';
     this._photoCard = this._element.querySelector('.photo__img');
     this._photoCard.addEventListener('click', () => {
       handleCardPhotoImg(this._photoCard);
-      //console.log(this._photoCard);
     });
-   }
+  }
 
-   _handleCardLikeClick = () => {
+  _handleCardLikeClick = () => {
     this._likeBtn.classList.toggle('photo__like_active');
    }
 
    _handleCardDeleteClick = () => {
     this._likeBtn.closest('.photo').remove();
-   }
-   
   }
+}
 
-
-  const photoPopupCard = document.querySelector('.popup__photo');
-  const captionPopupCard = document.querySelector('.popup__caption');
-  const popupPhotoCard = document.querySelector('.popup_photo');
-  
-  const handleCardPhotoImg = (photoElement) => {
-    photoPopupCard.src = photoElement.src;
-    photoPopupCard.alt = photoElement.alt;
-    captionPopupCard.textContent = photoElement.alt;
-    openPopup(popupPhotoCard);
-  }
-
-  export {Card, handleCardPhotoImg};
+export {Card, handleCardPhotoImg};
   
