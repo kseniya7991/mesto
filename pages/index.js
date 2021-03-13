@@ -1,8 +1,10 @@
 //новое
-import { initialCards } from './initialCards.js';
-import {Card, handleCardPhotoImg} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import { initialCards } from '../components/initialCards.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
 
+
+//Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add');
 
@@ -31,38 +33,42 @@ const validationElements = {
   inputErrorActive: 'popup__input_error',
 };
 
-
+//Отрисовка первоначальных 6ти карточек
 initialCards.forEach((item) => {
   const card = new Card(item, '.template');
   const cardElement = card.generateCard();
   document.querySelector('.photos-grid').append(cardElement)
 });  
 
+//Функция открытия попапа
 const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupEscClick); 
 }
 
+//Открытие попапа добавления карточки
 const openAddCardPopup = (evt) => {
   addCardForm.reset();
   openPopup(popupAddCard);
-  resetErrorClosingPopup(popupAddCard, validationElements);
+  resetErrorOpenPopup(popupAddCard, validationElements);
 }
 
+//Открытие попапа редактирования профиля
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
-  resetErrorClosingPopup(popupEditProfile, validationElements);
+  resetErrorOpenPopup(popupEditProfile, validationElements);
   openPopup(popupEditProfile);
 }
 
+//Функция закрытия попапа
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
   document.removeEventListener('keydown', handlePopupEscClick);
 }
 
-//Скрытие ошибок при закрытии активного попапа
-const resetErrorClosingPopup = (popup, validationElements) => {
+//Сброс ошибок при открытии попапа
+const resetErrorOpenPopup = (popup, validationElements) => {
   const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
   inputErrorList.forEach((inputErrorEl) => {
     inputErrorEl.classList.remove(validationElements.inputErrorActive);
@@ -73,6 +79,7 @@ const resetErrorClosingPopup = (popup, validationElements) => {
   })
 }
 
+//Обработка измененных данных профиля
 const handlerProfileSubmit = (evt) => {
   evt.preventDefault();
   userName.textContent = editName.value;
@@ -80,12 +87,15 @@ const handlerProfileSubmit = (evt) => {
   closePopup(popupEditProfile);
 }
 
+//Добавление новой карточки из попапа
 const handlerAddCardSubmit = (evt) => {
   evt.preventDefault();
   addNewCard();
   closePopup(popupAddCard);
 }
 
+
+//Рендеринг новой карточки
 const addNewCard = () => {
   const item = {name: editTitle.value, src: editLink.value};
   const card = new Card(item, '.template');
@@ -93,11 +103,13 @@ const addNewCard = () => {
   document.querySelector('.photos-grid').prepend(cardElement);
 }
 
+//Закрытие попапа по клику на Esc
 const handlePopupEscClick = (evt) => {
   const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') closePopup(popupOpened);
 };
 
+//Закрытие попапов по клику на крестик
 const handleClosePopupClick = () => {
   const popups = document.querySelectorAll('.popup');
   popups.forEach((popup) => {
@@ -108,6 +120,7 @@ const handleClosePopupClick = () => {
   });
 }
 
+//Добавление экземпляра класса валидатора для каждой формы
 const addValidator = (validationElements) => {
   const formList = Array.from(document.querySelectorAll(validationElements.formSelector));
   formList.forEach( (formElement) => {
@@ -116,6 +129,7 @@ const addValidator = (validationElements) => {
   });
 }
 
+//Слушатели на кнопки
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
  
@@ -125,4 +139,5 @@ addCardForm.addEventListener('submit', handlerAddCardSubmit);
 handleClosePopupClick();
 addValidator(validationElements);
 
+//Экспорт для модулей
 export {openPopup, validationElements};

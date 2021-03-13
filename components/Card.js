@@ -1,15 +1,8 @@
-import {openPopup} from './index2.js';
+import {openPopup} from '../pages/index.js';
 
 const photoPopupCard = document.querySelector('.popup__photo');
 const captionPopupCard = document.querySelector('.popup__caption');
 const popupPhotoCard = document.querySelector('.popup_photo');
-
-const handleCardPhotoImg = (photoElement) => {
-  photoPopupCard.src = photoElement.src;
-  photoPopupCard.alt = photoElement.alt;
-  captionPopupCard.textContent = photoElement.alt;
-  openPopup(popupPhotoCard);
-}
 
  class Card {
   constructor(data, cardSelector) {
@@ -50,7 +43,7 @@ const handleCardPhotoImg = (photoElement) => {
 
     this._photoCard = this._element.querySelector('.photo__img');
     this._photoCard.addEventListener('click', () => {
-      handleCardPhotoImg(this._photoCard);
+      this._handleCardPhotoImg(this._photoCard);
     });
   }
 
@@ -61,7 +54,15 @@ const handleCardPhotoImg = (photoElement) => {
    _handleCardDeleteClick = () => {
     this._likeBtn.closest('.photo').remove();
   }
+
+
+  _handleCardPhotoImg = (photoElement) => {
+    photoPopupCard.src = photoElement.src;
+    photoPopupCard.alt = photoElement.alt;
+    captionPopupCard.textContent = photoElement.alt;
+    openPopup(popupPhotoCard);
+  }
 }
 
-export {Card, handleCardPhotoImg};
+export {Card};
   
