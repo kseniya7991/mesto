@@ -9,18 +9,19 @@ class FormValidator {
     this._inactiveBtn = validationElements.inactiveButtonClass;
   }
 
-  enableValidation() {
+  enableValidation = (evt) => {
+    //evt.preventDefault();
     this._setEventListeners();
   }
 
   //Установление слушателей на все инпуты форм
   _setEventListeners() {
-    const inputList = Array.from(this._form.querySelectorAll(this._input));
+    this._inputList = Array.from(this._form.querySelectorAll(this._input));
     const buttonElement = this._form.querySelector(this._submitBtn);
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValid(inputElement);
-        this._toggleButtonState(inputElement, inputList,buttonElement);
+        this._toggleButtonState(inputElement,buttonElement);
       })
     })
   }
@@ -53,8 +54,8 @@ class FormValidator {
   }
 
   //Переключение состояния кнопок "сохранить" и "создать"
-  _toggleButtonState(inputElement, inputList, buttonElement) {
-    const notValidInput = inputList.some((inputElement) => !inputElement.validity.valid);
+  _toggleButtonState(inputElement, buttonElement) {
+    const notValidInput = this._inputList.some((inputElement) => !inputElement.validity.valid);
     if(notValidInput) {
       buttonElement.setAttribute('disabled', true);
       buttonElement.classList.add(this._inactiveBtn);
@@ -66,3 +67,5 @@ class FormValidator {
 }
 
 export {FormValidator} ;
+
+//исправление inputList на this._inputList (доделать остальное)
