@@ -47,7 +47,7 @@ const openPopup = (popup) => {
 }
 
 //Открытие попапа добавления карточки
-const openAddCardPopup = (evt) => {
+const openAddCardPopup = () => {
   addCardForm.reset();
   openPopup(popupAddCard);
   resetErrorOpenPopup(popupAddCard, validationElements);
