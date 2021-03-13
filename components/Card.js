@@ -8,7 +8,7 @@ const popupPhotoCard = document.querySelector('.popup_photo');
   constructor(data, cardSelector) {
     this._data = data;
     this._src = data.src;
-   this._name = data.name;
+    this._name = data.name;
     this._cardSelector = cardSelector;
   }
 
@@ -24,8 +24,9 @@ const popupPhotoCard = document.querySelector('.popup_photo');
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector('.photo__img').src = this._src;
-    this._element.querySelector('.photo__img').alt = this._name;
+    this._photoImg = this._element.querySelector('.photo__img');
+    this._photoImg.src = this._src;
+    this._photoImg.alt = this._name;
     this._element.querySelector('.photo__title').textContent = this._name;
     return this._element;
   }
