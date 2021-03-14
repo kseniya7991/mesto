@@ -31,13 +31,21 @@ const validationElements = {
   textError: '.popup__input-error',
   activeTextError: 'popup__input-error_active',
   inputErrorActive: 'popup__input_error',
+  submitCardButton: '.popup__save-button_add',
+  formAddCard: '.popup__form_add',
+  formEditProfile: '.popup__form_profile'
 };
+
+//Создание экземпляра карточки
+const addInstanceCard = (item, cardSelector) => {
+  const card = new Card(item, cardSelector);
+  const cardElement = card.generateCard();
+  document.querySelector('.photos-grid').prepend(cardElement);
+}
 
 //Отрисовка первоначальных 6ти карточек
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template');
-  const cardElement = card.generateCard();
-  document.querySelector('.photos-grid').append(cardElement)
+  addInstanceCard(item, '.template');
 });  
 
 //Функция открытия попапа
@@ -50,14 +58,22 @@ const openPopup = (popup) => {
 const openAddCardPopup = () => {
   addCardForm.reset();
   openPopup(popupAddCard);
-  resetErrorOpenPopup(popupAddCard, validationElements);
+  addValidator(validationElements);
+  toggleButtonInactive(validationElements);
+}
+
+//Отключение активной кнопки при открытии попапа добавления карточки
+const toggleButtonInactive = (validationElements) => {
+const buttonCardElement = document.querySelector(validationElements.submitCardButton);
+buttonCardElement.setAttribute('disabled', true);
+buttonCardElement.classList.add(validationElements.inactiveButtonClass);
 }
 
 //Открытие попапа редактирования профиля
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
-  resetErrorOpenPopup(popupEditProfile, validationElements);
+  addValidator(validationElements);
   openPopup(popupEditProfile);
 }
 
@@ -65,18 +81,6 @@ const openProfilePopup = (evt) => {
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
   document.removeEventListener('keydown', handlePopupEscClick);
-}
-
-//Сброс ошибок при открытии попапа
-const resetErrorOpenPopup = (popup, validationElements) => {
-  const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
-  inputErrorList.forEach((inputErrorEl) => {
-    inputErrorEl.classList.remove(validationElements.inputErrorActive);
-  });
-  const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
-  textErrorList.forEach((textErrorEl) => {
-    textErrorEl.textContent = '';
-  })
 }
 
 //Обработка измененных данных профиля
@@ -98,10 +102,10 @@ const handlerAddCardSubmit = (evt) => {
 //Рендеринг новой карточки
 const addNewCard = () => {
   const item = {name: editTitle.value, src: editLink.value};
-  const card = new Card(item, '.template');
-  const cardElement = card.generateCard();
-  document.querySelector('.photos-grid').prepend(cardElement);
+  addInstanceCard(item, '.template');
 }
+
+
 
 //Закрытие попапа по клику на Esc
 const handlePopupEscClick = (evt) => {
@@ -122,11 +126,13 @@ const handleClosePopupClick = () => {
 
 //Добавление экземпляра класса валидатора для каждой формы
 const addValidator = (validationElements) => {
-  const formList = Array.from(document.querySelectorAll(validationElements.formSelector));
-  formList.forEach( (formElement) => {
-    const formEl = new FormValidator (validationElements, formElement);
-    formEl.enableValidation();
-  });
+  const formEditProfile =  new FormValidator (validationElements, profileForm);
+  formEditProfile.enableValidation();
+  formEditProfile.resetErrorOpenPopup();
+
+  const formAddCard = new FormValidator (validationElements, addCardForm);
+  formAddCard.enableValidation();
+  formAddCard.resetErrorOpenPopup();
 }
 
 //Слушатели на кнопки

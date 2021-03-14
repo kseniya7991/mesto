@@ -7,20 +7,24 @@ class FormValidator {
     this._textError = validationElements.activeTextError;
     this._inputError = validationElements.inputErrorActive;
     this._inactiveBtn = validationElements.inactiveButtonClass;
+    this._textErrorInput = validationElements.textError;
   }
 
-  enableValidation() {
+  enableValidation = (evt) => {
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
     this._setEventListeners();
   }
 
   //Установление слушателей на все инпуты форм
   _setEventListeners() {
-    const inputList = Array.from(this._form.querySelectorAll(this._input));
-    const buttonElement = this._form.querySelector(this._submitBtn);
-    inputList.forEach((inputElement) => {
+    this._inputList = Array.from(this._form.querySelectorAll(this._input));
+    this._buttonElement = this._form.querySelector(this._submitBtn);
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValid(inputElement);
-        this._toggleButtonState(inputElement, inputList,buttonElement);
+        this._toggleButtonState(inputElement);
       })
     })
   }
@@ -53,16 +57,29 @@ class FormValidator {
   }
 
   //Переключение состояния кнопок "сохранить" и "создать"
-  _toggleButtonState(inputElement, inputList, buttonElement) {
-    const notValidInput = inputList.some((inputElement) => !inputElement.validity.valid);
+  _toggleButtonState(inputElement) {
+    const notValidInput = this._inputList.some((inputElement) => !inputElement.validity.valid);
     if(notValidInput) {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(this._inactiveBtn);
+      this._buttonElement.setAttribute('disabled', true);
+      this._buttonElement.classList.add(this._inactiveBtn);
     } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(this._inactiveBtn);
+      this._buttonElement.removeAttribute('disabled');
+      this._buttonElement.classList.remove(this._inactiveBtn);
     }
   }
+
+
+  //Публичный метод сброса ошибок формы при открытии попапа
+  resetErrorOpenPopup () {
+    const inputErrorList = Array.from(this._form.querySelectorAll(this._input));
+    inputErrorList.forEach((inputErrorEl) => {
+      inputErrorEl.classList.remove(this._inputError);
+    });
+    const textErrorList = Array.from(this._form.querySelectorAll(this._textErrorInput));
+    textErrorList.forEach((textErrorEl) => {
+      textErrorEl.textContent = '';
+    })
+  } 
 }
 
 export {FormValidator} ;
