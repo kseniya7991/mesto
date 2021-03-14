@@ -58,7 +58,7 @@ const openPopup = (popup) => {
 const openAddCardPopup = (evt) => {
   addCardForm.reset();
   openPopup(popupAddCard);
-  resetErrorOpenPopup(popupAddCard, validationElements);
+  addValidator(validationElements);
   toggleButtonInactive(validationElements);
 }
 
@@ -73,7 +73,7 @@ buttonCardElement.classList.add(validationElements.inactiveButtonClass);
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
-  resetErrorOpenPopup(popupEditProfile, validationElements);
+  addValidator(validationElements);
   openPopup(popupEditProfile);
 }
 
@@ -82,18 +82,6 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_opened'); 
   document.removeEventListener('keydown', handlePopupEscClick);
 }
-
-//Сброс ошибок при открытии попапа (переносим в ForValidator)
- const resetErrorOpenPopup = (popup, validationElements) => {
-  const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
-  inputErrorList.forEach((inputErrorEl) => {
-    inputErrorEl.classList.remove(validationElements.inputErrorActive);
-  });
-  const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
-  textErrorList.forEach((textErrorEl) => {
-    textErrorEl.textContent = '';
-  })
-} 
 
 //Обработка измененных данных профиля
 const handlerProfileSubmit = (evt) => {
@@ -140,20 +128,12 @@ const handleClosePopupClick = () => {
 const addValidator = (validationElements) => {
   const formEditProfile =  new FormValidator (validationElements, profileForm);
   formEditProfile.enableValidation();
+  formEditProfile.resetErrorOpenPopup();
 
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.enableValidation();
-
-  //const formList = Array.from(document.querySelectorAll(validationElements.formSelector));
-  
-  /*formList.forEach( (formElement) => {
-    const formEl = new FormValidator (validationElements, formElement);
-    formEl.enableValidation();
-    
-  }); */
+  formAddCard.resetErrorOpenPopup();
 }
-
-//добавление экземпляра классы выносила из цикла
 
 //Слушатели на кнопки
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);

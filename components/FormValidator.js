@@ -7,10 +7,13 @@ class FormValidator {
     this._textError = validationElements.activeTextError;
     this._inputError = validationElements.inputErrorActive;
     this._inactiveBtn = validationElements.inactiveButtonClass;
+    this._textErrorInput = validationElements.textError;
   }
 
   enableValidation = (evt) => {
-    //evt.preventDefault();
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
     this._setEventListeners();
   }
 
@@ -66,19 +69,17 @@ class FormValidator {
   }
 
 
- /*  //Публичный метод сброса ошибок формы при открытии попапа
-  resetErrorOpenPopup = (popup, validationElements) => {
-    const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
+  //Публичный метод сброса ошибок формы при открытии попапа
+  resetErrorOpenPopup () {
+    const inputErrorList = Array.from(this._form.querySelectorAll(this._input));
     inputErrorList.forEach((inputErrorEl) => {
-      inputErrorEl.classList.remove(validationElements.inputErrorActive);
+      inputErrorEl.classList.remove(this._inputError);
     });
-    const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
+    const textErrorList = Array.from(this._form.querySelectorAll(this._textErrorInput));
     textErrorList.forEach((textErrorEl) => {
       textErrorEl.textContent = '';
     })
-  } */
+  } 
 }
 
 export {FormValidator} ;
-
-//исправление inputList на this._inputList (доделать остальное)
