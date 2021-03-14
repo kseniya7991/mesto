@@ -17,11 +17,11 @@ class FormValidator {
   //Установление слушателей на все инпуты форм
   _setEventListeners() {
     this._inputList = Array.from(this._form.querySelectorAll(this._input));
-    const buttonElement = this._form.querySelector(this._submitBtn);
+    this._buttonElement = this._form.querySelector(this._submitBtn);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValid(inputElement);
-        this._toggleButtonState(inputElement,buttonElement);
+        this._toggleButtonState(inputElement);
       })
     })
   }
@@ -54,16 +54,29 @@ class FormValidator {
   }
 
   //Переключение состояния кнопок "сохранить" и "создать"
-  _toggleButtonState(inputElement, buttonElement) {
+  _toggleButtonState(inputElement) {
     const notValidInput = this._inputList.some((inputElement) => !inputElement.validity.valid);
     if(notValidInput) {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(this._inactiveBtn);
+      this._buttonElement.setAttribute('disabled', true);
+      this._buttonElement.classList.add(this._inactiveBtn);
     } else {
-      buttonElement.removeAttribute('disabled');
-      buttonElement.classList.remove(this._inactiveBtn);
+      this._buttonElement.removeAttribute('disabled');
+      this._buttonElement.classList.remove(this._inactiveBtn);
     }
   }
+
+
+ /*  //Публичный метод сброса ошибок формы при открытии попапа
+  resetErrorOpenPopup = (popup, validationElements) => {
+    const inputErrorList = Array.from(popup.querySelectorAll(validationElements.inputSelector));
+    inputErrorList.forEach((inputErrorEl) => {
+      inputErrorEl.classList.remove(validationElements.inputErrorActive);
+    });
+    const textErrorList = Array.from(popup.querySelectorAll(validationElements.textError));
+    textErrorList.forEach((textErrorEl) => {
+      textErrorEl.textContent = '';
+    })
+  } */
 }
 
 export {FormValidator} ;

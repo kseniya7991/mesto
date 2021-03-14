@@ -38,7 +38,7 @@ const popupPhotoCard = document.querySelector('.popup_photo');
     });
 
     this._deleteBtn = this._element.querySelector('.photo__delete');
-    this,this._deleteBtn.addEventListener('click', () => {
+    this._deleteBtn.addEventListener('click', () => {
       this._handleCardDeleteClick()
     });
 
