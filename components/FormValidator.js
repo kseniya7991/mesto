@@ -80,6 +80,9 @@ class FormValidator {
       textErrorEl.textContent = '';
     })
   } 
+  
 }
+
+
 
 export {FormValidator} ;

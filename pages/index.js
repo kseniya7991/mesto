@@ -58,7 +58,8 @@ const openPopup = (popup) => {
 const openAddCardPopup = (evt) => {
   addCardForm.reset();
   openPopup(popupAddCard);
-  addValidator(validationElements);
+  const formAddCard = new FormValidator (validationElements, addCardForm);
+  formAddCard.resetErrorOpenPopup();
   toggleButtonInactive(validationElements);
 }
 
@@ -73,7 +74,8 @@ buttonCardElement.classList.add(validationElements.inactiveButtonClass);
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
-  addValidator(validationElements);
+  const formEditProfile = new FormValidator (validationElements, profileForm);
+  formEditProfile.resetErrorOpenPopup();
   openPopup(popupEditProfile);
 }
 
@@ -128,12 +130,11 @@ const handleClosePopupClick = () => {
 const addValidator = (validationElements) => {
   const formEditProfile =  new FormValidator (validationElements, profileForm);
   formEditProfile.enableValidation();
-  formEditProfile.resetErrorOpenPopup();
 
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.enableValidation();
-  formAddCard.resetErrorOpenPopup();
 }
+
 
 //Слушатели на кнопки
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
