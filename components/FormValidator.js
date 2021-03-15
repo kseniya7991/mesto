@@ -80,14 +80,6 @@ class FormValidator {
       textErrorEl.textContent = '';
     })
   } 
-<<<<<<< HEAD
 }
 
-=======
-  
-}
-
-
-
->>>>>>> develop
 export {FormValidator} ;

@@ -58,12 +58,9 @@ const openPopup = (popup) => {
 const openAddCardPopup = () => {
   addCardForm.reset();
   openPopup(popupAddCard);
-<<<<<<< HEAD
-  addValidator(validationElements);
-=======
+
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.resetErrorOpenPopup();
->>>>>>> develop
   toggleButtonInactive(validationElements);
 }
 
@@ -78,12 +75,9 @@ buttonCardElement.classList.add(validationElements.inactiveButtonClass);
 const openProfilePopup = (evt) => {
   editName.value = userName.textContent;
   editAbout.value = userAbout.textContent;
-<<<<<<< HEAD
-  addValidator(validationElements);
-=======
+
   const formEditProfile = new FormValidator (validationElements, profileForm);
   formEditProfile.resetErrorOpenPopup();
->>>>>>> develop
   openPopup(popupEditProfile);
 }
 
@@ -138,17 +132,9 @@ const handleClosePopupClick = () => {
 const addValidator = (validationElements) => {
   const formEditProfile =  new FormValidator (validationElements, profileForm);
   formEditProfile.enableValidation();
-<<<<<<< HEAD
-  formEditProfile.resetErrorOpenPopup();
 
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.enableValidation();
-  formAddCard.resetErrorOpenPopup();
-=======
-
-  const formAddCard = new FormValidator (validationElements, addCardForm);
-  formAddCard.enableValidation();
->>>>>>> develop
 }
 
 
