@@ -1,4 +1,5 @@
-//новое
+//Импорт js модулей
+import Section from '../components/Section.js';
 import { initialCards } from '../components/initialCards.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -23,6 +24,9 @@ const userAbout =  document.querySelector('.user__about');
 
 const buttonAddCard = document.querySelector('.add-button');
 
+//перенести в константы
+const cardListSection = '.photos-grid';
+
 const validationElements = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -36,17 +40,35 @@ const validationElements = {
   formEditProfile: '.popup__form_profile'
 };
 
-//Создание экземпляра карточки
-const addInstanceCard = (item, cardSelector) => {
+//Создание экземпляра карточки старая версия
+ /* const addInstanceCard = (item, cardSelector) => {
   const card = new Card(item, cardSelector);
   const cardElement = card.generateCard();
   document.querySelector('.photos-grid').prepend(cardElement);
+}  */
+
+//Функция создания экземпляра карточки
+const addInstanceCard = (item) => {
+  const card = new Card(item, '.template');
+  const cardElement = card.generateCard();
+  cardList.addItem(cardElement);
 }
 
 //Отрисовка первоначальных 6ти карточек
-initialCards.forEach((item) => {
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (item) => { 
+    addInstanceCard(item);
+  }},
+  cardListSection
+  )
+
+//Запуск функции отрисовки
+cardList.renderer();
+
+/* initialCards.forEach((item) => {
   addInstanceCard(item, '.template');
-});  
+});   */
 
 //Функция открытия попапа
 const openPopup = (popup) => {
@@ -101,10 +123,19 @@ const handlerAddCardSubmit = (evt) => {
 }
 
 
+
+
 //Рендеринг новой карточки
 const addNewCard = () => {
-  const item = {name: editTitle.value, src: editLink.value};
-  addInstanceCard(item, '.template');
+  const itemCard = [{name: editTitle.value, src: editLink.value}];
+  const newCard = new Section ({
+    items: itemCard,
+    renderer: (item) => {
+      addInstanceCard(item);
+    }},
+    cardListSection
+    )
+    newCard.renderer();
 }
 
 
