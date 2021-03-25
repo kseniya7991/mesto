@@ -1,7 +1,6 @@
 /*import {openPopup} from '../components/utils.js';*/
+import PopupWithImage from './PopupWithImage.js';
 
-const photoPopupCard = document.querySelector('.popup__photo');
-const captionPopupCard = document.querySelector('.popup__caption');
 const popupPhotoCard = document.querySelector('.popup_photo');
 
  class Card {
@@ -44,7 +43,7 @@ const popupPhotoCard = document.querySelector('.popup_photo');
 
     this._photoCard = this._element.querySelector('.photo__img');
     this._photoCard.addEventListener('click', () => {
-      this._handleCardPhotoImg(this._photoCard);
+      this.handleCardClick();
     });
   }
 
@@ -57,11 +56,9 @@ const popupPhotoCard = document.querySelector('.popup_photo');
   }
 
 
-  _handleCardPhotoImg = (photoElement) => {
-    photoPopupCard.src = photoElement.src;
-    photoPopupCard.alt = photoElement.alt;
-    captionPopupCard.textContent = photoElement.alt;
-   /* openPopup(popupPhotoCard);*/
+  handleCardClick = () => {
+    const popupCard = new PopupWithImage (this._photoCard, popupPhotoCard);
+    popupCard.open();
   }
 }
 
