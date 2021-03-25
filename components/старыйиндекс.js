@@ -3,8 +3,7 @@ import Section from '../components/Section.js';
 import { initialCards } from '../components/initialCards.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-import Popup from '../components/Popup.js';
-import PopupWithForm from '../components/PopupWithForm.js';
+
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
@@ -70,15 +69,15 @@ const cardList = new Section ({
 });   */
 
 //Функция открытия попапа
-/* const openPopup = (popup) => {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupEscClick); 
-} */
+}
 
 //Открытие попапа добавления карточки
 const openAddCardPopup = (evt) => {
-  const popupCard = new PopupWithForm (handlerAddCardSubmit, popupAddCard);
-  popupCard.open();
+  addCardForm.reset();
+  openPopup(popupAddCard);
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.resetErrorOpenPopup();
   toggleButtonInactive(validationElements);
@@ -118,12 +117,12 @@ const handlerProfileSubmit = (evt) => {
 const handlerAddCardSubmit = (evt) => {
   evt.preventDefault();
   addNewCard();
+  closePopup(popupAddCard);
 }
 
 //Рендеринг новой карточки
 const addNewCard = () => {
   const itemCard = [{name: editTitle.value, src: editLink.value}];
-  console.log(itemCard);
   const newCard = new Section ({
     items: itemCard,
     renderer: (item) => {
@@ -143,7 +142,7 @@ const handlePopupEscClick = (evt) => {
 };
 
 //Закрытие попапов по клику на крестик
-/* const handleClosePopupClick = () => {
+const handleClosePopupClick = () => {
   const popups = document.querySelectorAll('.popup');
   popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
@@ -151,7 +150,7 @@ const handlePopupEscClick = (evt) => {
       if (evt.target.classList.contains('popup-close')) closePopup(popup);
     });
   });
-} */
+}
 
 //Добавление экземпляра класса валидатора для каждой формы
 const addValidator = (validationElements) => {
@@ -168,8 +167,9 @@ buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
  
 profileForm.addEventListener('submit', handlerProfileSubmit); 
-//addCardForm.addEventListener('submit', handlerAddCardSubmit);
+addCardForm.addEventListener('submit', handlerAddCardSubmit);
 
+handleClosePopupClick();
 addValidator(validationElements);
 
 //Запуск функции отрисовки дефолтных карточек
@@ -177,4 +177,4 @@ cardList.renderer();
 
 
 //Экспорт для модулей
-export {/*openPopup*/ validationElements};
+export {openPopup, validationElements};
