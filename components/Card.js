@@ -1,4 +1,4 @@
-import {openPopup} from '../components/utils.js';
+/*import {openPopup} from '../components/utils.js';*/
 
 const photoPopupCard = document.querySelector('.popup__photo');
 const captionPopupCard = document.querySelector('.popup__caption');
@@ -61,7 +61,7 @@ const popupPhotoCard = document.querySelector('.popup_photo');
     photoPopupCard.src = photoElement.src;
     photoPopupCard.alt = photoElement.alt;
     captionPopupCard.textContent = photoElement.alt;
-    openPopup(popupPhotoCard);
+   /* openPopup(popupPhotoCard);*/
   }
 }
 

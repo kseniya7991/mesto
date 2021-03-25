@@ -3,7 +3,7 @@ import Section from '../components/Section.js';
 import { initialCards } from '../components/initialCards.js';
 import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
-
+import Popup from '../components/Popup.js';
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
@@ -63,23 +63,23 @@ const cardList = new Section ({
   cardListSection
   )
 
-//Запуск функции отрисовки
-cardList.renderer();
 
 /* initialCards.forEach((item) => {
   addInstanceCard(item, '.template');
 });   */
 
 //Функция открытия попапа
-const openPopup = (popup) => {
+/* const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupEscClick); 
-}
+} */
 
 //Открытие попапа добавления карточки
 const openAddCardPopup = (evt) => {
   addCardForm.reset();
-  openPopup(popupAddCard);
+  const popupCard = new Popup (popupAddCard);
+  popupCard.open();
+ //openPopup(popupAddCard);
   const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.resetErrorOpenPopup();
   toggleButtonInactive(validationElements);
@@ -121,9 +121,6 @@ const handlerAddCardSubmit = (evt) => {
   addNewCard();
   closePopup(popupAddCard);
 }
-
-
-
 
 //Рендеринг новой карточки
 const addNewCard = () => {
@@ -177,5 +174,9 @@ addCardForm.addEventListener('submit', handlerAddCardSubmit);
 handleClosePopupClick();
 addValidator(validationElements);
 
+//Запуск функции отрисовки дефолтных карточек
+cardList.renderer();
+
+
 //Экспорт для модулей
-export {openPopup, validationElements};
+export {/*openPopup*/ validationElements};
