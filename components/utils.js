@@ -1,2 +1,2 @@
-import {openPopup} from '../pages/index.js';
-export {openPopup};
+/*import {openPopup} from '../pages/index.js';
+export {openPopup};*/
