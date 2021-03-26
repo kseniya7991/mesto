@@ -5,6 +5,7 @@ import {Card} from '../components/Card.js';
 import {FormValidator} from '../components/FormValidator.js';
 //import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js'
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
@@ -66,6 +67,8 @@ const openAddCardPopup = (evt) => {
   const popupCard = new PopupWithForm (handlerAddCardSubmit, popupAddCard);
   popupCard.open();
   
+
+
   toggleButtonInactive(validationElements);
 }
 
@@ -84,13 +87,18 @@ const openProfilePopup = (evt) => {
   const formEditProfile = new FormValidator (validationElements, profileForm);
   formEditProfile.resetErrorOpenPopup();
 
+  const userInfo = new UserInfo ({nameSelector: '.user__name',aboutSelector:'.user__about'})
+  userInfo.getUserInfo();
+
   toggleButtonInactive(validationElements);
 }
 
 //Обработка измененных данных профиля
 const handlerProfileSubmit = (submitData) => {
-  userName.textContent = submitData.Name;
-  userAbout.textContent = submitData.Job;
+  //userName.textContent = submitData.Name;
+  // userAbout.textContent = submitData.Job;
+  //console.log(submitData);
+  
 }
 
 //Добавление новой карточки из попапа
