@@ -1,18 +1,24 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup{
-  constructor(submitFunction, cardSelector){
-    super(cardSelector);
-      this._cardSelector = cardSelector;
+  constructor(submitFunction, popupSelector){
+    super(popupSelector);
+      this._popupSelector = popupSelector;
       this._submitFunction = submitFunction;
-      this._form = this._cardSelector.querySelector('.popup__form');
+      this._form = this._popupSelector.querySelector('.popup__form');
   }
 
   _getInputValues() {
-    this._editName = document.querySelector('.popup__input_text_name').value;
-    this._editAbout = document.querySelector('.popup__input_text_about').value;
-    this._editTitle = document.querySelector('.popup__input_text_title').value;
-    this._editLink = document.querySelector('.popup__input_link_photo').value;
+    this._inputList = this._form.querySelectorAll('.popup__input');
+    // создаём пустой объект
+    this._formValues = {};
+  
+    // добавляем в этот объект значения всех полей
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value;
+    });
+    // возвращаем объект значений
+    return this._formValues;
   }
 
   setEventListeners() {
@@ -23,9 +29,9 @@ export default class PopupWithForm extends Popup{
         if (evt.target.classList.contains('popup-close')) this.close();
       });
     });
-    this._cardSelector.addEventListener('submit', (evt) => {
+    this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitFunction(evt);
+      this._submitFunction(this._getInputValues());
       this.close();
     })
   }
@@ -37,4 +43,5 @@ export default class PopupWithForm extends Popup{
     });
     this._form.reset();
   }
+
 }

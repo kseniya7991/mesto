@@ -1,4 +1,3 @@
-/*import {openPopup} from '../components/utils.js';*/
 import PopupWithImage from './PopupWithImage.js';
 
 const popupPhotoCard = document.querySelector('.popup_photo');

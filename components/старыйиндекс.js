@@ -120,6 +120,8 @@ const handlerAddCardSubmit = (evt) => {
   closePopup(popupAddCard);
 }
 
+//решить проблему с добавлением нескольких карточек
+
 //Рендеринг новой карточки
 const addNewCard = () => {
   const itemCard = [{name: editTitle.value, src: editLink.value}];

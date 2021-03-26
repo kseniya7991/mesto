@@ -6,7 +6,8 @@ export default class Section {
   }
 
   renderer() {
-    console.log(this._rendererItems);
+    console.log(this._rendererItems, this._renderer)
+    //console.log(this._rendererItems);
     this._rendererItems.forEach( item => this._renderer(item))
   }
 
