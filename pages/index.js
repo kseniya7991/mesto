@@ -6,6 +6,7 @@ import {FormValidator} from '../components/FormValidator.js';
 //import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js'
+import Popup from '../components/Popup.js';
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
@@ -82,6 +83,7 @@ buttonCardElement.classList.add(validationElements.inactiveButtonClass);
 //Открытие попапа редактирования профиля
 const openProfilePopup = (evt) => {
   const popupProfile = new PopupWithForm(handlerProfileSubmit, popupEditProfile)
+  //const popupProfile = new Popup(popupEditProfile);
   popupProfile.open();
 
   const formEditProfile = new FormValidator (validationElements, profileForm);
