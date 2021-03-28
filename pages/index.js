@@ -96,20 +96,15 @@ const toggleButtonInactive = (validationElements) => {
   }
   
 
-const popupCardInstanse = (photoCard, popupPhotoCard) => {
- const popupCard = new PopupWithImage (photoCard, popupPhotoCard);
- popupCard.open();
-}
-
 //открытие попапа при клике на карточку
 const handleCardClick = (photoCard, popupPhotoCard) => {
-  popupCardInstanse(photoCard, popupPhotoCard);
+  const popupCard = new PopupWithImage (photoCard, popupPhotoCard);
+  popupCard.open();
 }
 
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
   const itemCard = {name: submitData.Title, src: submitData.Link};
-  console.log(itemCard);
   addInstanceCard(itemCard);
 }
 
