@@ -14,11 +14,10 @@ export default class UserInfo {
   }
   
   //принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo() {
-    this._userName.textContent = this._userNameInput.value;
-    console.log(this._userName);
-    this._userAbout.textContent = this._userAboutInput.value;
-    console.log(this._userAbout);
+  setUserInfo(formData) {
+    this._userName.textContent = formData.Name;
+    this._userAbout.textContent = formData.Job;
+    //this._userAbout.textContent = this._userAboutInput.value;
   }
 
  }

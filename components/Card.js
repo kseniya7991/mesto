@@ -55,11 +55,6 @@ const popupPhotoCard = document.querySelector('.popup_photo');
     this._likeBtn.closest('.photo').remove();
   }
 
-
-  /*handleCardClick = () => {
-    const popupCard = new PopupWithImage (this._photoCard, popupPhotoCard);
-    popupCard.open();
-  }*/
 }
 
 export {Card};

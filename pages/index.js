@@ -16,20 +16,10 @@ const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 const profileForm = document.querySelector('.popup__form_profile');
 const addCardForm = document.querySelector('.popup__form_add');
 
-//Временно оставленные переменные для просмотра
-/*const editName = document.querySelector('.popup__input_text_name');
-const editAbout = document.querySelector('.popup__input_text_about');
-const editTitle = document.querySelector('.popup__input_text_title');
-const editLink = document.querySelector('.popup__input_link_photo'); */
-
-const userName = document.querySelector('.user__name');
-const userAbout =  document.querySelector('.user__about');
-
 const buttonAddCard = document.querySelector('.add-button');
-
-//перенести в константы
 const cardListSection = '.photos-grid';
 
+//Элементы для валидации формы
 const validationElements = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -59,37 +49,42 @@ const cardList = new Section ({
   cardListSection
   )
 
-//Открытие попапа добавления карточки
-const openAddCardPopup = (evt) => {
-  const popupCard = new PopupWithForm (/*handlerAddCardSubmit*/
-    {submitFunction: (formData) => {
-      addNewCard(formData);;
-    }}
-    , popupAddCard);
-  popupCard.open();
+//Создание экземпляров двух форм: добавления карточки и редактирования профиля
+const popupProfile = new PopupWithForm(
+  {submitFunction: (formData) => {
+    userInfo.setUserInfo(formData);
+  }}, popupEditProfile);
+  popupProfile.setEventListeners();
 
+  const popupCard = new PopupWithForm(
+    {submitFunction: (formData) => {
+      addNewCard(formData);
+    }}, popupAddCard);
+  popupCard.setEventListeners();
+
+//Экземпляр UserInfo (создается 1 раз)
+const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about'});
+
+//Создание экземпляра валидатора формы редактирования профиля
+const formEditProfile = new FormValidator (validationElements, profileForm);
+
+//Создание экземпляра валидатора формы добавления карточки
+const formAddCard = new FormValidator (validationElements, addCardForm);
+
+//Открытие попапа редактирования профиля
+const openProfilePopup = () => {
+  popupProfile.open();
   //Запуск валидатора формы
-  const formAddCard = new FormValidator (validationElements, addCardForm);
-  formAddCard.resetErrorOpenPopup();
+  formEditProfile.resetErrorOpenPopup();
+  userInfo.getUserInfo();
   toggleButtonInactive(validationElements);
 }
 
-//Экземпляр UserInfo создан единожды
-const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about'});
-
-//Открытие попапа редактирования профиля
-const openProfilePopup = (evt) => {
-  const popupProfile = new PopupWithForm(
-    {submitFunction: (formData) => {
-      userInfo.setUserInfo();
-    }}, popupEditProfile)
-  popupProfile.open();
-
-  const formEditProfile = new FormValidator (validationElements, profileForm);
-  formEditProfile.resetErrorOpenPopup();
-
-  userInfo.getUserInfo();
-
+//Открытие попапа добавления карточки
+const openAddCardPopup = () => {
+  popupCard.open();
+  //Запуск валидатора формы
+  formAddCard.resetErrorOpenPopup();
   toggleButtonInactive(validationElements);
 }
 
@@ -101,47 +96,21 @@ const toggleButtonInactive = (validationElements) => {
   }
   
 
-//Обработка измененных данных профиля
-const handlerProfileSubmit = () => {
-  //userName.textContent = submitData.Name;
-  // userAbout.textContent = submitData.Job;
-  userInfo.setUserInfo();
-  popupEditProfile.classList.remove('popup_opened');
-  //console.log(submitData);
-  
+const popupCardInstanse = (photoCard, popupPhotoCard) => {
+ const popupCard = new PopupWithImage (photoCard, popupPhotoCard);
+ popupCard.open();
 }
 
 //открытие попапа при клике на карточку
 const handleCardClick = (photoCard, popupPhotoCard) => {
-  const popupCard = new PopupWithImage (photoCard, popupPhotoCard);
-  popupCard.open();
+  popupCardInstanse(photoCard, popupPhotoCard);
 }
-
-//Добавление новой карточки из попапа
-const handlerAddCardSubmit = (submitData) => {
-  addNewCard(submitData);
-}
-
-
-
-//Функция закрытия попапа старая
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened'); 
-  document.removeEventListener('keydown', handlePopupEscClick);
-}
-
 
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
-  const itemCard = [{name: submitData.Title, src: submitData.Link}];
+  const itemCard = {name: submitData.Title, src: submitData.Link};
   console.log(itemCard);
-  const newCard = new Section ({
-      items: itemCard,
-      renderer: (item) => {
-        addInstanceCard(item);
-      }},
-    cardListSection)
-    newCard.renderer();
+  addInstanceCard(itemCard);
 }
 
 //Добавление экземпляра класса валидатора для каждой формы
