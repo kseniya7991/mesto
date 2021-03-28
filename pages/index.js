@@ -16,6 +16,10 @@ const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 const profileForm = document.querySelector('.popup__form_profile');
 const addCardForm = document.querySelector('.popup__form_add');
 
+const inputProfileName = document.querySelector('.popup__input_text_name');
+const inputProfileAbout = document.querySelector('.popup__input_text_about');
+
+
 const buttonAddCard = document.querySelector('.add-button');
 const cardListSection = '.photos-grid';
 
@@ -76,7 +80,8 @@ const openProfilePopup = () => {
   popupProfile.open();
   //Запуск валидатора формы
   formEditProfile.resetErrorOpenPopup();
-  userInfo.getUserInfo();
+  inputProfileName.value = userInfo.getUserInfo().name;
+  inputProfileAbout.value = userInfo.getUserInfo().about;
   toggleButtonInactive(validationElements);
 }
 
