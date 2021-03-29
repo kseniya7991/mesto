@@ -15,10 +15,8 @@ export default class PopupWithImage extends Popup {
     photoPopupCard.src = this._imgSrc;
     photoPopupCard.alt = this._imgAlt;
     captionPopupCard.textContent = this._imgAlt;
-    this._popupSelector.classList.add('popup_opened');
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
+    super.open();
     this.setEventListeners();
   }
+  
 }
