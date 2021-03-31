@@ -1,11 +1,14 @@
+//Импорт главного CSS
+import './pages/index.css'; 
+
 //Импорт js модулей
-import Section from '../components/Section.js';
-import { initialCards } from '../components/initialCards.js';
-import {Card} from '../components/Card.js';
-import {FormValidator} from '../components/FormValidator.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js'
-import PopupWithImage from '../components/PopupWithImage.js';
+import Section from './components/Section.js';
+import { initialCards } from './components/initialCards.js';
+import {Card} from './components/Card.js';
+import {FormValidator} from './components/FormValidator.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js'
+import PopupWithImage from './components/PopupWithImage.js';
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');

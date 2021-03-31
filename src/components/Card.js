@@ -47,11 +47,11 @@ const popupPhotoCard = document.querySelector('.popup_photo');
     });
   }
 
-  _handleCardLikeClick = () => {
+  _handleCardLikeClick () {
     this._likeBtn.classList.toggle('photo__like_active');
    }
 
-   _handleCardDeleteClick = () => {
+   _handleCardDeleteClick () {
     this._likeBtn.closest('.photo').remove();
   }
 
