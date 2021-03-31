@@ -10,7 +10,7 @@ class FormValidator {
     this._textErrorInput = validationElements.textError;
   }
 
-  enableValidation = (evt) => {
+  enableValidation (evt) {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
