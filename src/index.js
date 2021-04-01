@@ -106,9 +106,14 @@ const toggleButtonInactive = (validationElements) => {
 
 //открытие попапа при клике на карточку
 const handleCardClick = (photoCard, popupPhotoCard) => {
-  const popupCard = new PopupWithImage (photoCard, popupPhotoCard);
-  popupCard.open();
+  
+  popupCardPhoto.open();
 }
+
+const popupCardPhoto = new PopupWithImage (photoCard, popupPhotoCard);
+
+
+
 
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
@@ -117,11 +122,8 @@ const addNewCard = (submitData) => {
 }
 
 //Добавление экземпляра класса валидатора для каждой формы
-const addValidator = (validationElements) => {
-  const formEditProfile =  new FormValidator (validationElements, profileForm);
+const addValidator = () => {
   formEditProfile.enableValidation();
-
-  const formAddCard = new FormValidator (validationElements, addCardForm);
   formAddCard.enableValidation();
 }
 
@@ -130,7 +132,7 @@ buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
 
 
-addValidator(validationElements);
+addValidator();
 
 //Запуск функции отрисовки дефолтных карточек
 cardList.renderer();
