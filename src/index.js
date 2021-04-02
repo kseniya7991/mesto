@@ -25,6 +25,7 @@ const inputProfileAbout = document.querySelector('.popup__input_text_about');
 
 const buttonAddCard = document.querySelector('.add-button');
 const cardListSection = '.photos-grid';
+const popupPhotoCard = document.querySelector('.popup_photo');
 
 //Элементы для валидации формы
 const validationElements = {
@@ -40,9 +41,19 @@ const validationElements = {
   formEditProfile: '.popup__form_profile'
 };
 
+
+const popupCardPhoto = new PopupWithImage (popupPhotoCard);
+popupCardPhoto.setEventListeners();
+
 //Функция создания экземпляра карточки
 const addInstanceCard = (item) => {
-  const card = new Card(handleCardClick, item, '.template');
+  const card = new Card(    
+    item, 
+    '.template',
+    //handleCardClick
+    () => {
+      popupCardPhoto.open(item);
+    });
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
@@ -103,18 +114,6 @@ const toggleButtonInactive = (validationElements) => {
   buttonCardElement.classList.add(validationElements.inactiveButtonClass);
   }
   
-
-//открытие попапа при клике на карточку
-const handleCardClick = (photoCard, popupPhotoCard) => {
-  
-  popupCardPhoto.open();
-}
-
-const popupCardPhoto = new PopupWithImage (photoCard, popupPhotoCard);
-
-
-
-
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
   const itemCard = {name: submitData.Title, src: submitData.Link};

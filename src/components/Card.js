@@ -1,14 +1,11 @@
 import PopupWithImage from './PopupWithImage.js';
-
-const popupPhotoCard = document.querySelector('.popup_photo');
-
  class Card {
-  constructor(handleCardClick, data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._data = data;
     this._src = data.src;
     this._name = data.name;
     this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick;
+    this.handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -43,7 +40,7 @@ const popupPhotoCard = document.querySelector('.popup_photo');
 
     this._photoCard = this._element.querySelector('.photo__img');
     this._photoCard.addEventListener('click', () => {
-     this._handleCardClick(this._photoCard, popupPhotoCard);
+      this.handleCardClick();
     });
   }
 
