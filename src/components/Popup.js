@@ -5,6 +5,7 @@ export default class Popup {
     this._toggleEscEventLisneter = function (evt) {
       this._handleEscClose(evt);
     }
+    //this._popup = document.querySelector(popupSelector);
     this.toggleEsc = this._toggleEscEventLisneter.bind(this);
   }
 
@@ -24,12 +25,9 @@ export default class Popup {
   }
 
   setEventListeners() {
-    const popups = document.querySelectorAll('.popup');
-    popups.forEach((popup) => {
-      popup.addEventListener('click', (evt) => {
-        //Закрытие попапа при клике на область вокруг формы или при клике на крестик
-        if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup-close'))) this.close();
-      });
+    this._popupSelector.addEventListener('click', (evt) => {
+     //Закрытие попапа при клике на область вокруг формы или при клике на крестик
+     if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup-close'))) this.close();
     });
   }
 
