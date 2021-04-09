@@ -9,6 +9,7 @@ import {FormValidator} from './components/FormValidator.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import UserInfo from './components/UserInfo.js'
 import PopupWithImage from './components/PopupWithImage.js';
+import Api from './components/Api.js';
 
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
@@ -40,6 +41,20 @@ const validationElements = {
   formAddCard: '.popup__form_add',
   formEditProfile: '.popup__form_profile'
 };
+
+//Получение API
+const api = new Api({
+  //address: httpsdsffsfsd,
+  token: '98ab6b78-4926-4ba2-b164-ff0669091526',
+  groupID: 'cohort-22'
+})
+
+api.getUser()
+  .then( user => {
+    console.log(user)
+  })
+  .catch(err => console.log('Ошибка при создании'))
+
 
 
 const popupCardPhoto = new PopupWithImage (popupPhotoCard);

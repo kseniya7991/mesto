@@ -81,11 +81,24 @@
     </figure>
   </section>
 
-  <section class="popup popup_delete-card popup_opened">
-    <form class="popup__form popup__form_detele-card" name="userProfileForm" novalidate>
+  <section class="popup popup_delete-card">
+    <form class="popup__form popup__form_detele-card" name="deleteCard" novalidate>
       <button type="reset" class="popup-close popup-close_delete-card" aria-label="close"></button>
       <h2 class="popup__title popup__title_delete-card">Вы уверены?</h2>
       <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_delete-card" aria-label="save">Да</button>
+    </form>
+  </section>
+
+  
+  <section class="popup popup_update-avatar">
+    <form class="popup__form popup__form_update-avatar" name="updateAvatar" novalidate>
+      <button type="reset" class="popup-close" aria-label="close"></button>
+      <h2 class="popup__title popup__title_update-avatar">Обновить аватар</h2>
+      <section class="popup__input-section">
+        <input class="popup__input popup__input_link_avatar" id="link-avatar" name="AvatarLink" type="url" placeholder="Ссылка на фото" minlength="2" maxlength="40" required>
+        <span class="popup__input-error" id="profile-link-avatar"></span>
+      </section>
+      <button type="submit" formtarget="_self" class="popup__save-button popup__save-button_update-avatar" aria-label="save">Сохранить</button>
     </form>
   </section>
  
