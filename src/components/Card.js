@@ -4,6 +4,7 @@ import PopupWithImage from './PopupWithImage.js';
     this._data = data;
     this._link = data.link;
     this._name = data.name;
+    this._likes = data.likes.length;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
   }
@@ -24,6 +25,9 @@ import PopupWithImage from './PopupWithImage.js';
     this._photoImg.src = this._link;
     this._photoImg.alt = this._name;
     this._element.querySelector('.photo__title').textContent = this._name;
+
+    this._likeCounter = this._element.querySelector('.photo__like-counter');
+    this._likeCounter.textContent = this._likes;
     return this._element;
   }
      
