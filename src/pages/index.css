@@ -28,6 +28,7 @@
 @import url('../blocks/photo/__delete/photo__delete.css');
 @import url('../blocks/photo/__like-wrapper/photo__like-wrapper.css');
 @import url('../blocks/photo/__like-counter/photo__like-counter.css');
+@import url('../blocks/photo/__delete/_inactive/photo__delete_inactive.css');
 
 @import url('../blocks/footer/footer.css');
 

@@ -5,6 +5,7 @@ import {popupDelete} from './utils.js';
     this._data = data;
     this._link = data.link;
     this._name = data.name;
+    this._userId = data.owner._id;
     this._likes = data.likes.length;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
@@ -29,6 +30,12 @@ import {popupDelete} from './utils.js';
 
     this._likeCounter = this._element.querySelector('.photo__like-counter');
     this._likeCounter.textContent = this._likes;
+
+    if(this._userId === '593bac0b0630e44665c3a674') {
+      this._deleteBtn.classList.remove('photo__delete_inactive');
+      this._deleteBtn.removeAttribute('disabled');
+    }
+
     return this._element;
   }
      
