@@ -13,7 +13,12 @@ export default class Api {
       }
     })
 
-    .then(res => { return res.json(); })
+    .then(res => { 
+      if(res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`Ошибка ${response.status}`) 
+    })
     .catch ( err => {
       console.log (`Ой йой, ошибка ${res.status}`)
     })
@@ -22,13 +27,27 @@ export default class Api {
 
   getCards() {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+      method:'GET',
       headers: {
         authorization: this._token,
-        method:'GET'
       }})
     .then( res => { return res.json()})
     .catch ( err => {
       console.log (`Ой йой, ошибка ${res.status}`)
+    })
+  }
+
+  sendUser({name, about} = userData) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`,{
+      method: 'PATCH',
+      headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
     })
   }
 

@@ -100,6 +100,7 @@ const cardList = new Section ({
 const popupProfile = new PopupWithForm(
   {submitFunction: (formData) => {
     userInfo.setUserInfo(formData);
+    api.sendUser(formData)
   }}, popupEditProfile);
   popupProfile.setEventListeners();
 
