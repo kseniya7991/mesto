@@ -41,8 +41,8 @@ export default class Api {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`,{
       method: 'PATCH',
       headers: {
-      authorization: this._token,
-      'Content-Type': 'application/json'
+        authorization: this._token,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name: name,
@@ -51,6 +51,19 @@ export default class Api {
     })
   }
 
+  addCard({Title, Link} = cardData) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: Title,
+        link: Link
+      })
+    })
+  }
 
 
   /*addMessage() {

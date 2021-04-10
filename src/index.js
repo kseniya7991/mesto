@@ -108,6 +108,7 @@ const popupProfile = new PopupWithForm(
   const popupCard = new PopupWithForm(
     {submitFunction: (formData) => {
       addNewCard(formData);
+      api.addCard(formData)
     }}, popupAddCard);
   popupCard.setEventListeners();
 
@@ -177,7 +178,7 @@ const toggleButtonActive = (validationElementsButton) => {
   
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
-  const itemCard = {name: submitData.Title, src: submitData.Link};
+  const itemCard = {name: submitData.Title, link: submitData.Link};
   addInstanceCard(itemCard);
 }
 

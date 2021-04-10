@@ -5,7 +5,7 @@ export default class Section {
   }
 
   renderer(cards) {
-    cards.forEach( item => this._renderer(item))
+    cards.reverse().forEach( item => this._renderer(item))
   }
 
   addItem(element) {
