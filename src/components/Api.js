@@ -16,12 +16,12 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ой йой, ошибка ${res.status}`)
     })
-    .then((result) => {
-      return result;
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${res.status}`)
     })
-  }
+    
+}
 
   getCards() {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {

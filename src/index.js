@@ -62,13 +62,8 @@ api.getUser()
 
 //Получение массива карточек пользователей
 api.getCards()
-  .then( cards => {
-    return cards;}
-  )
-  .then (result => {
-    result.forEach( card => {
-      addInstanceCard(card);
-    })
+  .then(cards => {
+      cardList.renderer(cards);
   })
   .catch(err => console.log(err))
 
@@ -91,7 +86,6 @@ const addInstanceCard = (item) => {
 
 //Отрисовка первоначальных 6ти карточек
 const cardList = new Section ({
-  items: initialCards,
   //items: initialServerCards,
   renderer: (item) => { 
     addInstanceCard(item);
@@ -195,7 +189,7 @@ avatarUser.addEventListener('click', openUpdAvatarPopup);
 addValidator();
 
 //Запуск функции отрисовки дефолтных карточек
-cardList.renderer();
+//cardList.renderer();
 
 //Экспорт для модулей
 export {validationElements};
