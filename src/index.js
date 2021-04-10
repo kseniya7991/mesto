@@ -44,7 +44,8 @@ const validationElements = {
   submitCardButton: '.popup__save-button_add',
   formAddCard: '.popup__form_add',
   formEditProfile: '.popup__form_profile',
-  submitUpdateAvatar: '.popup__save-button_update-avatar'
+  submitUpdateAvatar: '.popup__save-button_update-avatar',
+  submitEditProfile: '.popup__save-button_profile'
 };
 
 //Получение API
@@ -140,7 +141,7 @@ const openProfilePopup = () => {
   formEditProfile.resetErrorOpenPopup();
   inputProfileName.value = userInfo.getUserInfo().name;
   inputProfileAbout.value = userInfo.getUserInfo().about;
-  toggleButtonInactive(validationElements);
+  toggleButtonActive(validationElements.submitEditProfile);
 }
 
 //Открытие попапа добавления карточки
@@ -159,13 +160,19 @@ const openUpdAvatarPopup = () => {
   toggleButtonInactive(validationElements.submitUpdateAvatar);
 }
 
-//Отключение активной кнопки при открытии попапа добавления карточки
+//Отключение активной кнопки при открытии попапов с ссылками
 const toggleButtonInactive = (validationElementsButton) => {
-  //const buttonCardElement = document.querySelector(validationElements.submitCardButton);
-  const buttonCardElement = document.querySelector(validationElementsButton);
-  buttonCardElement.setAttribute('disabled', true);
-  buttonCardElement.classList.add(validationElements.inactiveButtonClass);
+  const buttonElement = document.querySelector(validationElementsButton);
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(validationElements.inactiveButtonClass);
   }
+
+//Активное состояние кнопки "Сохранить" при открытии попара редактирования данных профиля
+const toggleButtonActive = (validationElementsButton) => {
+  const buttonElement = document.querySelector(validationElementsButton);
+  buttonElement.removeAttribute('disabled');
+  buttonElement.classList.remove(validationElements.inactiveButtonClass);
+}
   
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {

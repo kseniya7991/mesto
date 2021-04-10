@@ -12,11 +12,8 @@ export default class Api {
         method:'GET'
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    })
+
+    .then(res => { return res.json(); })
     .catch ( err => {
       console.log (`Ой йой, ошибка ${res.status}`)
     })
@@ -28,18 +25,14 @@ export default class Api {
       headers: {
         authorization: this._token,
         method:'GET'
-      }}
-    )
-    .then( res => {
-      if(res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`Ой йой, ошибка ${res.status}`)
-    })
-    .then( result => {
-      return result;
+      }})
+    .then( res => { return res.json()})
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${res.status}`)
     })
   }
+
+
 
   /*addMessage() {
     return fetch(`${address}/messages`,{
