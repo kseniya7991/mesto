@@ -178,7 +178,7 @@ const toggleButtonActive = (validationElementsButton) => {
   
 //Рендеринг новой карточки
 const addNewCard = (submitData) => {
-  const itemCard = {name: submitData.Title, link: submitData.Link};
+  const itemCard = {name: submitData.Title, link: submitData.Link, likes: []};
   addInstanceCard(itemCard);
 }
 
