@@ -5,7 +5,6 @@ export default class Popup {
     this._toggleEscEventLisneter = function (evt) {
       this._handleEscClose(evt);
     }
-    //this._popup = document.querySelector(popupSelector);
     this.toggleEsc = this._toggleEscEventLisneter.bind(this);
   }
 

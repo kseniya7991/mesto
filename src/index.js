@@ -21,8 +21,6 @@ const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 
 const avatarUser = document.querySelector('.user__avatar');
 
-const buttonDeleteCard = document.querySelector('.photo__delete');
-
 const profileForm = document.querySelector('.popup__form_profile');
 const addCardForm = document.querySelector('.popup__form_add');
 const userAvatarForm = document.querySelector('.popup__form_update-avatar');
@@ -124,11 +122,14 @@ popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
 export const popupDelete = new PopupWithForm(
-  {submitFunction: (formData) => {
-    console.log(formData)
+  {submitFunction: (idCard) => {
+    api.removeCard(idCard)
+      .then(() => card.removeCard())
+      .catch(err => console.log(`Ошибка ${err.status} при удалении`))
   }}, popupDeleteCard);
 popupDelete.setEventListeners();
 
+//test
 
 const updateUserAvatar = (link) => {
   avatarUser.src = link;
@@ -205,7 +206,6 @@ const addValidator = () => {
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
 avatarUser.addEventListener('click', openUpdAvatarPopup);
-//buttonDeleteCard.addEventListener('click', openDeleteCardPopup);
 
 
 addValidator();

@@ -6,6 +6,7 @@ import {popupDelete} from './utils.js';
     this._link = data.link;
     this._name = data.name;
     this._userId = data.owner._id;
+    this._idCard = data._id;
     this._likes = data.likes.length;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
@@ -61,8 +62,14 @@ import {popupDelete} from './utils.js';
    }
 
    _handleCardDeleteClick () {
+    popupDelete.getIdCard(this._idCard);
     popupDelete.open();
     //this._likeBtn.closest('.photo').remove();
+  }
+
+  removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 
 }

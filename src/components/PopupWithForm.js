@@ -28,6 +28,11 @@ export default class PopupWithForm extends Popup{
     })
   }
 
+  getIdCard(idCard){
+    this._submitFunction(idCard);
+  }
+
+
   close() {
     super.close();
     this._form.reset();

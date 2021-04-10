@@ -65,6 +65,9 @@ export default class Api {
     })
   }
 
+  removeCard(idCard){
+    console.log(idCard);
+  }
 
   /*addMessage() {
     return fetch(`${address}/messages`,{
