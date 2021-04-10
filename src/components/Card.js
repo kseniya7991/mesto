@@ -1,4 +1,5 @@
 import PopupWithImage from './PopupWithImage.js';
+import {popupDelete} from './utils.js';
  class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._data = data;
@@ -53,7 +54,8 @@ import PopupWithImage from './PopupWithImage.js';
    }
 
    _handleCardDeleteClick () {
-    this._likeBtn.closest('.photo').remove();
+    popupDelete.open();
+    //this._likeBtn.closest('.photo').remove();
   }
 
 }

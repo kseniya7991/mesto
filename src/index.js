@@ -14,11 +14,14 @@ import Api from './components/Api.js';
 //Объявление переменных
 const popupEditProfile = document.querySelector('.popup_profile');
 const popupAddCard = document.querySelector('.popup_add');
-const popupUpdateAvatar = document.querySelector('.popup_update-avatar')
+const popupUpdateAvatar = document.querySelector('.popup_update-avatar');
+const popupDeleteCard = document.querySelector('.popup_delete-card');
 
 const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 
 const avatarUser = document.querySelector('.user__avatar');
+
+const buttonDeleteCard = document.querySelector('.photo__delete');
 
 const profileForm = document.querySelector('.popup__form_profile');
 const addCardForm = document.querySelector('.popup__form_add');
@@ -119,6 +122,14 @@ const popupAvatar = new PopupWithForm(
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 
+//Подтверждение удаления карточки
+export const popupDelete = new PopupWithForm(
+  {submitFunction: (formData) => {
+    console.log(formData)
+  }}, popupDeleteCard);
+popupDelete.setEventListeners();
+
+
 const updateUserAvatar = (link) => {
   avatarUser.src = link;
   console.log(avatarUser.src);
@@ -162,6 +173,7 @@ const openUpdAvatarPopup = () => {
   toggleButtonInactive(validationElements.submitUpdateAvatar);
 }
 
+
 //Отключение активной кнопки при открытии попапов с ссылками
 const toggleButtonInactive = (validationElementsButton) => {
   const buttonElement = document.querySelector(validationElementsButton);
@@ -193,6 +205,7 @@ const addValidator = () => {
 buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
 avatarUser.addEventListener('click', openUpdAvatarPopup);
+//buttonDeleteCard.addEventListener('click', openDeleteCardPopup);
 
 
 addValidator();
