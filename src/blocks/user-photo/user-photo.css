@@ -1,0 +1,12 @@
+.user-photo {
+  width: 120px;
+  overflow: hidden;
+  margin-right: 30px;
+}
+
+
+@media screen and (max-width: 580px) {
+  .user-photo {
+    margin-right: 0;
+  }
+}

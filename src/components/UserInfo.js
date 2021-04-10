@@ -12,8 +12,11 @@ export default class UserInfo {
   
   //принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(formData) {
-    this._userName.textContent = formData.Name;
-    this._userAbout.textContent = formData.Job;
+    //Так было раньше
+    //this._userName.textContent = formData.Name;
+    //this._userAbout.textContent = formData.Job;
+    this._userName.textContent = formData.name;
+    this._userAbout.textContent = formData.about;
   }
 
  }

@@ -2,7 +2,7 @@ import PopupWithImage from './PopupWithImage.js';
  class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._data = data;
-    this._src = data.src;
+    this._link = data.link;
     this._name = data.name;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
@@ -21,7 +21,7 @@ import PopupWithImage from './PopupWithImage.js';
     this._element = this._getTemplate();
     this._setEventListeners();
     this._photoImg = this._element.querySelector('.photo__img');
-    this._photoImg.src = this._src;
+    this._photoImg.src = this._link;
     this._photoImg.alt = this._name;
     this._element.querySelector('.photo__title').textContent = this._name;
     return this._element;

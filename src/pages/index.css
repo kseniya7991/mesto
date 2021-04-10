@@ -16,6 +16,7 @@
 @import url('../blocks/add-button/add-button.css');
 @import url('../blocks/add-button/__image/add-button__image.css');
 @import url('../blocks/user/__name-block/user__name-block.css');
+@import url('../blocks/user-photo/user-photo.css');
 
 @import url('../blocks/photos-grid/photos-grid.css');
 @import url('../blocks/photo/photo.css');

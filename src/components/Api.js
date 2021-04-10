@@ -1,23 +1,43 @@
-class Api {
-  constructor({ token, groupID}) {
+export default class Api {
+  constructor({token, groupID}) {
     //this._address = address;
     this._token = token;
     this._groupID = groupID;
   }
 
   getUser() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me`, {
       headers: {
         authorization: this._token,
         method:'GET'
       }
     })
-    .then(response => {
-      if (response.ok) {
-        console.log(response);
-        //return response.json();
+    .then(res => {
+      if (res.ok) {
+        return res.json();
       }
-      return Promise.reject(`Ошибка ${response.status}`)
+      return Promise.reject(`Ой йой, ошибка ${res.status}`)
+    })
+    .then((result) => {
+      return result;
+    })
+  }
+
+  getCards() {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
+      headers: {
+        authorization: this._token,
+        method:'GET'
+      }}
+    )
+    .then( res => {
+      if(res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`Ой йой, ошибка ${res.status}`)
+    })
+    .then( result => {
+      return result;
     })
   }
 
