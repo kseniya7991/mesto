@@ -74,14 +74,26 @@ const popupCardPhoto = new PopupWithImage (popupPhotoCard);
 popupCardPhoto.setEventListeners();
 
 //Функция создания экземпляра карточки
-const addInstanceCard = (item) => {
+export const addInstanceCard = (item) => {
   const card = new Card(    
     item, 
     '.template',
     //handleCardClick
     () => {
       popupCardPhoto.open(item);
-    });
+    },
+    {handleDeleteButtonClick: () => {
+     const popupDelete = new PopupWithForm(
+        {submitFunction: () => {
+          console.log('fff');
+          /*api.removeCard(card.getId())
+            .then(() => card.removeCard())
+            .catch(err => console.log(`Ошибка ${err.status} при удалении`))*/
+        }}, popupDeleteCard);
+      popupDelete.setEventListeners();
+      
+    }}
+    );
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
@@ -123,9 +135,9 @@ popupAvatar.setEventListeners();
 //Подтверждение удаления карточки
 export const popupDelete = new PopupWithForm(
   {submitFunction: (idCard) => {
-    api.removeCard(idCard)
+    /*api.removeCard(idCard)
       .then(() => card.removeCard())
-      .catch(err => console.log(`Ошибка ${err.status} при удалении`))
+      .catch(err => console.log(`Ошибка ${err.status} при удалении`))*/
   }}, popupDeleteCard);
 popupDelete.setEventListeners();
 

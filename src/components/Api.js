@@ -66,7 +66,7 @@ export default class Api {
   }
 
   removeCard(idCard){
-    console.log(idCard);
+    //console.log(idCard);
   }
 
   /*addMessage() {

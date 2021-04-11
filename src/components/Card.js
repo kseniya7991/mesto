@@ -1,7 +1,7 @@
 import PopupWithImage from './PopupWithImage.js';
 import {popupDelete} from './utils.js';
  class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, {handleDeleteButtonClick}) {
     this._data = data;
     this._link = data.link;
     this._name = data.name;
@@ -10,6 +10,7 @@ import {popupDelete} from './utils.js';
     this._likes = data.likes.length;
     this._cardSelector = cardSelector;
     this.handleCardClick = handleCardClick;
+    this._handleDeleteButtonClick = handleDeleteButtonClick;
   }
 
   _getTemplate() {
@@ -31,6 +32,7 @@ import {popupDelete} from './utils.js';
 
     this._likeCounter = this._element.querySelector('.photo__like-counter');
     this._likeCounter.textContent = this._likes;
+
 
     if(this._userId === '593bac0b0630e44665c3a674') {
       this._deleteBtn.classList.remove('photo__delete_inactive');
@@ -62,14 +64,19 @@ import {popupDelete} from './utils.js';
    }
 
    _handleCardDeleteClick () {
-    popupDelete.getIdCard(this._idCard);
-    popupDelete.open();
+    //popupDelete.open();
     //this._likeBtn.closest('.photo').remove();
   }
 
   removeCard() {
+    console.log('dddd');
     this._element.remove();
     this._element = null;
+  }
+
+  getId(){
+    console.log(this._idCard)
+    //return this._idCard;
   }
 
 }
