@@ -20,10 +20,10 @@ export default class Api {
       return Promise.reject(`Ошибка ${response.status}`) 
     })
     .catch ( err => {
-      console.log (`Ой йой, ошибка ${res.status}`)
+      console.log (`Ой йой, ошибка ${err.status}`)
     })
     
-}
+  }
 
   getCards() {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards`, {
@@ -33,7 +33,7 @@ export default class Api {
       }})
     .then( res => { return res.json()})
     .catch ( err => {
-      console.log (`Ой йой, ошибка ${res.status}`)
+      console.log (`Ой йой, ошибка ${err.status}`)
     })
   }
 
@@ -49,6 +49,9 @@ export default class Api {
         about: about
       })
     })
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${err.status}`)
+    })
   }
 
   addCard({Title, Link} = cardData) {
@@ -63,11 +66,94 @@ export default class Api {
         link: Link
       })
     })
+    .then(res => res.ok
+      ? res.json()
+      : Promise.reject(`Ошибка ${res.status}`))
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${err.status}`)
+    })
   }
 
   removeCard(idCard){
+<<<<<<< HEAD
     //console.log(idCard);
+=======
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/${idCard}`,{
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(res => res.ok
+      ? Promise.resolve('success')
+      : Promise.reject(`Ошибка ${res.status}`))
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${err.status}`)
+    })
+    }
+
+  likeCard(idCard) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then( res => console.log ('лайк поставили'))
+    .catch(err => `Ошибка ${err.status}`)
   }
+
+  deleteLikeCard(idCard) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then( res => console.log ('лайк удалили'))
+    .catch(err => `Ошибка ${err.status}`)
+  }
+
+  updateAvatar(avatarLink) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me/${avatarLink}`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token
+      },
+      body: JSON.stringify({
+        avatar: avatarLink
+      })
+    })
+    .then (res => {
+      //console.log(res.json());
+      return res.json();
+    })
+    .then (data => console.log(data))
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${err.status}`)
+    })
+>>>>>>> 416273d
+  }
+
+  /*renderLoading(isLoading) {
+    const saveButton = document.querySelector('.popup__save-button');
+
+    if(isLoading) {
+      saveButton.textContent = 'Cохранение...'
+      //saveButton.classList.add('content_hidden')
+    } else {
+      saveButton.classList.remove('spinner_visible')
+      //saveButton.classList.remove('content_hidden')
+    }
+  }*/
+
+
+
+}
+
+
+
+  
 
   /*addMessage() {
     return fetch(`${address}/messages`,{
@@ -100,7 +186,7 @@ export default class Api {
   }
 */
   
-}
+
 
 
 

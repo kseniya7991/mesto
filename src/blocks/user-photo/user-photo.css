@@ -2,6 +2,9 @@
   width: 120px;
   overflow: hidden;
   margin-right: 30px;
+  position: relative;
+  display: block;
+  height: 120px;
 }
 
 
@@ -9,4 +12,35 @@
   .user-photo {
     margin-right: 0;
   }
+}
+
+.user-photo:hover{
+  transition: .5s;
+}
+
+.user-photo:hover::after {
+  background: rgba(0, 0, 0, 0.8);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.user-photo:hover::before {
+  content: '';
+  background: url('../../images/__edit-photo.svg');
+  position: absolute; 
+  /*transform:translate(0%, 0%);*/
+  right:0;
+  bottom:0;
+  left:50%;
+  top: 50%;
+  margin-top: -25%;
+  /*left:25%; */
+  margin-left:-25%;
+  margin: auto;
+  z-index: 2;
+  background-repeat: no-repeat;
 }

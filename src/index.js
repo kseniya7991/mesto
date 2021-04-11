@@ -19,7 +19,8 @@ const popupDeleteCard = document.querySelector('.popup_delete-card');
 
 const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 
-const avatarUser = document.querySelector('.user__avatar');
+//const avatarUser = document.querySelector('.user__avatar');
+const avatarUser = document.querySelector('.user-photo');
 
 const profileForm = document.querySelector('.popup__form_profile');
 const addCardForm = document.querySelector('.popup__form_add');
@@ -59,6 +60,7 @@ const api = new Api({
 api.getUser()
   .then( user => {
     userInfo.setUserInfo(user)
+    userInfo.getOwnerId(user);
   })
   .catch(err => console.log(err))
 
@@ -79,6 +81,7 @@ export const addInstanceCard = (item) => {
     item, 
     '.template',
     //handleCardClick
+<<<<<<< HEAD
     () => {
       popupCardPhoto.open(item);
     },
@@ -94,6 +97,14 @@ export const addInstanceCard = (item) => {
       
     }}
     );
+=======
+    () => {popupCardPhoto.open(item)},
+    //handleCardLike 
+    (idCard) => { api.likeCard(idCard)},
+    //handleDeleteCardLike
+    (idCard) => {api.deleteLikeCard(idCard)},
+    userInfo.getOwnerId());
+>>>>>>> 416273d
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
@@ -112,34 +123,68 @@ const cardList = new Section ({
 //Редактирование информации о пользователе
 const popupProfile = new PopupWithForm(
   {submitFunction: (formData) => {
+    popupProfile.renderLoading(true, 'Сохранить', 'Сохранение...');
     userInfo.setUserInfo(formData);
     api.sendUser(formData)
+    .finally(popupProfile.renderLoading(false, 'Сохрaнить', 'Сохранение...'))
   }}, popupEditProfile);
   popupProfile.setEventListeners();
 
 //Добавление новой карточки
   const popupCard = new PopupWithForm(
     {submitFunction: (formData) => {
-      addNewCard(formData);
+      //addNewCard(formData) 
       api.addCard(formData)
+        .then(res => {
+          console.log(formData);
+          const itemData = {name: formData.Title, link: formData.Link, _id: res._id, likes: res.likes, owner: {_id: res.owner._id}};
+          console.log(itemData);
+          addInstanceCard(itemData);
+        })
     }}, popupAddCard);
   popupCard.setEventListeners();
+
+  
+//Рендеринг новой карточки
+/*const addNewCard = ({submitData, idCard}) => {
+  //const itemCard = {name: submitData.Title, link: submitData.Link, likes: [], owner: {_id: '593bac0b0630e44665c3a674'}};
+  const itemCard = {name: submitData.Title, link: submitData.Link, likes: [], owner: {_id: '593bac0b0630e44665c3a674'}, idCard};
+  console.log(itemCard)
+  addInstanceCard(itemCard);
+}*/
 
 //Редактирование аватара пользователя
 const popupAvatar = new PopupWithForm(
   {submitFunction: (formData) => {
-    updateUserAvatar(formData);
+    console.log(formData.AvatarLink)
+    const linkAvatar = formData.AvatarLink
+    api.updateAvatar(linkAvatar)
+    .then((res) => updateUserAvatar(res.url))
+    //*/
+    //updateUserAvatar(linkAvatar)
+
+    //updateUserAvatar(formData);
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
 export const popupDelete = new PopupWithForm(
+<<<<<<< HEAD
   {submitFunction: (idCard) => {
     /*api.removeCard(idCard)
       .then(() => card.removeCard())
       .catch(err => console.log(`Ошибка ${err.status} при удалении`))*/
+=======
+  {submitFunction: (card, idCard) => {
+    api.removeCard(idCard)
+      .then(() => {
+        console.log(card);
+        card.remove()
+      })
+      .catch(err => console.log(`Ошибка ${err.status} при удалении`))
+>>>>>>> 416273d
   }}, popupDeleteCard);
-popupDelete.setEventListeners();
+
 
 //test
 
@@ -200,12 +245,7 @@ const toggleButtonActive = (validationElementsButton) => {
   buttonElement.removeAttribute('disabled');
   buttonElement.classList.remove(validationElements.inactiveButtonClass);
 }
-  
-//Рендеринг новой карточки
-const addNewCard = (submitData) => {
-  const itemCard = {name: submitData.Title, link: submitData.Link, likes: [], owner: {_id: '593bac0b0630e44665c3a674'}};
-  addInstanceCard(itemCard);
-}
+
 
 //Добавление экземпляра класса валидатора для каждой формы
 const addValidator = () => {
@@ -221,9 +261,6 @@ avatarUser.addEventListener('click', openUpdAvatarPopup);
 
 
 addValidator();
-
-//Запуск функции отрисовки дефолтных карточек
-//cardList.renderer();
 
 //Экспорт для модулей
 export {validationElements};

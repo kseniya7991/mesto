@@ -17,6 +17,11 @@ export default class UserInfo {
     //this._userAbout.textContent = formData.Job;
     this._userName.textContent = formData.name;
     this._userAbout.textContent = formData.about;
+    this._userOwnerId = formData._id;
+  }
+
+  getOwnerId(){
+    return this._userOwnerId;
   }
 
  }

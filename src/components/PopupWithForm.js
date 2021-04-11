@@ -28,14 +28,37 @@ export default class PopupWithForm extends Popup{
     })
   }
 
-  getIdCard(idCard){
-    this._submitFunction(idCard);
+  getCard(сard, idCard){
+    this._popupSelector.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitFunction(сard, idCard);
+      this.close();
+    })
+   
   }
 
+  /*removeCard(card) {
+    card.remove();
+    card = null;
+  }*/
 
   close() {
     super.close();
     this._form.reset();
   }
   
+  renderLoading(isLoading, defaultText, loadingText){
+    const saveButton = this._popupSelector.querySelector('.popup__save-button');
+    //const saveButtonText = saveButton.textContent;
+    //console.log(saveButton.textContent)
+    if(isLoading){
+      saveButton.textContent = loadingText;
+      console.log(saveButton.textContent)
+    } else {
+      
+      saveButton.textContent = defaultText;
+      console.log(saveButton.textContent)
+    }
+  }
+
 }
