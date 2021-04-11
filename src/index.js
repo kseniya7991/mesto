@@ -81,7 +81,7 @@ export const addInstanceCard = (item) => {
     item, 
     '.template',
     //handleCardClick
-<<<<<<< HEAD
+/*<<<<<<< HEAD
     () => {
       popupCardPhoto.open(item);
     },
@@ -91,20 +91,21 @@ export const addInstanceCard = (item) => {
           console.log('fff');
           /*api.removeCard(card.getId())
             .then(() => card.removeCard())
-            .catch(err => console.log(`Ошибка ${err.status} при удалении`))*/
+            .catch(err => console.log(`Ошибка ${err.status} при удалении`))
         }}, popupDeleteCard);
       popupDelete.setEventListeners();
       
     }}
-    );
-=======
+    );*/
+
     () => {popupCardPhoto.open(item)},
     //handleCardLike 
     (idCard) => { api.likeCard(idCard)},
     //handleDeleteCardLike
     (idCard) => {api.deleteLikeCard(idCard)},
-    userInfo.getOwnerId());
->>>>>>> 416273d
+    userInfo.getOwnerId()
+    );
+
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
@@ -169,12 +170,6 @@ popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
 export const popupDelete = new PopupWithForm(
-<<<<<<< HEAD
-  {submitFunction: (idCard) => {
-    /*api.removeCard(idCard)
-      .then(() => card.removeCard())
-      .catch(err => console.log(`Ошибка ${err.status} при удалении`))*/
-=======
   {submitFunction: (card, idCard) => {
     api.removeCard(idCard)
       .then(() => {
@@ -182,7 +177,6 @@ export const popupDelete = new PopupWithForm(
         card.remove()
       })
       .catch(err => console.log(`Ошибка ${err.status} при удалении`))
->>>>>>> 416273d
   }}, popupDeleteCard);
 
 
