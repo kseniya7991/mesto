@@ -75,9 +75,6 @@ export default class Api {
   }
 
   removeCard(idCard){
-<<<<<<< HEAD
-    //console.log(idCard);
-=======
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/${idCard}`,{
       method: 'DELETE',
       headers: {
@@ -132,7 +129,6 @@ export default class Api {
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
     })
->>>>>>> 416273d
   }
 
   /*renderLoading(isLoading) {
