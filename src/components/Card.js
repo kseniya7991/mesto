@@ -48,23 +48,22 @@ import {popupDelete} from './utils.js';
     //this._likeCounter = this._element.querySelector('.photo__like-counter');
     this._likeBtn = this._element.querySelector('.photo__like');
     
-
     this._likeBtn.addEventListener('click', () => {
-     if(!this._likeBtn.classList.contains('photo__like_active')) {
-      this._handleAddLike();
-      this._handleLikeCard(this._idCard);
-     } else {
-      this._handleLikeDelete();
-      this._handleDeleteCardLike(this._idCard);
-     }
-      
+      if(!this._likeBtn.classList.contains('photo__like_active')) {
+        this._handleAddLike();
+        this._handleLikeCard(this._idCard);
+      } else {
+        this._handleLikeDelete();
+        this._handleDeleteCardLike(this._idCard);
+      }
     });
-
     
     this._deleteBtn = this._element.querySelector('.photo__delete');
     this._deleteBtn.addEventListener('click', () => {
-      this._hadleDeleteCardButton(this._element);
+      //this._hadleDeleteCardButton(this._element);
+      console.log(this._element, this._idCard)
       //this._handleCardDeleteClick()
+      this._hadleDeleteCardButton(this._element, this._idCard);
     });
 
     this._photoCard = this._element.querySelector('.photo__img');
@@ -85,8 +84,10 @@ import {popupDelete} from './utils.js';
   }
    
 
+
    _handleCardDeleteClick () {
     console.log(this._element, this._idCard);
+    
     //this.getCard(this._element, this._idCard);
     //popupDelete.open();
   }

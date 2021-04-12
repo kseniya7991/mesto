@@ -28,11 +28,17 @@ export default class PopupWithForm extends Popup{
     })
   }
 
-  setEventLisnetersDelete() {
+
+  getCard(card, idCard){
+    this._submitFunction(card,idCard)
+  }
+
+  setEventListenersDelete() {
+    super.setEventListeners();
     this._popupSelector.addEventListener('submit', (evt) => {
-      console.log(evt.target)
+      //console.log(this.getCard())
       evt.preventDefault();
-      this._submitFunction();
+      this._submitFunction(card, idCard);
       this.close();
     })
   }

@@ -5,6 +5,7 @@
   position: relative;
   display: block;
   height: 120px;
+  
 }
 
 
@@ -14,33 +15,42 @@
   }
 }
 
-.user-photo:hover{
-  transition: .5s;
+.user-photo::after { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  background: rgba(0,0,0,.5);  
+  opacity: 0; 
+  transition: .3s;
+}
+
+
+.user-photo::before {
+  content: '';
+  background: url('../../images/__edit-photo.svg');
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto;
+  width: 26px;
+  height:26px;
+  background-repeat: no-repeat;
+  z-index:1;
+  opacity:0; 
+  transition: .3s;
 }
 
 .user-photo:hover::after {
-  background: rgba(0, 0, 0, 0.8);
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  opacity: 1;
+  transition: all .5s ease;
 }
 
 .user-photo:hover::before {
-  content: '';
-  background: url('../../images/__edit-photo.svg');
-  position: absolute; 
-  /*transform:translate(0%, 0%);*/
-  right:0;
-  bottom:0;
-  left:50%;
-  top: 50%;
-  margin-top: -25%;
-  /*left:25%; */
-  margin-left:-25%;
-  margin: auto;
-  z-index: 2;
-  background-repeat: no-repeat;
+  opacity: 1;
+  transition: all .5s ease;
 }
