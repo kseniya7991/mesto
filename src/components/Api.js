@@ -49,6 +49,7 @@ export default class Api {
         about: about
       })
     })
+    
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
     })
@@ -112,20 +113,18 @@ export default class Api {
   }
 
   updateAvatar(avatarLink) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me/${avatarLink}`, {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token
+        authorization: this._token,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         avatar: avatarLink
       })
     })
-    .then (res => {
-      //console.log(res.json());
-      return res.json();
-    })
-    .then (data => console.log(data))
+    .then((res) => res.json())
+    .then(res => console.log(res))
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
     })

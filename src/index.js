@@ -19,7 +19,7 @@ const popupDeleteCard = document.querySelector('.popup_delete-card');
 
 const buttonOpenEditProfile = document.querySelector('.user__edit-button');
 
-//const avatarUser = document.querySelector('.user__avatar');
+const avatarUserPhoto = document.querySelector('.user__avatar');
 const avatarUser = document.querySelector('.user-photo');
 
 const profileForm = document.querySelector('.popup__form_profile');
@@ -59,7 +59,9 @@ const api = new Api({
 //Получение  данных юзера (себя)
 api.getUser()
   .then( user => {
+    console.log(user.avatar);
     userInfo.setUserInfo(user)
+    userInfo.setUserPhoto(user)
     userInfo.getOwnerId(user);
   })
   .catch(err => console.log(err))
@@ -110,7 +112,7 @@ export const addInstanceCard = (item) => {
   cardList.addItem(cardElement);
 }
 
-//Отрисовка первоначальных 6ти карточек
+//Отрисовка карточек
 const cardList = new Section ({
   //items: initialServerCards,
   renderer: (item) => { 
@@ -125,8 +127,11 @@ const cardList = new Section ({
 const popupProfile = new PopupWithForm(
   {submitFunction: (formData) => {
     popupProfile.renderLoading(true, 'Сохранить', 'Сохранение...');
-    userInfo.setUserInfo(formData);
     api.sendUser(formData)
+    .then(() => userInfo.setUserInfo(formData))
+    .catch ( err => {
+      console.log (`Ой йой, ошибка ${err.status}`)
+    })
     .finally(popupProfile.renderLoading(false, 'Сохрaнить', 'Сохранение...'))
   }}, popupEditProfile);
   popupProfile.setEventListeners();
@@ -141,6 +146,9 @@ const popupProfile = new PopupWithForm(
           const itemData = {name: formData.Title, link: formData.Link, _id: res._id, likes: res.likes, owner: {_id: res.owner._id}};
           console.log(itemData);
           addInstanceCard(itemData);
+        })
+        .catch ( err => {
+          console.log (`Ой йой, ошибка ${err.status}`)
         })
     }}, popupAddCard);
   popupCard.setEventListeners();
@@ -157,14 +165,12 @@ const popupProfile = new PopupWithForm(
 //Редактирование аватара пользователя
 const popupAvatar = new PopupWithForm(
   {submitFunction: (formData) => {
-    console.log(formData.AvatarLink)
+    //console.log(formData.AvatarLink)
     const linkAvatar = formData.AvatarLink
+    console.log(linkAvatar);
     api.updateAvatar(linkAvatar)
-    .then((res) => updateUserAvatar(res.url))
-    //*/
-    //updateUserAvatar(linkAvatar)
-
-    //updateUserAvatar(formData);
+    .then(() => userInfo.updateUserAvatar(linkAvatar))
+    .catch((err) => console.log(err))
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 
@@ -182,13 +188,15 @@ export const popupDelete = new PopupWithForm(
 
 //test
 
-const updateUserAvatar = (link) => {
-  avatarUser.src = link;
-  console.log(avatarUser.src);
-}
+//userInfo.getUserInfo()
+/*const updateUserAvatar = (link) => {
+  avatarUserPhoto.src = link;
+  console.log({avatar: avatarUserPhoto.src});
+}*/
 
 //Экземпляр UserInfo (создается 1 раз)
-const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about'});
+//const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about'});
+const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about', avatarUserPhoto});
 
 //Создание экземпляра валидатора формы редактирования профиля
 const formEditProfile = new FormValidator (validationElements, profileForm);
