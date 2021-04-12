@@ -59,7 +59,6 @@ const api = new Api({
 //Получение  данных юзера (себя)
 api.getUser()
   .then( user => {
-    console.log(user.avatar);
     userInfo.setUserInfo(user)
     userInfo.setUserPhoto(user)
     userInfo.getOwnerId(user);
@@ -83,28 +82,26 @@ export const addInstanceCard = (item) => {
     item, 
     '.template',
     //handleCardClick
-/*<<<<<<< HEAD
-    () => {
-      popupCardPhoto.open(item);
-    },
-    {handleDeleteButtonClick: () => {
-     const popupDelete = new PopupWithForm(
-        {submitFunction: () => {
-          console.log('fff');
-          /*api.removeCard(card.getId())
-            .then(() => card.removeCard())
-            .catch(err => console.log(`Ошибка ${err.status} при удалении`))
-        }}, popupDeleteCard);
-      popupDelete.setEventListeners();
-      
-    }}
-    );*/
-
     () => {popupCardPhoto.open(item)},
     //handleCardLike 
     (idCard) => { api.likeCard(idCard)},
     //handleDeleteCardLike
     (idCard) => {api.deleteLikeCard(idCard)},
+    //hadleDeleteCardButton
+    () => {
+      const popupDelete = new PopupWithForm(
+        {submitFunction: (card) => {
+          api.removeCard(card.getId())
+            .then(() => {
+              //console.log(card);
+              //card.remove()
+              card.removeCard();
+            })
+            .catch(err => console.log(`Ошибка ${err.status} при удалении`))
+        }}, popupDeleteCard);
+        popupDelete.setEventLisnetersDelete(card);
+        popupDelete.open();
+    },
     userInfo.getOwnerId()
     );
 
@@ -136,6 +133,7 @@ const popupProfile = new PopupWithForm(
   }}, popupEditProfile);
   popupProfile.setEventListeners();
 
+
 //Добавление новой карточки
   const popupCard = new PopupWithForm(
     {submitFunction: (formData) => {
@@ -165,7 +163,6 @@ const popupProfile = new PopupWithForm(
 //Редактирование аватара пользователя
 const popupAvatar = new PopupWithForm(
   {submitFunction: (formData) => {
-    //console.log(formData.AvatarLink)
     const linkAvatar = formData.AvatarLink
     console.log(linkAvatar);
     api.updateAvatar(linkAvatar)
@@ -175,7 +172,7 @@ const popupAvatar = new PopupWithForm(
 popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
-export const popupDelete = new PopupWithForm(
+/*export const popupDelete = new PopupWithForm(
   {submitFunction: (card, idCard) => {
     api.removeCard(idCard)
       .then(() => {
@@ -183,7 +180,7 @@ export const popupDelete = new PopupWithForm(
         card.remove()
       })
       .catch(err => console.log(`Ошибка ${err.status} при удалении`))
-  }}, popupDeleteCard);
+  }}, popupDeleteCard);*/
 
 
 //test

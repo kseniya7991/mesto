@@ -1,7 +1,7 @@
 import PopupWithImage from './PopupWithImage.js';
 import {popupDelete} from './utils.js';
  class Card {
- constructor(data, cardSelector, handleCardClick, handleLikeCard,handleDeleteCardLike, userOwnerId) {
+ constructor(data, cardSelector, handleCardClick, handleLikeCard,handleDeleteCardLike,hadleDeleteCardButton, userOwnerId) {
     this._data = data;
     this._link = data.link;
     this._name = data.name;
@@ -13,6 +13,7 @@ import {popupDelete} from './utils.js';
     this._userOwnerId = userOwnerId;
     this._handleLikeCard = handleLikeCard;
     this._handleDeleteCardLike = handleDeleteCardLike;
+    this._hadleDeleteCardButton = hadleDeleteCardButton;
   }
 
   _getTemplate() {
@@ -62,7 +63,8 @@ import {popupDelete} from './utils.js';
     
     this._deleteBtn = this._element.querySelector('.photo__delete');
     this._deleteBtn.addEventListener('click', () => {
-      this._handleCardDeleteClick()
+      this._hadleDeleteCardButton(this._element);
+      //this._handleCardDeleteClick()
     });
 
     this._photoCard = this._element.querySelector('.photo__img');
@@ -84,14 +86,20 @@ import {popupDelete} from './utils.js';
    
 
    _handleCardDeleteClick () {
-    popupDelete.getCard(this._element, this._idCard);
-    popupDelete.open();
+    console.log(this._element, this._idCard);
+    //this.getCard(this._element, this._idCard);
+    //popupDelete.open();
   }
 
 
   getId(){
     console.log(this._idCard)
-    //return this._idCard;
+    return this._idCard;
+  }
+
+  removeCard() {
+    this._element.remove();
+    this._element = null
   }
 
 }
