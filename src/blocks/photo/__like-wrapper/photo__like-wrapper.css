@@ -6,4 +6,6 @@
   max-height: 35px;
   max-width: 22px;
   overflow: hidden;
+  padding-left: 5px;
+  padding-right: 5px;
 }

@@ -3,7 +3,6 @@ import './pages/index.css';
 
 //Импорт js модулей
 import Section from './components/Section.js';
-import { initialCards } from './components/initialCards.js';
 import {Card} from './components/Card.js';
 import {FormValidator} from './components/FormValidator.js';
 import PopupWithForm from './components/PopupWithForm.js';
@@ -63,16 +62,18 @@ api.getUser()
     userInfo.setUserPhoto(user)
     userInfo.getOwnerId(user);
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.error(err)})
 
 //Получение массива карточек пользователей
 api.getCards()
   .then(cards => {
       cardList.renderer(cards);
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.error(err);
+  })
 
-//console.log(initialServerCards);
 const popupCardPhoto = new PopupWithImage (popupPhotoCard);
 popupCardPhoto.setEventListeners();
 
@@ -84,16 +85,19 @@ export const addInstanceCard = (item) => {
     //handleCardClick
     () => {popupCardPhoto.open(item)},
     //handleCardLike 
-    (idCard) => { api.likeCard(idCard)},
+    (idCard) => { 
+      api.likeCard(idCard)
+      .catch((err) => {console.error(err)})
+    },
     //handleDeleteCardLike
-    (idCard) => {api.deleteLikeCard(idCard)},
+    (idCard) => {
+      api.deleteLikeCard(idCard)
+      .catch((err) => {console.error(err)})
+    },
     //hadleDeleteCardButton
     (cardElementHtml, idCard) => {
-      //console.log(card)
       console.log(cardElementHtml, idCard);
-      popupDelete.open()
-      popupDelete.getCard(cardElementHtml, idCard);
-      //popupDelete.setEventListenersDelete(cardElementHtml, idCard);
+      popupDelete.openPopupDelete(cardElementHtml, idCard)
     },
     /*() => {
       const popupDelete = new PopupWithForm(
@@ -118,25 +122,25 @@ export const addInstanceCard = (item) => {
 
 //Отрисовка карточек
 const cardList = new Section ({
-  //items: initialServerCards,
   renderer: (item) => { 
     addInstanceCard(item);
   }},
   cardListSection
-  )
+)
   
 
 //Создание экземпляров форм
 //Редактирование информации о пользователе
 const popupProfile = new PopupWithForm(
   {submitFunction: (formData) => {
-    popupProfile.renderLoading(true, 'Сохранить', 'Сохранение...');
+    popupProfile.renderLoading(true, 'Сохранение...');
     api.sendUser(formData)
     .then(() => userInfo.setUserInfo(formData))
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
+      console.error(err);
     })
-    .finally(popupProfile.renderLoading(false, 'Сохрaнить', 'Сохранение...'))
+    .finally(popupProfile.renderLoading(false, 'Сохранение...'))
   }}, popupEditProfile);
 popupProfile.setEventListeners();
 
@@ -147,13 +151,12 @@ popupProfile.setEventListeners();
       //addNewCard(formData) 
       api.addCard(formData)
         .then(res => {
-          console.log(formData);
           const itemData = {name: formData.Title, link: formData.Link, _id: res._id, likes: res.likes, owner: {_id: res.owner._id}};
-          console.log(itemData);
           addInstanceCard(itemData);
         })
         .catch ( err => {
           console.log (`Ой йой, ошибка ${err.status}`)
+          console.error(err)
         })
     }}, popupAddCard);
   popupCard.setEventListeners();
@@ -171,24 +174,21 @@ popupProfile.setEventListeners();
 const popupAvatar = new PopupWithForm(
   {submitFunction: (formData) => {
     const linkAvatar = formData.AvatarLink
-    console.log(linkAvatar);
     api.updateAvatar(linkAvatar)
     .then(() => userInfo.updateUserAvatar(linkAvatar))
-    .catch((err) => console.log(err))
+    .catch((err) => {console.error(err)})
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
 const popupDelete = new PopupWithForm(
-  {submitFunction: (card, idCard) => {
-    //console.log(card)
+  {submitFunction: (idCard, cardEl) => {
     api.removeCard(idCard)
-      .then(() => {
-        //console.log(card._idCard);
-        console.log(card)
-        card.remove()
+      .then(() => {cardEl.remove()})
+      .catch(err => {
+        console.log(`Ошибка ${err.status} при удалении`)
+        console.error(err);
       })
-      .catch(err => console.log(`Ошибка ${err.status} при удалении`))
   }}, popupDeleteCard);
 popupDelete.setEventListenersDelete();
 

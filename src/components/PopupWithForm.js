@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
       this._submitFunction = submitFunction;
       this._form = this._popupSelector.querySelector('.popup__form');
+      this._buttonTextActive = this._form.querySelector('.popup__save-button');
+      this._buttonTextDefault = this._form.querySelector('.popup__save-button').value;
   }
 
   _getInputValues() {
@@ -18,6 +20,8 @@ export default class PopupWithForm extends Popup{
     return this._formValues;
   }
 
+
+
   setEventListeners() {
     super.setEventListeners();
 
@@ -29,50 +33,36 @@ export default class PopupWithForm extends Popup{
   }
 
 
-  getCard(card, idCard){
-    this._submitFunction(card,idCard)
+  openPopupDelete(card, idCard){
+    super.open();
+    this._card = card;
+    this._idCard = idCard;
   }
 
   setEventListenersDelete() {
     super.setEventListeners();
     this._popupSelector.addEventListener('submit', (evt) => {
-      //console.log(this.getCard())
       evt.preventDefault();
-      this._submitFunction(card, idCard);
+      this._submitFunction(this._idCard, this._card);
       this.close();
     })
   }
-
-  /*getCard(сard, idCard){
-    this._popupSelector.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._submitFunction(сard, idCard);
-      this.close();
-    })
-   
-  }
-
-  /*removeCard(card) {
-    card.remove();
-    card = null;
-  }*/
 
   close() {
     super.close();
     this._form.reset();
   }
   
-  renderLoading(isLoading, defaultText, loadingText){
-    const saveButton = this._popupSelector.querySelector('.popup__save-button');
-    //const saveButtonText = saveButton.textContent;
-    //console.log(saveButton.textContent)
-    if(isLoading){
-      saveButton.textContent = loadingText;
-      console.log(saveButton.textContent)
+  renderLoading(isLoading, loadingText){
+     if(isLoading){
+      this._buttonTextActive.textContent = "Загрузка";
+      //this._buttonTextActive.textContent = loadingText;
+      console.log(this._buttonTextActive.textContent);
+      console.log(this._buttonTextActive)
     } else {
-      
-      saveButton.textContent = defaultText;
-      console.log(saveButton.textContent)
+      this._buttonTextActive.textContent = 'Дефолт';
+      console.log( this._buttonTextActive.textContent);
+      console.log(this._buttonTextActive)
     }
   }
 

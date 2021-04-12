@@ -28,7 +28,6 @@ export default class UserInfo {
 
   updateUserAvatar(link) {
     this._avatarUser.src = link;
-    console.log({avatar: this._avatarUser.src});
   }
 
  }

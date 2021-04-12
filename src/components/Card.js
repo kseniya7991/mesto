@@ -1,5 +1,5 @@
 import PopupWithImage from './PopupWithImage.js';
-import {popupDelete} from './utils.js';
+
  class Card {
  constructor(data, cardSelector, handleCardClick, handleLikeCard,handleDeleteCardLike,hadleDeleteCardButton, userOwnerId) {
     this._data = data;
@@ -45,7 +45,6 @@ import {popupDelete} from './utils.js';
   }
      
   _setEventListeners() {
-    //this._likeCounter = this._element.querySelector('.photo__like-counter');
     this._likeBtn = this._element.querySelector('.photo__like');
     
     this._likeBtn.addEventListener('click', () => {
@@ -60,9 +59,6 @@ import {popupDelete} from './utils.js';
     
     this._deleteBtn = this._element.querySelector('.photo__delete');
     this._deleteBtn.addEventListener('click', () => {
-      //this._hadleDeleteCardButton(this._element);
-      console.log(this._element, this._idCard)
-      //this._handleCardDeleteClick()
       this._hadleDeleteCardButton(this._element, this._idCard);
     });
 
@@ -75,7 +71,6 @@ import {popupDelete} from './utils.js';
   _handleAddLike () {
     this._likeBtn.classList.toggle('photo__like_active');
     this._likeCounter.textContent = this._likes + 1;
-    console.log(this._likes)
    }
 
   _handleLikeDelete() {
@@ -83,27 +78,6 @@ import {popupDelete} from './utils.js';
     this._likeCounter.textContent = this._likes;
   }
    
-
-
-   _handleCardDeleteClick () {
-    console.log(this._element, this._idCard);
-    
-    //this.getCard(this._element, this._idCard);
-    //popupDelete.open();
-  }
-
-
-  getId(){
-    console.log(this._idCard)
-    return this._idCard;
-  }
-
-  removeCard() {
-    this._element.remove();
-    this._element = null
-  }
-
 }
 
 export {Card};
-  
