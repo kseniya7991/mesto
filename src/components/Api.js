@@ -1,6 +1,5 @@
 export default class Api {
   constructor({token, groupID}) {
-    //this._address = address;
     this._token = token;
     this._groupID = groupID;
   }

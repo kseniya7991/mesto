@@ -74,6 +74,7 @@ api.getCards()
     console.error(err);
   })
 
+//Попап открытия полноразмерного фото карточек
 const popupCardPhoto = new PopupWithImage (popupPhotoCard);
 popupCardPhoto.setEventListeners();
 
@@ -96,26 +97,10 @@ export const addInstanceCard = (item) => {
     },
     //hadleDeleteCardButton
     (cardElementHtml, idCard) => {
-      console.log(cardElementHtml, idCard);
       popupDelete.openPopupDelete(cardElementHtml, idCard)
     },
-    /*() => {
-      const popupDelete = new PopupWithForm(
-        {submitFunction: (card) => {
-          api.removeCard(card.getId())
-            .then(() => {
-              //console.log(card);
-              //card.remove()
-              card.removeCard();
-            })
-            .catch(err => console.log(`Ошибка ${err.status} при удалении`))
-        }}, popupDeleteCard);
-        popupDelete.setEventLisnetersDelete(card);
-        popupDelete.open();
-    },*/
     userInfo.getOwnerId()
-    );
-
+  );
   const cardElement = card.generateCard();
   cardList.addItem(cardElement);
 }
@@ -138,7 +123,6 @@ const popupProfile = new PopupWithForm(
     .then(() => userInfo.setUserInfo(formData))
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err);
     })
     .finally(popupProfile.renderLoading(false, 'Сохранение...'))
   }}, popupEditProfile);
@@ -148,7 +132,7 @@ popupProfile.setEventListeners();
 //Добавление новой карточки
   const popupCard = new PopupWithForm(
     {submitFunction: (formData) => {
-      //addNewCard(formData) 
+      popupCard.renderLoading(true, 'Создание...');
       api.addCard(formData)
         .then(res => {
           const itemData = {name: formData.Title, link: formData.Link, _id: res._id, likes: res.likes, owner: {_id: res.owner._id}};
@@ -156,49 +140,37 @@ popupProfile.setEventListeners();
         })
         .catch ( err => {
           console.log (`Ой йой, ошибка ${err.status}`)
-          console.error(err)
         })
+        .finally(popupCard.renderLoading(false, 'Создание...'))
     }}, popupAddCard);
   popupCard.setEventListeners();
-
-  
-//Рендеринг новой карточки
-/*const addNewCard = ({submitData, idCard}) => {
-  //const itemCard = {name: submitData.Title, link: submitData.Link, likes: [], owner: {_id: '593bac0b0630e44665c3a674'}};
-  const itemCard = {name: submitData.Title, link: submitData.Link, likes: [], owner: {_id: '593bac0b0630e44665c3a674'}, idCard};
-  console.log(itemCard)
-  addInstanceCard(itemCard);
-}*/
 
 //Редактирование аватара пользователя
 const popupAvatar = new PopupWithForm(
   {submitFunction: (formData) => {
-    const linkAvatar = formData.AvatarLink
+    popupAvatar.renderLoading(true, 'Сохранение...');
+    const linkAvatar = formData.AvatarLink;
     api.updateAvatar(linkAvatar)
     .then(() => userInfo.updateUserAvatar(linkAvatar))
     .catch((err) => {console.log(err)})
+    .finally(popupAvatar.renderLoading(false, 'Сохранение...'))
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 
 //Подтверждение удаления карточки
 const popupDelete = new PopupWithForm(
   {submitFunction: (idCard, cardEl) => {
+    popupDelete.renderLoading(true, 'Удаление...');
     api.removeCard(idCard)
       .then(() => {cardEl.remove()})
       .catch(err => {
         console.log(`Ошибка ${err.status} при удалении`)
         console.error(err);
       })
+      .finally(popupDelete.renderLoading(false, 'Удаление...'))
   }}, popupDeleteCard);
 popupDelete.setEventListenersDelete();
 
-//test
-
-//userInfo.getUserInfo()
-/*const updateUserAvatar = (link) => {
-  avatarUserPhoto.src = link;
-  console.log({avatar: avatarUserPhoto.src});
-}*/
 
 //Экземпляр UserInfo (создается 1 раз)
 //const userInfo = new UserInfo ({nameSelector: '.user__name', aboutSelector:'.user__about'});
@@ -267,7 +239,7 @@ buttonOpenEditProfile.addEventListener('click', openProfilePopup);
 buttonAddCard.addEventListener('click', openAddCardPopup);
 avatarUser.addEventListener('click', openUpdAvatarPopup);
 
-
+//Запуск валидатора форм
 addValidator();
 
 //Экспорт для модулей

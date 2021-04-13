@@ -5,7 +5,7 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
       this._submitFunction = submitFunction;
       this._form = this._popupSelector.querySelector('.popup__form');
-      this._buttonTextActive = this._form.querySelector('.popup__save-button');
+      this._buttonTextActive = this._form.querySelector('.popup__save-button').textContent;
       this._buttonTextDefault = this._form.querySelector('.popup__save-button').value;
   }
 
@@ -54,16 +54,10 @@ export default class PopupWithForm extends Popup{
   }
   
   renderLoading(isLoading, loadingText){
-    console.log('запустили')
      if(isLoading){
-      this._buttonTextActive.textContent = "Загрузка";
-      //this._buttonTextActive.textContent = loadingText;
-      console.log(this._buttonTextActive.textContent);
-      console.log(this._buttonTextActive)
+      this._buttonTextActive = loadingText;
     } else {
-      this._buttonTextActive.textContent = 'Дефолт';
-      console.log( this._buttonTextActive.textContent);
-      console.log(this._buttonTextActive)
+      this._buttonTextActive = this._buttonTextDefault;
     }
   }
 
