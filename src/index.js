@@ -176,7 +176,7 @@ const popupAvatar = new PopupWithForm(
     const linkAvatar = formData.AvatarLink
     api.updateAvatar(linkAvatar)
     .then(() => userInfo.updateUserAvatar(linkAvatar))
-    .catch((err) => {console.error(err)})
+    .catch((err) => {console.log(err)})
   }}, popupUpdateAvatar);
 popupAvatar.setEventListeners();
 

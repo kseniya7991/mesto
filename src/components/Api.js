@@ -12,17 +12,13 @@ export default class Api {
         method:'GET'
       }
     })
-    .then(res => { 
+    .then(res => {
       if(res.ok) {
         return res.json()
       }
       return Promise.reject(`Ошибка ${response.status}`) 
     })
-    .catch ( err => {
-      console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err)
-    })
-    
+    .catch((err) => {console.log(err)})
   }
 
   getCards() {
@@ -31,11 +27,11 @@ export default class Api {
       headers: {
         authorization: this._token,
       }})
-    .then( res => { return res.json()})
-    .catch ( err => {
-      console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err)
-    })
+    .then( res =>  res.ok
+        ? res.json()
+        : Promise.reject(`Ошибка ${res.status}`) 
+    )
+    .catch((err) => {console.log(err)})
   }
 
   sendUser({name, about} = userData) {
@@ -50,10 +46,11 @@ export default class Api {
         about: about
       })
     })
-    .catch ( err => {
-      console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err)
-    })
+    .then( res => res.ok
+      ? Promise.resolve('Success')
+      : Promise.reject(`Ошибка ${res.status}`)
+    )
+    .catch((err) => {console.log(err)})
   }
 
   addCard({Title, Link} = cardData) {
@@ -71,10 +68,7 @@ export default class Api {
     .then(res => res.ok
       ? res.json()
       : Promise.reject(`Ошибка ${res.status}`))
-    .catch ( err => {
-      console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err)
-    })
+    .catch((err) => {console.log(err)})
   }
 
   removeCard(idCard){
@@ -84,14 +78,12 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(res => res.ok
-      ? Promise.resolve('success')
-      : Promise.reject(`Ошибка ${res.status}`))
-    .catch ( err => {
-      console.log (`Ой йой, ошибка ${err.status}`)
-      console.error(err)
+    .then(res => { res.ok
+        ? Promise.resolve('Success')
+        : Promise.reject(`Ошибка ${res.status}`)
     })
-    }
+    .catch((err) => {console.log(err)})
+  }
 
   likeCard(idCard) {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._groupID}/cards/likes/${idCard}`, {
@@ -100,7 +92,11 @@ export default class Api {
         authorization: this._token
       }
     })
-    .catch(err => `Ошибка ${err.status}`)
+    .then( res => res.ok
+      ? Promise.resolve('Success')
+      : Promise.reject(`Ошибка ${res.status}`)
+    )
+    .catch((err) => {console.log(err)})
   }
 
   deleteLikeCard(idCard) {
@@ -110,10 +106,11 @@ export default class Api {
         authorization: this._token
       }
     })
-    .catch(err => {
-      console.log(`Ошибка ${err.status}`)
-      console.error(err)
-    })
+    .then( res => res.ok
+      ? Promise.resolve('Success')
+      : Promise.reject(`Ошибка ${res.status}`)
+    )
+    .catch((err) => {console.log(err)})
   }
 
   updateAvatar(avatarLink) {
@@ -127,11 +124,11 @@ export default class Api {
         avatar: avatarLink
       })
     })
-    .then((res) => res.json())
-    .catch ( err => {
-      console.error(err);
-      console.log (`Ой йой, ошибка ${err.status}`)
-    })
+    .then(res => res.ok
+      ? res.json()
+      : Promise.reject(`Ошибка ${res.status}`)
+    )
+    .catch((err) => {console.log(err)})
   }
 
 }  

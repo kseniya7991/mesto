@@ -54,6 +54,7 @@ export default class PopupWithForm extends Popup{
   }
   
   renderLoading(isLoading, loadingText){
+    console.log('запустили')
      if(isLoading){
       this._buttonTextActive.textContent = "Загрузка";
       //this._buttonTextActive.textContent = loadingText;
