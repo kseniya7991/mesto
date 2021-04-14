@@ -1,3 +1,11 @@
+const handleResponse = (res) => {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+  return res.json();
+}
+
+
 export default class Api {
   constructor({token, groupID}) {
     this._token = token;
@@ -11,12 +19,7 @@ export default class Api {
         method:'GET'
       }
     })
-    .then(res => {
-      if(res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`Ошибка ${response.status}`) 
-    })
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -26,10 +29,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       }})
-    .then( res =>  res.ok
-        ? res.json()
-        : Promise.reject(`Ошибка ${res.status}`) 
-    )
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -45,10 +45,7 @@ export default class Api {
         about: about
       })
     })
-    .then( res => res.ok
-      ? Promise.resolve('Success')
-      : Promise.reject(`Ошибка ${res.status}`)
-    )
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -64,9 +61,7 @@ export default class Api {
         link: Link
       })
     })
-    .then(res => res.ok
-      ? res.json()
-      : Promise.reject(`Ошибка ${res.status}`))
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -77,10 +72,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(res => { res.ok
-        ? Promise.resolve('Success')
-        : Promise.reject(`Ошибка ${res.status}`)
-    })
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -91,10 +83,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then( res => res.ok
-      ? Promise.resolve('Success')
-      : Promise.reject(`Ошибка ${res.status}`)
-    )
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -105,10 +94,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then( res => res.ok
-      ? Promise.resolve('Success')
-      : Promise.reject(`Ошибка ${res.status}`)
-    )
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 
@@ -123,10 +109,7 @@ export default class Api {
         avatar: avatarLink
       })
     })
-    .then(res => res.ok
-      ? res.json()
-      : Promise.reject(`Ошибка ${res.status}`)
-    )
+    .then(handleResponse)
     .catch((err) => {console.log(err)})
   }
 

@@ -55,24 +55,21 @@ const api = new Api({
   groupID: 'cohort-22'
 })
 
-//Получение  данных юзера (себя)
-api.getUser()
-  .then( user => {
-    userInfo.setUserInfo(user)
-    userInfo.setUserPhoto(user)
-    userInfo.getOwnerId(user);
+Promise.all([
+  //Получение данных пользователя
+  api.getUser(),
+  //Получение карточек с сервера
+  api.getCards(),
+])
+  .then(([userData, cardsData]) => {
+    userInfo.setUserInfo(userData)
+    userInfo.setUserPhoto(userData)
+    userInfo.getOwnerId(userData);
+    cardList.renderer(cardsData);
   })
-  .catch(err => {
-    console.error(err)})
-
-//Получение массива карточек пользователей
-api.getCards()
-  .then(cards => {
-      cardList.renderer(cards);
-  })
-  .catch(err => {
-    console.error(err);
-  })
+  .catch((err) => {
+    console.log(err);
+  }); 
 
 //Попап открытия полноразмерного фото карточек
 const popupCardPhoto = new PopupWithImage (popupPhotoCard);
@@ -120,7 +117,10 @@ const popupProfile = new PopupWithForm(
   {submitFunction: (formData) => {
     popupProfile.renderLoading(true, 'Сохранение...');
     api.sendUser(formData)
-    .then(() => userInfo.setUserInfo(formData))
+    .then(() => {
+    userInfo.setUserInfo(formData)
+    popupProfile.close()
+    })
     .catch ( err => {
       console.log (`Ой йой, ошибка ${err.status}`)
     })
@@ -137,6 +137,7 @@ popupProfile.setEventListeners();
         .then(res => {
           const itemData = {name: formData.Title, link: formData.Link, _id: res._id, likes: res.likes, owner: {_id: res.owner._id}};
           addInstanceCard(itemData);
+          popupCard.close();
         })
         .catch ( err => {
           console.log (`Ой йой, ошибка ${err.status}`)
@@ -151,7 +152,10 @@ const popupAvatar = new PopupWithForm(
     popupAvatar.renderLoading(true, 'Сохранение...');
     const linkAvatar = formData.AvatarLink;
     api.updateAvatar(linkAvatar)
-    .then(() => userInfo.updateUserAvatar(linkAvatar))
+    .then(() => {
+      userInfo.updateUserAvatar(linkAvatar)
+      popupAvatar.close();
+    })
     .catch((err) => {console.log(err)})
     .finally(popupAvatar.renderLoading(false, 'Сохранение...'))
   }}, popupUpdateAvatar);
@@ -162,7 +166,10 @@ const popupDelete = new PopupWithForm(
   {submitFunction: (idCard, cardEl) => {
     popupDelete.renderLoading(true, 'Удаление...');
     api.removeCard(idCard)
-      .then(() => {cardEl.remove()})
+      .then(() => {
+        cardEl.remove()
+        popupDelete.close()
+      })
       .catch(err => {
         console.log(`Ошибка ${err.status} при удалении`)
         console.error(err);

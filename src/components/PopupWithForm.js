@@ -5,7 +5,7 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
       this._submitFunction = submitFunction;
       this._form = this._popupSelector.querySelector('.popup__form');
-      this._buttonTextActive = this._form.querySelector('.popup__save-button').textContent;
+      this._buttonTextActive = this._form.querySelector('.popup__save-button');
       this._buttonTextDefault = this._form.querySelector('.popup__save-button').value;
   }
 
@@ -28,7 +28,6 @@ export default class PopupWithForm extends Popup{
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitFunction(this._getInputValues());
-      this.close();
     })
   }
 
@@ -44,7 +43,6 @@ export default class PopupWithForm extends Popup{
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitFunction(this._idCard, this._card);
-      this.close();
     })
   }
 
@@ -53,12 +51,12 @@ export default class PopupWithForm extends Popup{
     this._form.reset();
   }
   
-  renderLoading(isLoading, loadingText){
-     if(isLoading){
-      this._buttonTextActive = loadingText;
-    } else {
-      this._buttonTextActive = this._buttonTextDefault;
-    }
-  }
+  renderLoading(isLoading, loadingText){ 
+    if(isLoading){ 
+     this._buttonTextActive = loadingText; 
+   } else { 
+     this._buttonTextActive = this._buttonTextDefault; 
+   } 
+ } 
 
 }
