@@ -1,2 +1,1 @@
-
 export const keyClose = 'Escape';

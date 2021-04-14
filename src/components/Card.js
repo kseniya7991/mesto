@@ -1,7 +1,15 @@
 import PopupWithImage from './PopupWithImage.js';
 
- class Card {
- constructor(data, cardSelector, handleCardClick, handleLikeCard,handleDeleteCardLike,hadleDeleteCardButton, userOwnerId) {
+class Card {
+  constructor(
+    data,
+    cardSelector,
+    handleCardClick,
+    handleLikeCard,
+    handleDeleteCardLike,
+    hadleDeleteCardButton,
+    userOwnerId,
+  ) {
     this._data = data;
     this._link = data.link;
     this._name = data.name;
@@ -17,10 +25,9 @@ import PopupWithImage from './PopupWithImage.js';
   }
 
   _getTemplate() {
-  	const cardElement = document
+    const cardElement = document
       .querySelector(this._cardSelector)
-      .content
-      .querySelector('.photo')
+      .content.querySelector('.photo')
       .cloneNode(true);
     return cardElement;
   }
@@ -36,19 +43,19 @@ import PopupWithImage from './PopupWithImage.js';
     this._likeCounter = this._element.querySelector('.photo__like-counter');
     this._likeCounter.textContent = this._likes;
 
-    if(this._userId === this._userOwnerId) {
+    if (this._userId === this._userOwnerId) {
       this._deleteBtn.classList.remove('photo__delete_inactive');
       this._deleteBtn.removeAttribute('disabled');
     }
 
     return this._element;
   }
-     
+
   _setEventListeners() {
     this._likeBtn = this._element.querySelector('.photo__like');
-    
+
     this._likeBtn.addEventListener('click', () => {
-      if(!this._likeBtn.classList.contains('photo__like_active')) {
+      if (!this._likeBtn.classList.contains('photo__like_active')) {
         this._handleAddLike();
         this._handleLikeCard(this._idCard);
       } else {
@@ -56,7 +63,7 @@ import PopupWithImage from './PopupWithImage.js';
         this._handleDeleteCardLike(this._idCard);
       }
     });
-    
+
     this._deleteBtn = this._element.querySelector('.photo__delete');
     this._deleteBtn.addEventListener('click', () => {
       this._hadleDeleteCardButton(this._element, this._idCard);
@@ -68,16 +75,15 @@ import PopupWithImage from './PopupWithImage.js';
     });
   }
 
-  _handleAddLike () {
+  _handleAddLike() {
     this._likeBtn.classList.toggle('photo__like_active');
     this._likeCounter.textContent = this._likes + 1;
-   }
+  }
 
   _handleLikeDelete() {
     this._likeBtn.classList.toggle('photo__like_active');
     this._likeCounter.textContent = this._likes;
   }
-   
 }
 
-export {Card};
+export { Card };

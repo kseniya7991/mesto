@@ -1,13 +1,12 @@
-import {keyClose} from './constants.js';
+import { keyClose } from './constants.js';
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
     this._toggleEscEventLisneter = function (evt) {
       this._handleEscClose(evt);
-    }
+    };
     this.toggleEsc = this._toggleEscEventLisneter.bind(this);
   }
-
 
   open() {
     this._popupSelector.classList.add('popup_opened');
@@ -15,9 +14,9 @@ export default class Popup {
   }
 
   close() {
-    this._popupSelector.classList.remove('popup_opened'); 
+    this._popupSelector.classList.remove('popup_opened');
     document.removeEventListener('keydown', this.toggleEsc);
-  };
+  }
 
   _handleEscClose(evt) {
     if (evt.key === keyClose) this.close();
@@ -25,13 +24,12 @@ export default class Popup {
 
   setEventListeners() {
     this._popupSelector.addEventListener('click', (evt) => {
-     //Закрытие попапа при клике на область вокруг формы или при клике на крестик
-     if ((evt.target.classList.contains('popup_opened')) || (evt.target.classList.contains('popup-close'))) this.close();
+      //Закрытие попапа при клике на область вокруг формы или при клике на крестик
+      if (
+        evt.target.classList.contains('popup_opened') ||
+        evt.target.classList.contains('popup-close')
+      )
+        this.close();
     });
   }
-
-
-    
-  
-
 }

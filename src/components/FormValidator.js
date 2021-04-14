@@ -1,5 +1,4 @@
 class FormValidator {
-
   constructor(validationElements, formElement) {
     this._form = formElement;
     this._input = validationElements.inputSelector;
@@ -10,7 +9,7 @@ class FormValidator {
     this._textErrorInput = validationElements.textError;
   }
 
-  enableValidation (evt) {
+  enableValidation(evt) {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
@@ -25,15 +24,15 @@ class FormValidator {
       inputElement.addEventListener('input', () => {
         this._checkInputValid(inputElement);
         this._toggleButtonState(inputElement);
-      })
-    })
+      });
+    });
   }
 
   //Проверка валидности формы
-  _checkInputValid (inputElement) {
+  _checkInputValid(inputElement) {
     const inputElementValid = inputElement.validity.valid;
     const errorMessage = inputElement.validationMessage;
-    if(inputElementValid) {
+    if (inputElementValid) {
       this._hideInputError(inputElement);
     } else {
       this._showInputError(inputElement, errorMessage);
@@ -41,7 +40,7 @@ class FormValidator {
   }
 
   //Скрываем ошибки формы
-  _hideInputError (inputElement) {
+  _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = '';
     errorElement.classList.remove(this._textError);
@@ -49,7 +48,7 @@ class FormValidator {
   }
 
   //Отображаем ошибки формы
-  _showInputError (inputElement, errorMessage) {
+  _showInputError(inputElement, errorMessage) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._textError);
@@ -59,7 +58,7 @@ class FormValidator {
   //Переключение состояния кнопок "сохранить" и "создать"
   _toggleButtonState(inputElement) {
     const notValidInput = this._inputList.some((inputElement) => !inputElement.validity.valid);
-    if(notValidInput) {
+    if (notValidInput) {
       this._buttonElement.setAttribute('disabled', true);
       this._buttonElement.classList.add(this._inactiveBtn);
     } else {
@@ -68,9 +67,8 @@ class FormValidator {
     }
   }
 
-
   //Публичный метод сброса ошибок формы при открытии попапа
-  resetErrorOpenPopup () {
+  resetErrorOpenPopup() {
     const inputErrorList = Array.from(this._form.querySelectorAll(this._input));
     inputErrorList.forEach((inputErrorEl) => {
       inputErrorEl.classList.remove(this._inputError);
@@ -78,8 +76,8 @@ class FormValidator {
     const textErrorList = Array.from(this._form.querySelectorAll(this._textErrorInput));
     textErrorList.forEach((textErrorEl) => {
       textErrorEl.textContent = '';
-    })
-  } 
+    });
+  }
 }
 
-export {FormValidator} ;
+export { FormValidator };
