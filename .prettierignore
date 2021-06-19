@@ -6,4 +6,5 @@ package.json
 postcss.config.js
 prettier.config.js
 README.md
-webpack.config.js
+reportWebVitals.js
+setupTests.js
